@@ -341,6 +341,9 @@ strong { font-weight: 600; }
 .tile.us-ref { grid-column: 1; grid-row: 1; background: var(--us); border-color: var(--us); color: #fff; cursor: default; }
 .tile.us-ref.off { background: var(--na-soft); border-color: var(--hair); color: var(--ink-3); }
 .map-side { display: grid; gap: 16px; }
+.map-foot { max-width: 600px; margin-top: 12px; font-size: 13px; }
+.map-foot .sources { margin-top: 0; }
+.map-foot .map-foot-link { display: inline-block; margin-top: 6px; font-size: 13px; }
 .map-legend { display: flex; flex-wrap: wrap; gap: 14px; font-size: 13px; color: var(--ink-2); }
 .map-legend span { display: inline-flex; align-items: center; gap: 6px; }
 .map-legend i { width: 14px; height: 14px; border-radius: 4px; display: inline-block; }

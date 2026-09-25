@@ -81,8 +81,8 @@ function renderSide() {
       unknownCount ? el('span', {}, el('i', { style: { background: 'var(--surface)', border: '1px solid var(--hair)' } }), 'Not published') : null,
       el('span', {}, el('i', { style: { background: 'var(--us)' } }), 'US reference'),
     ),
-    el('div', { style: { marginTop: '8px', fontSize: '13px' } }, sourceLinks(feature.sources), feature.featureId ? el('a', { href: `#feature-${feature.featureId}`, style: { fontSize: '13px' } }, 'See in scorecard ↓') : null),
   );
+  mount('map-foot', sourceLinks(feature.sources), feature.featureId ? el('a', { class: 'map-foot-link', href: `#feature-${feature.featureId}` }, 'See in scorecard ↓') : null);
 
   const list = el('div', { class: 'map-feature-list' });
   for (const m of MAP_FEATURES) {
