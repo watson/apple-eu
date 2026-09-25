@@ -90,30 +90,37 @@ function render() {
 }
 
 function renderMatrix(state) {
-  const rows = ['US', ...COUNTRIES.map((c) => c.code)].map((code) => ({ code, plan: topPlan(code), c: code === 'US' ? US : COUNTRY_BY_CODE[code] }));
+  const rows = ['US', ...COUNTRIES.map((c) => c.code)].map((code) => ({ code, plans: PRICING[code]?.appleOne?.plans || [], plan: topPlan(code), c: code === 'US' ? US : COUNTRY_BY_CODE[code] }));
   rows.sort((a, b) => {
     if (a.code === 'US') return -1; if (b.code === 'US') return 1;
     const ra = rank(a), rb = rank(b);
     return ra !== rb ? ra - rb : a.c.name.localeCompare(b.c.name);
   });
-  const extraCols = state.convert ? 1 : 0;
+  const TIERS = [['individual', 'Individual'], ['family', 'Family'], ['premier', 'Premium']];
+  const tierCell = (row, tier) => {
+    const plan = row.plans.find((p) => p.tier === tier);
+    if (!plan) return el('td', { class: 'muted' }, el('span', { class: 'dot off', title: 'Not sold here' }), el('span', { class: 'visually-hidden' }, 'not sold'));
+    const { local, approx } = priceParts(plan.monthly, PRICING[row.code].currency, state);
+    return el('td', { class: 'num', title: plan.localName !== tierName(plan, row.code) ? `Local name: ${plan.localName}` : null },
+      el('div', {}, local), approx ? el('div', { class: 'approx' }, approx) : null);
+  };
   const table = el('table', { class: 'matrix' },
-    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'Top tier'), el('th', {}, 'Monthly'), state.convert ? el('th', {}, '≈ € / month') : null, el('th', {}, 'Storage'), SERVICES.map((s) => el('th', {}, s.label.replace('Apple ', ''))))),
-    el('tbody', {}, rows.map(({ code, plan, c }) => {
-      const p = PRICING[code];
+    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', {}, label === 'Premium' ? 'Premium / Premier' : label)), el('th', {}, 'Top-tier storage'), el('th', {}, 'Fitness+'), el('th', {}, 'News+'))),
+    el('tbody', {}, rows.map((row) => {
+      const { code, plan, c } = row;
       const cls = code === 'US' ? 'us' : state.country === code ? 'me' : '';
       if (!plan) {
         return el('tr', { class: cls }, el('td', {}, el('span', { class: 'country' }, c.flag, ' ', c.name)),
-          el('td', { colspan: String(3 + extraCols + SERVICES.length), class: 'muted', style: { textAlign: 'left' } }, AVAILABILITY.appleOneAny.includes(code) ? 'Apple One listed as available; no plan page published on apple.com' : 'Apple One not listed for this country'));
+          el('td', { colspan: '6', class: 'muted', style: { textAlign: 'left' } }, AVAILABILITY.appleOneAny.includes(code) ? 'Apple One listed as available; no plan page published on apple.com' : 'Apple One not listed for this country'));
       }
-      const { local, approx } = priceParts(plan.monthly, p.currency, state);
+      const has = (key) => plan.services.includes(key);
+      const dot = (on, label) => [el('span', { class: `dot ${on ? 'on' : 'off'}`, title: on ? `${label} included in the top tier` : `${label} not included` }), el('span', { class: 'visually-hidden' }, on ? 'included' : 'not included')];
       return el('tr', { class: cls },
         el('td', {}, el('span', { class: 'country' }, c.flag, ' ', c.name)),
-        el('td', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, tierName(plan, code), plan.tier === 'premier' ? '' : el('span', { class: 'muted' }, ' (no top tier)')),
-        el('td', { class: 'num' }, local),
-        state.convert ? el('td', { class: 'num approx' }, approx || fmtMoney(plan.monthly, 'EUR')) : null,
+        TIERS.map(([tier]) => tierCell(row, tier)),
         el('td', {}, plan.storageGB >= 1024 ? `${plan.storageGB / 1024} TB` : `${plan.storageGB} GB`),
-        SERVICES.map((s) => el('td', {}, el('span', { class: `dot ${plan.services.includes(s.key) ? 'on' : 'off'}`, title: plan.services.includes(s.key) ? 'Included' : 'Not included' }), el('span', { class: 'visually-hidden' }, plan.services.includes(s.key) ? 'included' : 'not included'))),
+        el('td', {}, dot(has('fitness'), 'Fitness+')),
+        el('td', {}, dot(has('news'), 'News+')),
       );
     })),
   );
@@ -122,7 +129,7 @@ function renderMatrix(state) {
     el('div', { class: 'table-wrap' }, table),
     el('p', { class: 'tax-note' }, TAX_NOTE),
     conversionNote(state),
-    el('p', { class: 'note', style: { marginTop: '10px' } }, 'Ireland calls its five-service tier "Premier" but it still omits News+. Finland and Portugal have their own price points. Sources: each country’s apple.com/apple-one page and Apple’s media services register, accessed 25 September 2026.'));
+    el('p', { class: 'note', style: { marginTop: '10px' } }, 'Monthly prices in local currency. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier". Sources: each country\u2019s apple.com/apple-one page and Apple\u2019s media services register, accessed 25 September 2026.'));
 }
 
 function rank(r) {

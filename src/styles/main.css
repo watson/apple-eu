@@ -442,6 +442,7 @@ strong { font-weight: 600; }
 .matrix .dot.on { background: var(--same); }
 .matrix .dot.off { background: var(--na-soft); border: 1px solid var(--hair); }
 .matrix .num { font-variant-numeric: tabular-nums; }
+.matrix .num .approx { font-size: 12px; margin-top: 1px; }
 .matrix .country { display: flex; align-items: center; gap: 8px; font-weight: 500; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--hair-2); border-radius: var(--radius); background: var(--surface); padding: 8px 12px; box-shadow: var(--shadow); }
 
