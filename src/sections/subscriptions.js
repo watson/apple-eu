@@ -33,12 +33,12 @@ function topPlan(code) {
   return plans.find((p) => p.tier === 'premier') || plans.find((p) => p.tier === 'family') || null;
 }
 
-/** Local price string, with a tax marker for the US and an optional euro approximation. */
+/** Price to display for the current mode (local currency, or euros when the switch is on), plus the other one for tooltips. */
 function priceParts(amount, currency, state) {
   const local = fmtMoney(amount, currency) + (currency === 'USD' ? '*' : '');
-  if (!state.convert || currency === 'EUR') return { local, approx: null };
+  if (!state.convert || currency === 'EUR') return { shown: local, alt: null };
   const eur = toEUR(amount, currency, state.fx);
-  return { local, approx: eur == null ? null : `≈ ${fmtMoney(eur, 'EUR')}` };
+  return { shown: eur == null ? local : `≈ ${fmtMoney(eur, 'EUR')}${currency === 'USD' ? '*' : ''}`, alt: `${local} as advertised` };
 }
 
 function planCard(code, region, state) {
@@ -55,13 +55,13 @@ function planCard(code, region, state) {
     );
   }
   const storage = plan.storageGB >= 1024 ? `${plan.storageGB / 1024} TB` : `${plan.storageGB} GB`;
-  const { local, approx } = priceParts(plan.monthly, p.currency, state);
+  const { shown, alt } = priceParts(plan.monthly, p.currency, state);
   return el('div', { class: `plan ${region}` },
     el('div', { class: 'region' }, `${c.flag} ${c.name}`),
     el('h4', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, `Apple One ${tierName(plan, code)}`),
-    el('div', { class: 'price' }, local, el('small', {}, ` / month${code === 'US' ? ', before sales tax' : ', VAT included'}`)),
+    el('div', { class: 'price' }, shown, el('small', {}, ` / month${code === 'US' ? ', before sales tax' : ', VAT included'}`)),
     // Always rendered so switching the euro toggle does not change the card height.
-    el('div', { class: 'approx plan-approx' }, approx ? `${approx} / month` : '\u00a0'),
+    el('div', { class: 'approx plan-approx' }, alt || '\u00a0'),
     el('ul', {}, SERVICES.map((s) => {
       const has = plan.services.includes(s.key);
       return el('li', { class: has ? 'in' : 'out' }, el('i', { 'aria-hidden': 'true' }, has ? '✓' : '✕'), s.key === 'icloud' ? `${s.label} ${storage}` : s.label);
@@ -100,9 +100,9 @@ function renderMatrix(state) {
   const tierCell = (row, tier) => {
     const plan = row.plans.find((p) => p.tier === tier);
     if (!plan) return el('td', { class: 'muted' }, el('span', { class: 'dot off', title: 'Not sold here' }), el('span', { class: 'visually-hidden' }, 'not sold'));
-    const { local, approx } = priceParts(plan.monthly, PRICING[row.code].currency, state);
-    return el('td', { class: 'num', title: plan.localName !== tierName(plan, row.code) ? `Local name: ${plan.localName}` : null },
-      el('div', {}, local), approx ? el('div', { class: 'approx' }, approx) : null);
+    const { shown, alt } = priceParts(plan.monthly, PRICING[row.code].currency, state);
+    const title = [alt, plan.localName !== tierName(plan, row.code) ? `Local name: ${plan.localName}` : null].filter(Boolean).join(' · ');
+    return el('td', { class: 'num', title: title || null }, shown);
   };
   const table = el('table', { class: 'matrix' },
     el('thead', {}, el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', {}, label === 'Premium' ? 'Premium / Premier' : label)), el('th', {}, 'Top-tier storage'), el('th', {}, 'Fitness+'), el('th', {}, 'News+'))),
