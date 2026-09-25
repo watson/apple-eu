@@ -35,4 +35,4 @@ export const VERDICT_LABEL = {
 };
 
 export const STATUS_LABEL = { yes: 'Available', no: 'Not available', partial: 'Partial', na: 'N/A' };
-export const STATUS_GLYPH = { yes: '✓', no: '✕', partial: '◐', na: '–' };
+export const STATUS_GLYPH = { yes: '✓', no: '×', partial: '◐', na: '–' };

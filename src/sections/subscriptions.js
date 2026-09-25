@@ -7,6 +7,7 @@ import { FX, toEUR } from '../data/fx.js';
 import { fxToggle, exVatToggle } from '../components/fxToggle.js';
 import { tabPanels } from '../components/tabs.js';
 import { sourceLinks } from '../components/chips.js';
+import { glyph } from '../components/icons.js';
 import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
@@ -83,7 +84,7 @@ function planCard(code, region, state) {
     el('div', { class: 'approx plan-approx' }, alt || '\u00a0'),
     el('ul', {}, SERVICES.map((s) => {
       const has = plan.services.includes(s.key);
-      return el('li', { class: has ? 'in' : 'out' }, el('i', { 'aria-hidden': 'true' }, has ? '✓' : '✕'), s.key === 'icloud' ? `${s.label} ${storage}` : s.label);
+      return el('li', { class: has ? 'in' : 'out' }, el('i', { 'aria-hidden': 'true' }, glyph(has ? 'yes' : 'no')), s.key === 'icloud' ? `${s.label} ${storage}` : s.label);
     })),
     plan.tier !== 'premier' ? el('p', { class: 'missing' }, 'Highest tier sold here. No Premier or Premium tier is offered.') : null,
   );
