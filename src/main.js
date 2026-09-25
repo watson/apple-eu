@@ -7,6 +7,7 @@ import { initSubscriptions } from './sections/subscriptions.js';
 import { initPlatform } from './sections/platform.js';
 import { initHardware } from './sections/hardware.js';
 import { initSources } from './sections/sources.js';
+import { initSettings } from './components/settings.js';
 
 // Three-state theme control: System → Light → Dark → System. A manual choice is
 // remembered; "System" clears it so the page follows the OS again.
@@ -61,6 +62,7 @@ initSubscriptions();
 initPlatform();
 initHardware();
 initSources();
+initSettings();
 initNavHighlight();
 
 // Open a scorecard row when navigated to by hash.
