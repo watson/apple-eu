@@ -7,6 +7,7 @@ import { AVAILABILITY } from '../data/availability.js';
 import { statusChip, verdictPill, sourceLinks } from '../components/chips.js';
 
 const expanded = new Set();
+const lastRows = new Map(); // feature id -> { f, verdict, eu } from the latest render
 const FILTERS = ['all', 'us', 'eu', 'same', 'depends'];
 
 export function initScorecard() {
@@ -58,6 +59,8 @@ function renderList() {
 
   root.append(el('div', { class: 'scorecard-head' }, el('span', {}, 'Feature'), el('span', {}, 'United States'), el('span', {}, state.country ? `EU · ${state.country}` : 'European Union'), el('span', {}, 'Who is ahead'), el('span', {})));
 
+  lastRows.clear();
+  for (const r of rows) lastRows.set(r.f.id, r);
   for (const cat of CATEGORIES) {
     const items = visible.filter((r) => r.f.category === cat.id);
     if (!items.length) continue;
@@ -86,9 +89,21 @@ function row({ f, verdict, eu }, state) {
   return wrap;
 }
 
+// Expand or collapse a single row in place, so the page keeps its scroll position.
 function toggle(id) {
-  if (expanded.has(id)) expanded.delete(id); else expanded.add(id);
-  renderList();
+  const btn = document.getElementById(`feature-${id}`);
+  const r = lastRows.get(id);
+  if (!btn || !r) return;
+  const wrap = btn.parentElement;
+  if (expanded.has(id)) {
+    expanded.delete(id);
+    wrap.querySelector('.score-detail')?.remove();
+    btn.setAttribute('aria-expanded', 'false');
+  } else {
+    expanded.add(id);
+    wrap.append(detailPanel(r.f, r.eu, getState()));
+    btn.setAttribute('aria-expanded', 'true');
+  }
 }
 
 function detailPanel(f, eu, state) {
