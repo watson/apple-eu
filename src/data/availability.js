@@ -96,6 +96,7 @@ export const AVAILABILITY = {
     "AT",
     "BE",
     "BG",
+    "HR",
     "CY",
     "CZ",
     "DK",
@@ -114,6 +115,7 @@ export const AVAILABILITY = {
     "NL",
     "PL",
     "PT",
+    "RO",
     "SK",
     "SI",
     "ES",
@@ -138,6 +140,7 @@ export const AVAILABILITY = {
     "DE",
     "IE",
     "IT",
+    "LU",
     "NL",
     "PT",
     "ES"

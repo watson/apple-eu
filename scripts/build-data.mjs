@@ -33,10 +33,12 @@ const availability = {
   newsPlus: trueList(svc.newsPlus.eu),
   buyTvShows: media('tvShowPurchases'),
   audiobooks: media('audiobooks'),
-  appleTvSubscription: countryScoped('Apple TV'),
+  // Apple's dedicated media-services register lists Apple TV in all 27; the general iOS table omits HR and RO.
+  appleTvSubscription: media('tvSubscription'),
   // Satellite
   emergencySOS: trueList(svc.emergencySOS.eu),
-  findMySatellite: watchFeat('find_my_satellite'),
+  // The iPhone guide (S4) points to the Emergency SOS country list; the Watch page has its own, shorter list.
+  findMySatellite: trueList(svc.emergencySOS.eu),
   messagesSatellite: trueList(svc.messagesViaSatellite.eu),
   roadsideSatellite: trueList(svc.roadsideViaSatellite.eu),
   // Wallet
@@ -44,7 +46,7 @@ const availability = {
   tapToPay: trueList(svc.tapToPay.eu),
   transitWallet: watchFeat('wallet_transit'),
   // Health, Watch, AirPods
-  watchHealth: watchFeat('hypertension').filter((c) => watchFeat('ecg').includes(c) && watchFeat('afib_history').includes(c) && watchFeat('sleep_apnea').includes(c)),
+  watchHealth: watchFeat('hypertension').filter((c) => watchFeat('ecg').includes(c) && watchFeat('irregular_rhythm').includes(c) && watchFeat('afib_history').includes(c) && watchFeat('sleep_apnea').includes(c)),
   bloodOxygen: watchFeat('blood_oxygen'),
   watchForKids: watchFeat('family_setup'),
   watchHikes: watchFeat('hikes_topo'),
