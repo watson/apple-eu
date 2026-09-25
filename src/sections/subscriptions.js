@@ -99,13 +99,13 @@ function renderMatrix(state) {
   const TIERS = [['individual', 'Individual'], ['family', 'Family'], ['premier', 'Premium']];
   const tierCell = (row, tier) => {
     const plan = row.plans.find((p) => p.tier === tier);
-    if (!plan) return el('td', { class: 'muted' }, el('span', { class: 'dot off', title: 'Not sold here' }), el('span', { class: 'visually-hidden' }, 'not sold'));
+    if (!plan) return el('td', { class: 'muted unsold' }, el('span', { class: 'dot off', title: 'Not sold here' }), el('span', { class: 'visually-hidden' }, 'not sold'));
     const { shown, alt } = priceParts(plan.monthly, PRICING[row.code].currency, state);
     const title = [alt, plan.localName !== tierName(plan, row.code) ? `Local name: ${plan.localName}` : null].filter(Boolean).join(' · ');
     return el('td', { class: 'num', title: title || null }, shown);
   };
   const table = el('table', { class: 'matrix' },
-    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', {}, label === 'Premium' ? 'Premium / Premier' : label)), el('th', {}, 'Top-tier storage'), el('th', {}, 'Fitness+'), el('th', {}, 'News+'))),
+    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', { class: 'num' }, label === 'Premium' ? 'Premium / Premier' : label)), el('th', {}, 'Top-tier storage'), el('th', {}, 'Fitness+'), el('th', {}, 'News+'))),
     el('tbody', {}, rows.map((row) => {
       const { code, plan, c } = row;
       const cls = code === 'US' ? 'us' : state.country === code ? 'me' : '';
