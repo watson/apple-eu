@@ -6,8 +6,8 @@ import { FX } from '../data/fx.js';
 export function fxToggle() {
   const input = el('input', { type: 'checkbox', checked: getState().convert || null });
   input.addEventListener('change', () => setState({ convert: input.checked }));
-  return el('label', { class: 'toggle', title: `ECB reference rates averaged ${fmtDate(FX.from)} to ${fmtDate(FX.to)}` },
-    input, el('span', {}, 'Show prices in €'), el('span', { class: 'note' }, '(approximate, ECB 12-month average)'));
+  return el('label', { class: 'toggle', title: `Approximate: converted at the European Central Bank\u2019s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)}.` },
+    input, el('span', {}, 'Show prices in €'));
 }
 
 export const TAX_NOTE = '* US prices are before sales tax. Whether a US state taxes digital subscriptions at all varies, so none is added here; hardware prices in the iPhone chart do include the sales tax of a chosen state. EU prices include VAT.';

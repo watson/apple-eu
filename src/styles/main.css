@@ -448,6 +448,14 @@ strong { font-weight: 600; }
 .chart-controls input[type="range"] { accent-color: var(--eu); width: 180px; }
 .chart-controls input[type="number"] { width: 90px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--hair); background: var(--surface); font: inherit; font-size: 14px; color: var(--ink); }
 .chart-foot { font-size: 12px; color: var(--ink-3); margin-top: 10px; }
+details.advanced { margin-top: 10px; font-size: 14px; }
+details.advanced summary { cursor: pointer; color: var(--ink-2); display: inline-flex; align-items: center; gap: 6px; list-style: none; }
+details.advanced summary::-webkit-details-marker { display: none; }
+details.advanced summary .gear { font-size: 15px; line-height: 1; }
+details.advanced[open] summary { color: var(--ink); }
+details.advanced .advanced-body { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 10px; padding: 12px 14px; border: 1px solid var(--hair-2); border-radius: 12px; background: var(--surface-2); }
+details.advanced .advanced-body input[type="number"] { width: 90px; padding: 6px 8px; border-radius: 8px; border: 1px solid var(--hair); background: var(--surface); font: inherit; font-size: 14px; color: var(--ink); }
+details.advanced .advanced-body .note { font-size: 12px; color: var(--ink-3); }
 details.table-view { margin-top: 10px; font-size: 13px; }
 details.table-view summary { cursor: pointer; color: var(--ink-2); }
 details.table-view table { width: 100%; border-collapse: collapse; margin-top: 8px; }

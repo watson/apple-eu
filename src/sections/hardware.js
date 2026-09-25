@@ -14,6 +14,7 @@ import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
 const US_LIST = PRICING.US.iphone18Pro.from; // USD, before sales tax
+let advancedOpen = false; // disclosure state survives re-renders
 
 function published() {
   return COUNTRIES
@@ -70,16 +71,22 @@ function render() {
     attachTooltip(hit, () => tooltipLines(r, state));
     hit.addEventListener('pointerenter', () => bar.classList.add('hover'));
     hit.addEventListener('pointerleave', () => bar.classList.remove('hover'));
-    g.append(hit, bar);
+    g.append(bar, hit);
     if (labelled.has(r.code)) g.append(svg('text', { x: left + w + 8, y: y + 15, style: 'font-weight:600;fill:var(--ink)' }, valueLabel(r)));
   });
 
   // --- controls ---
   const rate = el('input', { type: 'number', step: '0.01', min: '0.5', max: '2', value: state.fx.toFixed(2), 'aria-label': 'US dollars per euro' });
-  const slider = el('input', { type: 'range', min: '0.80', max: '1.60', step: '0.01', value: String(state.fx), 'aria-label': 'US dollars per euro, slider' });
-  const onRate = (v) => { const n = Number(v); if (n > 0.3 && n < 3) setState({ fx: n }); };
-  rate.addEventListener('change', () => onRate(rate.value));
-  slider.addEventListener('input', () => onRate(slider.value));
+  rate.addEventListener('change', () => { const n = Number(rate.value); if (n > 0.3 && n < 3) setState({ fx: n }); });
+  const advanced = el('details', { class: 'advanced', open: advancedOpen || null },
+    el('summary', {}, el('span', { class: 'gear', 'aria-hidden': 'true' }, '⚙'), ' Advanced'),
+    el('div', { class: 'advanced-body' },
+      el('label', {}, 'US dollars per euro ', rate),
+      el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, 'Reset'),
+      el('span', { class: 'note' }, `Default ${FX.rates.USD.toFixed(2)}: ECB average, ${fmtDate(FX.from)} to ${fmtDate(FX.to)}.`),
+    ),
+  );
+  advanced.addEventListener('toggle', () => { advancedOpen = advanced.open; });
   const exVat = el('input', { type: 'checkbox', checked: state.exVat || null });
   exVat.addEventListener('change', () => setState({ exVat: exVat.checked }));
 
@@ -106,12 +113,11 @@ function render() {
         fxToggle(),
         usStateSelect(),
         el('label', {}, exVat, ' Remove VAT and sales tax'),
-        el('label', {}, 'USD per € ', rate), slider,
-        el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, `Reset to ${FX.rates.USD.toFixed(2)}`),
       ),
+      advanced,
       el('p', { class: 'chart-foot' }, meText),
       el('p', { class: 'tax-note' }, `Apple’s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
-      el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be adjusted above.`),
+      el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed under Advanced.`),
       el('details', { class: 'table-view' },
         el('summary', {}, 'Table view'),
         el('table', {},
