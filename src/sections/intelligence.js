@@ -93,9 +93,17 @@ function renderLangCheck() {
 function renderLangGrid() {
   const state = getState();
   const mine = new Set(state.langs);
-  mount('lang-grid', EU_LANGUAGES.map((l) => {
-    const ok = LANGUAGE_SUPPORT.appleIntelligence.includes(l.code);
-    return el('div', { class: `lang-pill ${ok ? 'yes' : 'no'} ${mine.has(l.code) ? 'me' : ''}`.trim(), title: ok ? 'Apple Intelligence supported' : 'Not supported by Apple Intelligence' },
-      el('i', { 'aria-hidden': 'true' }), l.name, el('span', { class: 'visually-hidden' }, ok ? ' supported' : ' not supported'));
-  }));
+  const supported = EU_LANGUAGES.filter((l) => LANGUAGE_SUPPORT.appleIntelligence.includes(l.code)).length;
+  mount('lang-grid',
+    el('div', { class: 'lang-legend' },
+      el('b', {}, `${supported} of ${EU_LANGUAGES.length} supported.`),
+      el('span', {}, el('span', { class: 'i', style: { background: 'var(--same)' }, 'aria-hidden': 'true' }, '✓'), 'Supported by Apple Intelligence'),
+      el('span', {}, el('span', { class: 'i', style: { background: 'var(--na)' }, 'aria-hidden': 'true' }, '✕'), 'Not supported'),
+    ),
+    el('div', { class: 'lang-grid' }, EU_LANGUAGES.map((l) => {
+      const ok = LANGUAGE_SUPPORT.appleIntelligence.includes(l.code);
+      return el('div', { class: `lang-pill ${ok ? 'yes' : 'no'} ${mine.has(l.code) ? 'me' : ''}`.trim(), title: ok ? 'Apple Intelligence supported' : 'Not supported by Apple Intelligence' },
+        el('span', { class: 'i', 'aria-hidden': 'true' }, ok ? '✓' : '✕'), l.name, el('span', { class: 'visually-hidden' }, ok ? ' supported' : ' not supported'));
+    })),
+  );
 }

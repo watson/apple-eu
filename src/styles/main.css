@@ -379,13 +379,16 @@ strong { font-weight: 600; }
 .lang-item.partial .icon { background: var(--depends); }
 .lang-item h4 { font-size: 15px; margin-bottom: 2px; }
 .lang-item p { font-size: 13px; color: var(--ink-2); }
-.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-top: 16px; }
-.lang-pill { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; font-size: 13px; font-weight: 500; background: var(--surface); border: 1px solid var(--hair-2); }
-.lang-pill i { width: 10px; height: 10px; border-radius: 50%; flex: none; }
-.lang-pill.yes i { background: var(--same); }
-.lang-pill.no i { background: var(--na); }
-.lang-pill.no { color: var(--ink-3); }
+.lang-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 6px; margin-top: 12px; }
+.lang-pill { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border-radius: 10px; font-size: 13px; font-weight: 600; border: 1px solid transparent; }
+.lang-pill .i { width: 16px; height: 16px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 11px; font-weight: 700; color: #fff; flex: none; }
+.lang-pill.yes { background: var(--same-soft); color: var(--same-ink); }
+.lang-pill.yes .i { background: var(--same); }
+.lang-pill.no { background: var(--na-soft); color: var(--ink-3); font-weight: 500; }
+.lang-pill.no .i { background: var(--na); }
 .lang-pill.me { border-color: var(--ink); }
+.lang-legend { display: flex; flex-wrap: wrap; gap: 6px 16px; align-items: center; font-size: 14px; color: var(--ink-2); margin-top: 8px; }
+.lang-legend .i { width: 14px; height: 14px; border-radius: 50%; display: inline-grid; place-items: center; font-size: 9px; font-weight: 700; color: #fff; margin-right: 6px; vertical-align: -2px; }
 
 /* ---------- Apple One comparison ---------- */
 .plan-compare { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
