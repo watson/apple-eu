@@ -159,6 +159,9 @@ strong { font-weight: 600; }
 .btn.primary { background: var(--ink); color: var(--page); border-color: var(--ink); }
 .btn.primary:hover { opacity: .9; }
 .btn.icon { padding: 8px; width: 36px; height: 36px; justify-content: center; }
+.btn.theme { padding: 7px 12px 7px 10px; gap: 6px; font-size: 13px; }
+.btn.theme .glyph { font-size: 14px; line-height: 1; }
+.btn.theme .label { min-width: 34px; text-align: left; }
 .select {
   appearance: none; -webkit-appearance: none;
   padding: 8px 36px 8px 14px; border-radius: 999px; border: 1px solid var(--hair);

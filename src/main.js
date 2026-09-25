@@ -8,14 +8,33 @@ import { initPlatform } from './sections/platform.js';
 import { initHardware } from './sections/hardware.js';
 import { initSources } from './sections/sources.js';
 
+// Three-state theme control: System → Light → Dark → System. A manual choice is
+// remembered; "System" clears it so the page follows the OS again.
+const THEME_MODES = [
+  { id: 'system', label: 'Auto', glyph: '◐', title: 'follows system' },
+  { id: 'light', label: 'Light', glyph: '○', title: 'light' },
+  { id: 'dark', label: 'Dark', glyph: '●', title: 'dark' },
+];
+
 function initTheme() {
   const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
   const root = document.documentElement;
-  const current = () => root.dataset.theme || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-  btn?.addEventListener('click', () => {
-    const next = current() === 'dark' ? 'light' : 'dark';
-    root.dataset.theme = next;
-    try { localStorage.setItem('theme', next); } catch { /* ignore */ }
+  const read = () => { try { const t = localStorage.getItem('theme'); return t === 'dark' || t === 'light' ? t : 'system'; } catch { return 'system'; } };
+  const apply = (mode) => {
+    if (mode === 'system') { delete root.dataset.theme; try { localStorage.removeItem('theme'); } catch { /* ignore */ } }
+    else { root.dataset.theme = mode; try { localStorage.setItem('theme', mode); } catch { /* ignore */ } }
+    const m = THEME_MODES.find((x) => x.id === mode);
+    const next = THEME_MODES[(THEME_MODES.indexOf(m) + 1) % THEME_MODES.length];
+    btn.querySelector('.glyph').textContent = m.glyph;
+    btn.querySelector('.label').textContent = m.label;
+    btn.title = `Theme: ${m.title}`;
+    btn.setAttribute('aria-label', `Theme: ${m.title}. Click to switch to ${next.title}.`);
+  };
+  apply(read());
+  btn.addEventListener('click', () => {
+    const i = THEME_MODES.findIndex((x) => x.id === read());
+    apply(THEME_MODES[(i + 1) % THEME_MODES.length].id);
   });
 }
 
