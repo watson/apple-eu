@@ -168,10 +168,10 @@ export const FEATURES = [
     id: 'apple-one-premier',
     category: 'subscriptions',
     title: 'Apple One top tier (Premier / Premium)',
-    short: 'The US Premier tier has six services and 2 TB. Seven EU countries advertise a five-service Premium, nine advertise only Individual and Family, and nine publish no plan page.',
+    short: 'The US Premier tier has six services and 2 TB. Of the {count:appleOnePagePublished} EU countries with a plan page, {count:appleOnePremier} advertise a five-service Premium and the rest stop at Family; {unknowncount:appleOnePremier} publish no plan page.',
     us: { status: 'yes', label: 'Premier, 6 services, $39.95 before tax' },
-    eu: { status: 'partial', label: '7 of 27 countries', avail: 'appleOnePremier', known: 'appleOnePagePublished' },
-    detail: `Apple does not sell one uniform European Apple One package. Austria, France, Germany, Ireland, Italy, Portugal and Spain offer a five-service Premium tier (Music, TV, Arcade, 2 TB iCloud+, Fitness+) without News+; Ireland calls it Premier. Belgium, Czechia, Denmark, Finland, Hungary, Luxembourg, the Netherlands, Poland and Sweden offer only Individual and Family with a 200 GB ceiling. Eleven member states have no Apple One page on apple.com; Apple's services register lists Apple One in nine of them, so their tiers are unverified rather than absent. Someone in a country without a top tier can add a separate 2 TB iCloud+ plan and keep both allocations, but that does not supply the missing subscriptions. A claim that Europeans pay the same price for fewer services is too broad; the country and tier must be specified.`,
+    eu: { status: 'partial', avail: 'appleOnePremier', known: 'appleOnePagePublished' },
+    detail: `Apple does not sell one uniform European Apple One package. {list:appleOnePremier} offer a five-service Premium tier (Music, TV, Arcade, 2 TB iCloud+, Fitness+) without News+; Ireland calls it Premier. Belgium, Czechia, Denmark, Finland, Hungary, Luxembourg, the Netherlands, Poland and Sweden offer only Individual and Family with a 200 GB ceiling. Eleven member states have no Apple One page on apple.com; Apple's services register lists Apple One in nine of them, so their tiers are unverified rather than absent. Someone in a country without a top tier can add a separate 2 TB iCloud+ plan and keep both allocations, but that does not supply the missing subscriptions. A claim that Europeans pay the same price for fewer services is too broad; the country and tier must be specified.`,
     sources: ['B1', 'B3', 'B4', 'B5', 'B6', 'B21'],
   },
   {
@@ -188,10 +188,10 @@ export const FEATURES = [
     id: 'fitness-plus',
     category: 'subscriptions',
     title: 'Apple Fitness+',
-    short: 'Available in 12 of 27 EU countries. Workouts are in English with subtitles or dubbing in a few languages.',
+    short: 'Available in {count:fitnessPlus} of 27 EU countries. Workouts are in English with subtitles or dubbing in a few languages.',
     us: { status: 'yes', label: '$9.99/mo or $79.99/yr' },
-    eu: { status: 'partial', label: '12 of 27 countries', avail: 'fitnessPlus' },
-    detail: `Apple's list of Fitness+ countries includes Austria, Belgium, Finland, France, Germany, Ireland, Italy, the Netherlands, Poland, Portugal, Spain and Sweden. Belgium, Finland, the Netherlands, Poland and Sweden were added on 15 December 2025. Instruction is in English with subtitles in English, Brazilian Portuguese, French, German, Italian, Russian and Spanish, and selected workouts dubbed with generated trainer voices in German, Spanish and Japanese. Availability of Fitness+ standalone does not mean the country has an Apple One tier that includes it.`,
+    eu: { status: 'partial', avail: 'fitnessPlus' },
+    detail: `Apple's list of Fitness+ countries includes {list:fitnessPlus}. Belgium, Finland, the Netherlands, Poland and Sweden were added on 15 December 2025. Instruction is in English with subtitles in English, Brazilian Portuguese, French, German, Italian, Russian and Spanish, and selected workouts dubbed with generated trainer voices in German, Spanish and Japanese. Availability of Fitness+ standalone does not mean the country has an Apple One tier that includes it.`,
     sources: ['B10', 'B11'],
   },
   {
@@ -232,8 +232,7 @@ export const FEATURES = [
     title: 'Apple Music, Music Classical, Apple TV, Arcade, Podcasts, Books',
     short: 'The core media services are listed in all 27 EU countries; catalogues can still differ.',
     us: { status: 'yes' },
-    eu: { status: 'yes', label: 'Listed in all 27 countries' },
-    verdict: 'same',
+    eu: { status: 'partial', avail: 'appleTvSubscription' },
     detail: `Apple's dedicated media-services register lists Music, Music Classical, the Apple TV subscription, Arcade, Podcasts and paid books in all 27 EU countries. Apple One is missing for Croatia and Romania, and Croatia's Apple Books store carries public-domain titles only. Apple's general iOS feature table omits Croatia and Romania from Apple TV; this site follows the dedicated register. Presence of a service does not prove an identical catalogue: Apple says media availability and capabilities can vary by country.`,
     sources: ['B16', 'A4'],
   },
@@ -241,20 +240,20 @@ export const FEATURES = [
     id: 'audiobooks',
     category: 'subscriptions',
     title: 'Buying audiobooks in Apple Books',
-    short: 'Sold in the US and 14 EU countries; 12 member states can buy e-books but not audiobooks, and Croatia gets public-domain books only.',
+    short: 'Sold in the US and {count:audiobooks} EU countries; the other {missingcount:audiobooks} can buy e-books but not audiobooks, and Croatia gets public-domain books only.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '14 of 27 countries', avail: 'audiobooks' },
-    detail: `Apple's services register shows "Book & Audiobook purchases" for 14 EU countries and "Book purchases" only for Bulgaria, Cyprus, Czechia, Estonia, Hungary, Latvia, Lithuania, Malta, Poland, Romania, Slovakia and Slovenia. Croatia is limited to public-domain books.`,
+    eu: { status: 'partial', avail: 'audiobooks' },
+    detail: `Apple's services register shows "Book & Audiobook purchases" for {list:audiobooks}, and "Book purchases" only for the rest, except Croatia, which is limited to public-domain books.`,
     sources: ['B16'],
   },
   {
     id: 'communication-safety',
     category: 'rights',
     title: 'Communication Safety for children in Messages',
-    short: 'The nudity-blurring child-safety feature is listed for the US and only 7 EU countries.',
+    short: 'The nudity-blurring child-safety feature is listed for the US and only {count:communicationSafety} EU countries.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '7 of 27 countries', avail: 'communicationSafety' },
-    detail: `Apple lists the Communication Safety setting and Messages safety warnings for Belgium, France, Germany, Italy, the Netherlands, Spain and Sweden within the EU.`,
+    eu: { status: 'partial', avail: 'communicationSafety' },
+    detail: `Apple lists the Communication Safety setting and Messages safety warnings for {list:communicationSafety} within the EU.`,
     sources: ['A4', 'S13'],
   },
   {
@@ -263,8 +262,8 @@ export const FEATURES = [
     title: 'Buying TV shows (not just films) in the Apple TV app',
     short: 'US customers can buy films and TV shows. Some EU storefronts list film purchases only.',
     us: { status: 'yes', label: 'Films and TV shows' },
-    eu: { status: 'partial', label: 'Depends on country', avail: 'buyTvShows' },
-    detail: `Apple's media availability register shows US customers can buy both movies and TV shows, whereas Denmark, for example, lists movie purchases but not TV-show purchases. This is a per-storefront difference.`,
+    eu: { status: 'partial', avail: 'buyTvShows' },
+    detail: `Apple's media availability register shows US customers can buy both movies and TV shows. In the EU only {list:buyTvShows} list TV-show purchases; the other storefronts list movie purchases only.`,
     sources: ['B16'],
   },
   {
@@ -397,10 +396,10 @@ export const FEATURES = [
     id: 'sos-satellite',
     category: 'satellite',
     title: 'Emergency SOS via satellite',
-    short: 'Available in 10 EU countries; visitors can use it there too.',
+    short: 'Available in {count:emergencySOS} EU countries; visitors can use it there too.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '10 of 27 countries', avail: 'emergencySOS' },
-    detail: `Apple lists Austria, Belgium, France, Germany, Ireland, Italy, Luxembourg, the Netherlands, Portugal and Spain, plus non-EU Andorra and Iceland. It requires iPhone 14 or later and a usable satellite connection. Availability follows physical location, so crossing a border can change eligibility with the same phone. Some purchase-country exclusions apply.`,
+    eu: { status: 'partial', avail: 'emergencySOS' },
+    detail: `Apple lists {list:emergencySOS}, plus non-EU Andorra and Iceland. It requires iPhone 14 or later and a usable satellite connection. Availability follows physical location, so crossing a border can change eligibility with the same phone. Some purchase-country exclusions apply.`,
     sources: ['S1'],
   },
   {
@@ -427,9 +426,9 @@ export const FEATURES = [
     id: 'findmy-satellite',
     category: 'satellite',
     title: 'Find My location sharing via satellite',
-    short: 'On iPhone it follows the Emergency SOS country list, so the same 10 EU countries.',
+    short: 'On iPhone it follows the Emergency SOS country list, so the same {count:findMySatellite} EU countries.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: 'Same 10 countries as SOS', avail: 'findMySatellite' },
+    eu: { status: 'partial', label: 'Same {count:findMySatellite} countries as SOS', avail: 'findMySatellite' },
     detail: `Manual off-grid location sharing with existing contacts, requiring an active SIM. It is not a substitute for every Find My function. Apple Watch has its own, shorter list for this feature (nine EU countries, without Luxembourg).`,
     sources: ['S4', 'S1'],
   },
@@ -503,8 +502,7 @@ export const FEATURES = [
     title: 'Tap to Pay on iPhone (accept payments as a merchant)',
     short: 'Listed for the US and all 27 EU countries; a participating payment provider is required.',
     us: { status: 'yes' },
-    eu: { status: 'yes', label: 'All 27 countries' },
-    verdict: 'same',
+    eu: { status: 'partial', avail: 'tapToPay' },
     detail: `The old "US-only" description is obsolete. Eight more European countries were added on 27 May 2025 and Apple's developer page lists providers such as Nexi, Stripe, SumUp, PayPal and Revolut. Merchants need a supporting payment provider and app.`,
     sources: ['S11', 'S12'],
   },
@@ -527,8 +525,7 @@ export const FEATURES = [
     title: 'ECG, AFib History, sleep apnoea and hypertension notifications',
     short: 'Cleared in every EU member state and the US; some other regions still wait on regulators.',
     us: { status: 'yes' },
-    eu: { status: 'yes', label: 'All 27 member states' },
-    verdict: 'same',
+    eu: { status: 'partial', avail: 'watchHealth' },
     detail: `Apple lists these regulated health features country by country. As of this snapshot every EU member state and the US appear on the lists for the ECG app, irregular rhythm notifications, AFib History, sleep apnoea notifications and hypertension notifications. Apple's footnote about pending regulatory clearance for Series 12 and Ultra 4 attaches only to non-EU entries. Compatible hardware and each feature's own eligibility rules still apply.`,
     sources: ['S13'],
   },
@@ -557,10 +554,10 @@ export const FEATURES = [
     id: 'airpods-hearing',
     category: 'health',
     title: 'AirPods Hearing Test and Hearing Aid',
-    short: 'Available in the US and 24 EU countries on AirPods Pro 2 and 3. Belgium, France and Spain are missing from the Hearing Aid list.',
+    short: 'Available in the US and {count:hearingAid} EU countries on AirPods Pro 2 and 3. {missing:hearingAid} are missing from the Hearing Aid list.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '24 of 27 countries', avail: 'hearingAid' },
-    detail: `Hearing Test and the Hearing Aid feature are regulated health features that Apple offers only after local authorisation, so they are listed per country. Apple's page lists Hearing Test for 26 EU countries (all but Belgium) and Hearing Aid for 24 (all but Belgium, France and Spain), on supported AirPods Pro 2 and Pro 3 for users aged 18 or over.`,
+    eu: { status: 'partial', avail: 'hearingAid' },
+    detail: `Hearing Test and the Hearing Aid feature are regulated health features that Apple offers only after local authorisation, so they are listed per country. Apple's page lists Hearing Test for {count:hearingTest} EU countries (all but {missing:hearingTest}) and Hearing Aid for {count:hearingAid} (all but {missing:hearingAid}), on supported AirPods Pro 2 and Pro 3 for users aged 18 or over.`,
     sources: ['S14'],
   },
   {
@@ -569,29 +566,29 @@ export const FEATURES = [
     title: 'AirPods Hearing Protection',
     short: 'On AirPods Pro 2 it is US-only; on AirPods Pro 3 it covers many EU countries.',
     us: { status: 'yes', label: 'Pro 2 and Pro 3' },
-    eu: { status: 'partial', label: 'Pro 3: all 27; Pro 2: none' },
+    eu: { status: 'partial', label: 'Pro 3: {count:hearingProtectionPro3} of 27; Pro 2: {count:hearingProtectionPro2}' },
     verdict: 'mixed',
-    detail: `Hearing Protection on AirPods Pro 2 is listed for the US and selected other jurisdictions with no EU member on the list. On AirPods Pro 3 the list includes all 27 EU countries. Saying "AirPods hearing health is unavailable in Europe" would be wrong; so would claiming Pro 2 and Pro 3 behave identically in the EU.`,
+    detail: `Hearing Protection on AirPods Pro 2 is listed for the US and selected other jurisdictions with no EU member on the list. On AirPods Pro 3 the list includes {count:hearingProtectionPro3} EU countries. Saying "AirPods hearing health is unavailable in Europe" would be wrong; so would claiming Pro 2 and Pro 3 behave identically in the EU.`,
     sources: ['S14'],
   },
   {
     id: 'watch-kids',
     category: 'health',
     title: 'Apple Watch For Your Kids (family setup)',
-    short: 'Available in the US and several EU countries.',
+    short: 'Available in the US and {count:watchForKids} EU countries.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: 'Depends on country', avail: 'watchForKids' },
-    detail: `Family setup lets a child use a Watch without their own iPhone. Apple lists the US and selected EU markets such as France, Germany, Poland, Spain and Sweden.`,
+    eu: { status: 'partial', avail: 'watchForKids' },
+    detail: `Family setup lets a child use a Watch without their own iPhone. Apple lists the US and, in the EU, {list:watchForKids}.`,
     sources: ['S13'],
   },
   {
     id: 'watch-hikes',
     category: 'health',
     title: 'Hikes and topographic maps on Apple Watch',
-    short: 'The US and eight EU countries.',
+    short: 'The US and {count:watchHikes} EU countries.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '8 of 27 countries', avail: 'watchHikes' },
-    detail: `Apple lists Austria, France, Germany, Ireland, Italy, Portugal, Slovenia and Spain.`,
+    eu: { status: 'partial', avail: 'watchHikes' },
+    detail: `Apple lists {list:watchHikes}.`,
     sources: ['S13'],
   },
   {
@@ -600,7 +597,7 @@ export const FEATURES = [
     title: 'Apple Maps: Look Around',
     short: 'Coverage varies by country and city inside the EU. Cycling, transit and Detailed City Experience have their own entries on the map.',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: 'Depends on country', avail: 'mapsLookAround' },
+    eu: { status: 'partial', avail: 'mapsLookAround' },
     detail: `Apple Maps features such as Look Around, cycling directions and the Detailed City Experience are listed per country and, for cities, per city. Visited Places lists the US but no EU member state by name.`,
     sources: ['A4'],
   },
@@ -652,9 +649,9 @@ export const FEATURES = [
     id: 'vision-pro',
     category: 'hardware',
     title: 'Apple Vision Pro',
-    short: 'Sold in the US and only two EU countries (France and Germany).',
+    short: 'Sold in the US and only {count:visionPro} EU countries ({list:visionPro}).',
     us: { status: 'yes' },
-    eu: { status: 'partial', label: '2 of 27 countries', avail: 'visionPro' },
+    eu: { status: 'partial', avail: 'visionPro' },
     detail: `Importing a Vision Pro does not remove account and support limitations: the App Store and Apple Music/TV purchases on it require an Apple Account from a supported country, support is available only where it is sold, and ZEISS optical inserts have purchase-country restrictions.`,
     sources: ['S20', 'S21', 'R3'],
   },
@@ -662,9 +659,9 @@ export const FEATURES = [
     id: 'applecare-one',
     category: 'hardware',
     title: 'AppleCare One (multi-device plan)',
-    short: 'Individual plan in the US, France and Germany; Family plan US-only.',
+    short: 'Individual plan in the US and, in the EU, {list:appleCareOne}; Family plan US-only.',
     us: { status: 'yes', label: 'From $19.99/mo' },
-    eu: { status: 'partial', label: 'Individual in 2 countries', avail: 'appleCareOne' },
+    eu: { status: 'partial', label: 'Individual in {count:appleCareOne} countries', avail: 'appleCareOne' },
     detail: `AppleCare One Individual covers three products from $19.99 a month in the US with more products at $5.99 each; it is available in Australia, France, Germany, the UK and the US. AppleCare One Family ($49.99 a month) requires a US Apple Account. Elsewhere Apple sells per-device AppleCare+ plans, which in the EU include iPhone theft and loss cover.`,
     sources: ['S22', 'S23', 'S24', 'S25'],
   },
@@ -694,8 +691,7 @@ export const FEATURES = [
     title: 'Self Service Repair programme',
     short: 'Genuine parts, tools and manuals for DIY repair in the US and all 27 EU countries.',
     us: { status: 'yes' },
-    eu: { status: 'yes', label: 'All 27 member states' },
-    verdict: 'same',
+    eu: { status: 'partial', avail: 'selfServiceRepair' },
     detail: `Apple's Self Service Repair site lists every EU member state. Which products and parts are supported still varies.`,
     sources: ['R1', 'R10'],
   },
@@ -703,10 +699,10 @@ export const FEATURES = [
     id: 'apple-stores',
     category: 'hardware',
     title: 'Physical Apple Stores',
-    short: 'Apple lists stores in 44 US states plus DC, and in only eight EU countries.',
+    short: 'Apple lists stores in 44 US states plus DC, and in only {count:retailStores} EU countries.',
     us: { status: 'partial', label: '44 of 50 states' },
-    eu: { status: 'partial', label: 'Depends on country', avail: 'retailStores' },
-    detail: `Apple's store directory has no store in Montana, North Dakota, South Dakota, Vermont, West Virginia or Wyoming. In the EU, Austria, Belgium, France, Germany, Italy, the Netherlands, Spain and Sweden have Apple Stores. Elsewhere, service goes through authorised providers and mail-in repair.`,
+    eu: { status: 'partial', avail: 'retailStores' },
+    detail: `Apple's store directory has no store in Montana, North Dakota, South Dakota, Vermont, West Virginia or Wyoming. In the EU, {list:retailStores} have Apple Stores. Elsewhere, service goes through authorised providers and mail-in repair.`,
     sources: ['R2'],
   },
 
@@ -757,12 +753,21 @@ export function verdictFor(feature, { country = null, langCodes = [] } = {}, ctx
 export function resolveEu(feature, { country = null, langCodes = [] } = {}, ctx = {}) {
   const eu = feature.eu;
   if (eu.status !== 'partial') return { ...eu, resolved: false };
-  if (eu.avail && country && ctx.availability?.[eu.avail]) {
-    if (eu.known && ctx.availability[eu.known] && !ctx.availability[eu.known].includes(country)) {
-      return { status: 'partial', label: `Not published for ${ctx.countryName || country}`, resolved: false };
+  const list = eu.avail ? ctx.availability?.[eu.avail] : null;
+  const unknown = eu.avail ? ctx.unknown?.[eu.avail] || [] : [];
+  const total = ctx.total || 27;
+  if (list) {
+    if (country) {
+      if (eu.known && ctx.availability[eu.known] && !ctx.availability[eu.known].includes(country)) {
+        return { status: 'partial', label: `Not published for ${ctx.countryName || country}`, resolved: false };
+      }
+      if (unknown.includes(country)) return { status: 'partial', label: `Not published for ${ctx.countryName || country}`, resolved: false };
+      const ok = list.includes(country);
+      return { status: ok ? 'yes' : 'no', label: ok ? `Available in ${ctx.countryName || country}` : `Not in ${ctx.countryName || country}`, resolved: true };
     }
-    const ok = ctx.availability[eu.avail].includes(country);
-    return { status: ok ? 'yes' : 'no', label: ok ? `Available in ${ctx.countryName || country}` : `Not in ${ctx.countryName || country}`, resolved: true };
+    if (list.length === total) return { status: 'yes', label: eu.label || `All ${total} countries`, resolved: true };
+    if (list.length === 0) return { status: 'no', label: eu.label || 'No EU country', resolved: true };
+    return { ...eu, label: eu.label || `${list.length} of ${total} countries`, resolved: false };
   }
   if (eu.lang && langCodes.length && ctx.languageSupport?.[eu.lang]) {
     const supported = langCodes.filter((l) => ctx.languageSupport[eu.lang].includes(l));

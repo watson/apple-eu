@@ -1,4 +1,5 @@
 import { el, mount } from '../dom.js';
+import { fill } from '../text.js';
 import { getState, subscribe, currentCountry } from '../state.js';
 import { evaluate } from '../context.js';
 import { LANGUAGE_BY_CODE } from '../data/languages.js';
@@ -40,7 +41,7 @@ function render() {
   }
 
   const list = (items, limit = 7) => el('ul', {},
-    items.slice(0, limit).map(({ f }) => el('li', {}, el('div', {}, el('b', {}, f.title), el('span', {}, f.short)))),
+    items.slice(0, limit).map(({ f }) => el('li', {}, el('div', {}, el('b', {}, f.title), el('span', {}, fill(f.short))))),
     items.length > limit ? el('li', {}, el('div', {}, el('a', { href: '#scorecard' }, `and ${items.length - limit} more in the scorecard`))) : null,
   );
 

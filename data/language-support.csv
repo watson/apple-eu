@@ -1,0 +1,16 @@
+key,label,page,section,sources,note,bg,hr,cs,da,nl,en,et,fi,fr,de,el,hu,ga,it,lv,lt,mt,pl,pt,ro,sk,sl,es,sv
+appleIntelligence,Apple Intelligence,ios,apple-intelligence-writing-tools,A1;A4,Full Apple Intelligence language list,N,N,N,Y,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,Y
+siri,Siri (classic),manual,siri,A4,Derived from the Siri country list with language qualifiers,N,N,N,Y,Y,Y,N,Y,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,Y
+phoneLiveTranslation,Live Translation in Phone and FaceTime,ios,apple-intelligence-live-translation-in-phone-and-facetime,A4;A7,Portuguese = Brazil only,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,N
+airpodsLiveTranslation,Live Translation with AirPods,ios,apple-intelligence-live-translation-with-airpods,A4;A8,Portuguese = Brazil only,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,N
+messagesLiveTranslation,Live Translation in Messages,ios,apple-intelligence-live-translation-in-messages,A4;A6,,N,N,N,Y,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,Y
+notesTranscriptionSummaries,Notes transcription summaries,ios,apple-intelligence-notes-transcription,A4,,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,N,N,N,N,N,Y,N,N,N,Y,N
+notesTranscription,Notes audio transcription,manual,notes-audio-transcription,A4;A11,Page lists ten non-English languages; English per guide A11,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,N
+workoutBuddy,Workout Buddy,ios,apple-intelligence-workout-buddy,A4;A10,,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N
+systemLanguage,iPhone system language,ios,system-language-system-language,A4,,Y,Y,Y,Y,Y,Y,N,Y,Y,Y,Y,Y,N,Y,N,Y,N,Y,Y,Y,Y,Y,Y,Y
+dictation,Dictation,ios,dictation,A4,,N,Y,Y,Y,Y,Y,N,Y,Y,Y,Y,Y,N,Y,N,N,N,Y,Y,Y,Y,N,Y,Y
+liveText,Live Text,ios,live-text-live-text,A4,,N,N,Y,Y,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,Y,Y,Y,N,N,Y,Y
+translateApp,Translate app,ios,translate-translate-app,A4,,N,N,N,N,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,Y,Y,N,N,N,Y,N
+safariTranslation,Safari web page translation,ios,safari-web-page-translation,A4,,N,N,N,N,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,Y,Y,N,N,N,Y,N
+visualLookUp,Visual Look Up,ios,visual-look-up-visual-look-up,A4,,N,N,N,N,Y,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,Y,N
+liveCaptions,Live Captions (accessibility),ios,accessibility-live-captions,A4,,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,Y,N

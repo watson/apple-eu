@@ -1,12 +1,13 @@
 import { el } from '../dom.js';
 import { STATUS_LABEL, STATUS_GLYPH, VERDICT_LABEL } from '../context.js';
 import { sourceList } from '../data/sources.js';
+import { fill } from '../text.js';
 
 export function statusChip(cell) {
   const status = cell?.status || 'na';
   return el('span', { class: `chip ${status}`, title: STATUS_LABEL[status] },
     el('span', { class: 'i', 'aria-hidden': 'true' }, STATUS_GLYPH[status]),
-    el('span', {}, cell?.label || STATUS_LABEL[status]),
+    el('span', {}, fill(cell?.label) || STATUS_LABEL[status]),
   );
 }
 

@@ -57,6 +57,12 @@ export function fmtMoney(value, currency, { maxFrac = 2 } = {}) {
   }
 }
 
+export function fmtDateLong(iso) {
+  if (!iso) return 'undated';
+  const [y, m, d] = iso.split('-').map(Number);
+  return new Date(Date.UTC(y, (m || 1) - 1, d || 1)).toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+}
+
 export function fmtDate(iso) {
   if (!iso) return 'undated';
   const [y, m, d] = iso.split('-').map(Number);

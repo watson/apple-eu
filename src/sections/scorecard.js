@@ -3,8 +3,9 @@ import { getState, setState, subscribe } from '../state.js';
 import { evaluate, VERDICT_LABEL } from '../context.js';
 import { CATEGORIES } from '../data/features.js';
 import { COUNTRIES } from '../data/countries.js';
-import { AVAILABILITY } from '../data/availability.js';
+import { AVAILABILITY, UNKNOWN } from '../data/availability.js';
 import { statusChip, verdictPill, sourceLinks } from '../components/chips.js';
+import { fill } from '../text.js';
 
 const expanded = new Set();
 const lastRows = new Map(); // feature id -> { f, verdict, eu } from the latest render
@@ -50,7 +51,7 @@ function renderList() {
   const visible = rows.filter(({ f, verdict }) => {
     if (state.filter !== 'all' && !(verdict === state.filter || (state.filter === 'depends' && verdict === 'mixed'))) return false;
     if (state.category !== 'all' && f.category !== state.category) return false;
-    if (q && !`${f.title} ${f.short} ${f.detail}`.toLowerCase().includes(q)) return false;
+    if (q && !fill(`${f.title} ${f.short} ${f.detail}`).toLowerCase().includes(q)) return false;
     return true;
   });
 
@@ -79,7 +80,7 @@ function row({ f, verdict, eu }, state) {
     onclick: () => toggle(f.id),
     onkeydown: (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(f.id); } },
   },
-    el('div', {}, el('div', { class: 'title' }, f.title), el('div', { class: 'short' }, f.short)),
+    el('div', {}, el('div', { class: 'title' }, f.title), el('div', { class: 'short' }, fill(f.short))),
     el('div', { class: 'cell us' }, el('span', { class: 'region' }, 'US'), statusChip(f.us)),
     el('div', { class: 'cell eu' }, el('span', { class: 'region' }, state.country || 'EU'), statusChip(eu)),
     el('div', { class: 'cell' }, verdictPill(verdict)),
@@ -107,12 +108,13 @@ function toggle(id) {
 }
 
 function detailPanel(f, eu, state) {
-  const parts = [el('p', {}, f.detail)];
+  const parts = [el('p', {}, fill(f.detail))];
   if (f.eu.avail && AVAILABILITY[f.eu.avail]) {
     const list = AVAILABILITY[f.eu.avail];
-    parts.push(el('p', { class: 'muted', style: { marginTop: '10px', fontSize: '13px' } }, `EU member states where Apple lists it (${list.length} of 27):`));
+    const unknown = UNKNOWN[f.eu.avail] || [];
+    parts.push(el('p', { class: 'muted', style: { marginTop: '10px', fontSize: '13px' } }, `EU member states where Apple lists it (${list.length} of 27${unknown.length ? `, ${unknown.length} not published` : ''}):`));
     parts.push(el('div', { class: 'country-list' },
-      COUNTRIES.map((c) => el('span', { class: `${list.includes(c.code) ? '' : 'off'} ${state.country === c.code ? 'me' : ''}`.trim(), title: c.name }, `${c.flag} ${c.code}`)),
+      COUNTRIES.map((c) => el('span', { class: `${list.includes(c.code) ? '' : unknown.includes(c.code) ? 'unknown' : 'off'} ${state.country === c.code ? 'me' : ''}`.trim(), title: unknown.includes(c.code) ? `${c.name}: not published` : c.name }, `${c.flag} ${c.code}${unknown.includes(c.code) ? '?' : ''}`)),
     ));
   }
   if (f.tags?.includes('dma')) parts.push(el('p', { style: { marginTop: '10px' } }, el('span', { class: 'tag' }, 'Digital Markets Act')));

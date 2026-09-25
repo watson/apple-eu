@@ -7,7 +7,9 @@
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",
-    "test": "node scripts/validate-data.mjs"
+    "build": "node scripts/build.mjs",
+    "fetch": "node scripts/fetch-availability.mjs",
+    "test": "node scripts/build.mjs > /dev/null && node scripts/validate-data.mjs"
   },
   "engines": {
     "node": ">=22"

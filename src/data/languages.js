@@ -1,8 +1,6 @@
 // The 24 official languages of the European Union.
-// `appleIntelligence`, `siri`, `phoneLiveTranslation` and `notesTranscription`
-// are filled from Apple's iOS 27 feature availability page (source A4) and the
-// support articles referenced in features.js. They are updated by the research
-// step; see research/raw/ios-feature-availability.json.
+// Which features support each language lives in data/language-support.csv
+// (generated into src/data/language-support.js).
 
 export const EU_LANGUAGES = [
   { code: 'bg', name: 'Bulgarian' },

@@ -8,6 +8,7 @@ import { initPlatform } from './sections/platform.js';
 import { initHardware } from './sections/hardware.js';
 import { initSources } from './sections/sources.js';
 import { initSettings } from './components/settings.js';
+import { fillStatic } from './text.js';
 
 // Three-state theme control: System → Light → Dark → System. A manual choice is
 // remembered; "System" clears it so the page follows the OS again.
@@ -52,6 +53,7 @@ function initNavHighlight() {
   sections.forEach((s) => io.observe(s));
 }
 
+fillStatic();
 initTheme();
 initHero();
 initOverview();
