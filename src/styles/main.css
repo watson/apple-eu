@@ -466,7 +466,8 @@ strong { font-weight: 600; }
 .matrix thead tr.group th:first-child { background: transparent; }
 .matrix thead tr.group th.grp { border-radius: 10px 10px 0 0; }
 .matrix .country { display: flex; align-items: center; gap: 8px; font-weight: 500; }
-.table-wrap { overflow-x: auto; border: 1px solid var(--hair-2); border-radius: var(--radius); background: var(--surface); padding: 8px 12px; box-shadow: var(--shadow); }
+.table-wrap { overflow-x: auto; border: 1px solid var(--hair-2); border-radius: var(--radius); background: var(--surface); padding: 8px 12px 12px; box-shadow: var(--shadow); }
+.table-wrap .chart-tabs { margin-top: 10px; }
 
 /* ---------- Chart ---------- */
 .chart { background: var(--surface); border: 1px solid var(--hair-2); border-radius: var(--radius); padding: 20px 20px 12px; box-shadow: var(--shadow); }

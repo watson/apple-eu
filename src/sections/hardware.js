@@ -9,6 +9,7 @@ import { PRICING } from '../data/pricing.js';
 import { FX, toEUR } from '../data/fx.js';
 import { attachTooltip } from '../components/tooltip.js';
 import { sourceLinks } from '../components/chips.js';
+import { tabPanels } from '../components/tabs.js';
 import { fxToggle, exVatToggle } from '../components/fxToggle.js';
 import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
@@ -84,11 +85,7 @@ function render() {
     table: () => el('div', { class: 'chart-panel' }, priceTable(rows, usRow, tax, state)),
     sources: () => el('div', { class: 'chart-panel' }, sourceLinks(['S18', 'S19', 'X2', 'X3'])),
   };
-  const TABS = [['notes', 'Notes'], ['table', 'Table'], ['sources', 'Sources']];
-  const tabs = el('div', { class: 'chart-tabs', role: 'tablist' }, TABS.map(([id, label]) => el('button', {
-    type: 'button', role: 'tab', 'aria-selected': String(panel === id), 'aria-expanded': String(panel === id),
-    onclick: () => { panel = panel === id ? null : id; render(); },
-  }, label)));
+  const [tabs, panelNode] = tabPanels([['notes', 'Notes'], ['table', 'Table'], ['sources', 'Sources']], panels, panel, (id) => { panel = id; render(); });
 
   mount('price-chart',
     el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect(), exVatToggle()),
@@ -101,7 +98,7 @@ function render() {
       ),
       g,
       tabs,
-      panel ? panels[panel]() : null,
+      panelNode,
     ),
   );
 }

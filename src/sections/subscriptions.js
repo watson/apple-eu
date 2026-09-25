@@ -5,8 +5,12 @@ import { PRICING } from '../data/pricing.js';
 import { AVAILABILITY } from '../data/availability.js';
 import { FX, toEUR } from '../data/fx.js';
 import { fxToggle, exVatToggle } from '../components/fxToggle.js';
+import { tabPanels } from '../components/tabs.js';
+import { sourceLinks } from '../components/chips.js';
 import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
+
+let panel = null; // open panel under the table: 'notes' | 'sources' | null
 
 const SERVICES = [
   { key: 'music', label: 'Apple Music' },
@@ -85,9 +89,8 @@ function planCard(code, region, state) {
   );
 }
 
-/** Always shown, so toggling the euro switch never adds or removes a paragraph. */
 function conversionNote(state) {
-  return el('p', { class: 'tax-note' }, `Euro figures, when shown, are approximate: converted at the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (USD ${state.fx.toFixed(2)}, DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro).`);
+  return el('p', {}, `Euro figures, when shown, are approximate: converted at the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (USD ${state.fx.toFixed(2)}, DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro).`);
 }
 
 function render() {
@@ -141,11 +144,19 @@ function renderMatrix(state) {
       );
     })),
   );
+  const panels = {
+    notes: () => el('div', { class: 'chart-panel prose' },
+      el('p', {}, 'Monthly prices in local currency, VAT included in the EU. US prices include the sales tax of the state chosen above, although digital subscriptions are only taxed in some states. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier".'),
+      el('p', {}, 'Eleven member states have no Apple One page on apple.com, so their tiers and prices could not be verified; Apple\u2019s services register lists Apple One as available in all of them except Croatia and Romania.'),
+      conversionNote(state),
+    ),
+    sources: () => el('div', { class: 'chart-panel' }, sourceLinks(['B1', 'B2', 'B3', 'B4', 'B5', 'B6', 'R5', 'B16', 'X2', 'X3'])),
+  };
+  const [tabs, panelNode] = tabPanels([['notes', 'Notes'], ['sources', 'Sources']], panels, panel, (id) => { panel = id; renderMatrix(getState()); });
   mount('apple-one-matrix',
     el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect(), exVatToggle()),
-    el('div', { class: 'table-wrap' }, table),
-    conversionNote(state),
-    el('p', { class: 'note', style: { marginTop: '10px' } }, 'Monthly prices in local currency, VAT included in the EU; US prices include the sales tax of the state chosen above, although digital subscriptions are only taxed in some states. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier". Sources: each country\u2019s apple.com/apple-one page and Apple\u2019s media services register, accessed 25 September 2026.'));
+    el('div', { class: 'table-wrap' }, table, tabs, panelNode),
+  );
 }
 
 function rank(r) {
