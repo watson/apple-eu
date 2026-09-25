@@ -47,9 +47,10 @@ developer or legal pages, with the European Commission for the legal position.
 
 ## Contributing
 
-Corrections are welcome, especially with a link to the Apple page that shows the current
-position. Running the site locally, checking the data and refreshing the snapshot are
-described in [CONTRIBUTING.md](CONTRIBUTING.md).
+Spotted something wrong or out of date? Please [open an issue](https://github.com/watson/apple-eu/issues)
+first, ideally with a link to the Apple page that shows the current position, before
+sending a pull request. How to run the site locally, check the data and refresh the
+snapshot is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 

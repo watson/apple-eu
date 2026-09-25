@@ -1,8 +1,15 @@
 # Contributing
 
 Corrections are the most valuable contribution to a project like this. If Apple has
-changed something, or a claim on the page does not match its source, open an issue or a
-pull request with a link to the Apple page that shows the current position.
+changed something, or a claim on the page does not match its source, please
+[open an issue](https://github.com/watson/apple-eu/issues) first and include a link to
+the Apple page that shows the current position.
+
+Please do not send a pull request without an issue behind it. Discussing the change
+first avoids wasted work: many apparent differences turn out to hinge on which page,
+language or account country was checked, and that is easier to settle in an issue than
+in a review. Once the change is agreed, a pull request is very welcome, and the sections
+below describe how to make one.
 
 ## Run it locally
 
