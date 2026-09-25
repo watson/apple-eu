@@ -15,7 +15,7 @@ developer and legal pages, plus the European Commission for the legal position.
 
 ## Run it locally
 
-No build step and no dependencies. Any static file server works; the repo ships a tiny one:
+No build step and no dependencies. Node.js 22 or newer (an `.nvmrc` selects Node 26 for nvm users). Any static file server works; the repo ships a tiny one:
 
 ```sh
 npm run dev          # serves the site at http://localhost:5173
