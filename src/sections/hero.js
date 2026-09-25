@@ -8,7 +8,7 @@ const TILES = [
   { key: 'us', label: 'US-only advantages', hint: 'Things a US customer gets that an EU customer does not' },
   { key: 'eu', label: 'EU-only advantages', hint: 'Things an EU customer gets that a US customer does not' },
   { key: 'same', label: 'Same on both sides', hint: 'Available in both regions, sometimes with caveats' },
-  { key: 'depends', label: 'Depends on where in the EU', hint: 'Varies by member state or language' },
+  { key: 'depends', label: 'Depends on where in the EU', hint: 'Varies by member state or language', labelCountry: 'Mixed or case by case', hintCountry: 'Trade-offs, or things that vary by city, provider or language even within one country' },
 ];
 
 const shown = {};
@@ -34,10 +34,12 @@ function renderKpis() {
       const value = el('div', { class: 'value' }, String(shown[t.key] ?? counts[t.key]));
       animateNumber(value, shown[t.key] ?? counts[t.key], counts[t.key]);
       shown[t.key] = counts[t.key];
+      const label = state.country && t.labelCountry ? t.labelCountry : t.label;
+      const hint = state.country && t.hintCountry ? t.hintCountry : t.hint;
       return el('div', { class: `stat ${t.key}` },
-        el('div', { class: 'label' }, t.label),
+        el('div', { class: 'label' }, label),
         value,
-        el('div', { class: 'hint' }, t.hint + (state.country && t.key === 'depends' ? '. Pick a language below to resolve the rest.' : '')),
+        el('div', { class: 'hint' }, hint),
       );
     }),
   );
