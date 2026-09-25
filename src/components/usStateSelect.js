@@ -5,8 +5,8 @@ import { US_STATES, US_AVERAGE_RATE } from '../data/us-sales-tax.js';
 /** Dropdown bound to state.usState: which US sales-tax rate to add to US prices. */
 export function usStateSelect() {
   const sel = el('select', { class: 'select', 'aria-label': 'US state for sales tax' },
-    el('option', { value: 'AVG' }, `US average (${US_AVERAGE_RATE.toFixed(2)}% sales tax)`),
-    el('option', { value: 'NONE' }, 'List price, no sales tax'),
+    el('option', { value: 'AVG' }, `US average (${US_AVERAGE_RATE.toFixed(2)}%)`),
+    el('option', { value: 'NONE' }, 'None (list price)'),
     US_STATES.map((s) => el('option', { value: s.code }, `${s.name} (${s.combined.toFixed(2)}%)`)),
   );
   const { usState, exVat } = getState();
