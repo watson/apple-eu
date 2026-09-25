@@ -56,7 +56,7 @@ function renderList() {
   const root = clear(document.getElementById('scorecard-list'));
   if (!visible.length) { root.append(el('div', { class: 'empty' }, 'Nothing matches those filters.')); return; }
 
-  root.append(el('div', { class: 'scorecard-head' }, el('span', {}, 'Feature'), el('span', {}, 'United States'), el('span', {}, state.country ? `EU · ${state.country}` : 'European Union'), el('span', {}, 'Who is ahead')));
+  root.append(el('div', { class: 'scorecard-head' }, el('span', {}, 'Feature'), el('span', {}, 'United States'), el('span', {}, state.country ? `EU · ${state.country}` : 'European Union'), el('span', {}, 'Who is ahead'), el('span', {})));
 
   for (const cat of CATEGORIES) {
     const items = visible.filter((r) => r.f.category === cat.id);
@@ -79,7 +79,8 @@ function row({ f, verdict, eu }, state) {
     el('div', {}, el('div', { class: 'title' }, f.title), el('div', { class: 'short' }, f.short)),
     el('div', { class: 'cell us' }, el('span', { class: 'region' }, 'US'), statusChip(f.us)),
     el('div', { class: 'cell eu' }, el('span', { class: 'region' }, state.country || 'EU'), statusChip(eu)),
-    el('div', { class: 'cell' }, verdictPill(verdict), el('span', { class: 'caret', 'aria-hidden': 'true' }, '⌄')),
+    el('div', { class: 'cell' }, verdictPill(verdict)),
+    el('span', { class: 'caret', 'aria-hidden': 'true' }, '⌄'),
   );
   const wrap = el('div', {}, btn, detail);
   return wrap;
