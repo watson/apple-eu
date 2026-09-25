@@ -9,7 +9,12 @@ export function usStateSelect() {
     el('option', { value: 'NONE' }, 'List price, no sales tax'),
     US_STATES.map((s) => el('option', { value: s.code }, `${s.name} (${s.combined.toFixed(2)}%)`)),
   );
-  sel.value = getState().usState;
+  const { usState, exVat } = getState();
+  // While "Remove VAT and sales tax" is on, the dropdown reflects that (list price) and is disabled;
+  // the chosen state is kept and returns when taxes are shown again.
+  sel.value = exVat ? 'NONE' : usState;
+  sel.disabled = exVat;
   sel.addEventListener('change', () => setState({ usState: sel.value }));
-  return el('label', { class: 'toggle' }, el('span', { class: 'muted', style: { fontWeight: '500' } }, 'US sales tax'), sel);
+  return el('label', { class: `toggle ${exVat ? 'is-disabled' : ''}`.trim(), title: exVat ? 'Sales tax is removed by the switch; turn it off to pick a state again.' : null },
+    el('span', { class: 'muted', style: { fontWeight: '500' } }, 'US sales tax'), sel);
 }
