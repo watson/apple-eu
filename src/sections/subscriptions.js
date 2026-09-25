@@ -4,7 +4,9 @@ import { COUNTRIES, COUNTRY_BY_CODE, US } from '../data/countries.js';
 import { PRICING } from '../data/pricing.js';
 import { AVAILABILITY } from '../data/availability.js';
 import { FX, toEUR } from '../data/fx.js';
-import { fxToggle, TAX_NOTE } from '../components/fxToggle.js';
+import { fxToggle } from '../components/fxToggle.js';
+import { usStateSelect } from '../components/usStateSelect.js';
+import { salesTaxFor } from '../data/us-sales-tax.js';
 
 const SERVICES = [
   { key: 'music', label: 'Apple Music' },
@@ -17,7 +19,7 @@ const SERVICES = [
 
 export function initSubscriptions() {
   render();
-  subscribe((state, prev) => { if (state.country !== prev.country || state.convert !== prev.convert) render(); });
+  subscribe((state, prev) => { if (['country', 'convert', 'usState', 'fx'].some((k) => state[k] !== prev[k])) render(); });
 }
 
 /** English tier name. The top tier is "Premier" in the US (the only bundle with News+) and shown as
@@ -33,12 +35,24 @@ function topPlan(code) {
   return plans.find((p) => p.tier === 'premier') || plans.find((p) => p.tier === 'family') || null;
 }
 
-/** Price to display for the current mode (local currency, or euros when the switch is on), plus the other one for tooltips. */
-function priceParts(amount, currency, state) {
-  const local = fmtMoney(amount, currency) + (currency === 'USD' ? '*' : '');
-  if (!state.convert || currency === 'EUR') return { shown: local, alt: null };
+/** Price to display for the current mode (local currency, or euros when the switch is on), plus the other one for tooltips.
+ *  US prices get the sales tax of the chosen state added (see TAX_NOTE). */
+function priceParts(listAmount, currency, state) {
+  const tax = salesTaxFor(state.usState);
+  const isUs = currency === 'USD';
+  const amount = isUs ? listAmount * (1 + tax.rate / 100) : listAmount;
+  const local = fmtMoney(amount, currency) + (isUs ? '*' : '');
+  const basis = isUs ? `${fmtMoney(listAmount, 'USD')} list${tax.rate ? ` + ${tax.rate.toFixed(2)}% sales tax` : ', no sales tax'}` : `${local} as advertised`;
+  if (!state.convert || currency === 'EUR') return { shown: local, alt: isUs ? basis : null };
   const eur = toEUR(amount, currency, state.fx);
-  return { shown: eur == null ? local : `≈ ${fmtMoney(eur, 'EUR')}${currency === 'USD' ? '*' : ''}`, alt: `${local} as advertised` };
+  return { shown: eur == null ? local : `≈ ${fmtMoney(eur, 'EUR')}${isUs ? '*' : ''}`, alt: basis };
+}
+
+function taxNote(state) {
+  const tax = salesTaxFor(state.usState);
+  return tax.rate
+    ? `* US prices include ${tax.label} sales tax, as chosen above. Sales tax applies to digital subscriptions only in states that tax them, which varies. EU prices include VAT.`
+    : '* US prices are list prices with no sales tax, as chosen above. EU prices include VAT.';
 }
 
 function planCard(code, region, state) {
@@ -59,7 +73,7 @@ function planCard(code, region, state) {
   return el('div', { class: `plan ${region}` },
     el('div', { class: 'region' }, `${c.flag} ${c.name}`),
     el('h4', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, `Apple One ${tierName(plan, code)}`),
-    el('div', { class: 'price' }, shown, el('small', {}, ` / month${code === 'US' ? ', before sales tax' : ', VAT included'}`)),
+    el('div', { class: 'price' }, shown, el('small', {}, ` / month${code === 'US' ? (salesTaxFor(state.usState).rate ? ', sales tax incl.' : ', no sales tax') : ', VAT included'}`)),
     // Always rendered so switching the euro toggle does not change the card height.
     el('div', { class: 'approx plan-approx' }, alt || '\u00a0'),
     el('ul', {}, SERVICES.map((s) => {
@@ -81,10 +95,10 @@ function render() {
   if (state.country) cards.push(planCard(state.country, 'eu', state));
   else cards.push(planCard('DE', 'eu', state), planCard('NL', 'eu', state));
   mount('plan-compare',
-    el('div', { class: 'filter-row', style: { marginTop: '0' } }, fxToggle()),
+    el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect()),
     el('div', { class: 'plan-compare' }, cards),
     el('p', { class: 'note', style: { marginTop: '12px' } }, state.country ? 'Top tier advertised in the US versus the top tier advertised in your country.' : 'Top tier advertised in the US, Germany (five-service Premium) and the Netherlands (no top tier). Pick a country to compare your own.'),
-    el('p', { class: 'tax-note' }, TAX_NOTE),
+    el('p', { class: 'tax-note' }, taxNote(state)),
   );
   renderMatrix(state);
 }
@@ -125,9 +139,9 @@ function renderMatrix(state) {
     })),
   );
   mount('apple-one-matrix',
-    el('div', { class: 'filter-row', style: { marginTop: '0' } }, fxToggle()),
+    el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect()),
     el('div', { class: 'table-wrap' }, table),
-    el('p', { class: 'tax-note' }, TAX_NOTE),
+    el('p', { class: 'tax-note' }, taxNote(state)),
     conversionNote(state),
     el('p', { class: 'note', style: { marginTop: '10px' } }, 'Monthly prices in local currency. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier". Sources: each country\u2019s apple.com/apple-one page and Apple\u2019s media services register, accessed 25 September 2026.'));
 }
