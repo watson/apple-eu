@@ -53,7 +53,13 @@ export const LANGUAGE_SUPPORT = {
     "es",
     "sv"
   ],
-  "notesTranscriptionSummaries": [],
+  "notesTranscriptionSummaries": [
+    "en",
+    "fr",
+    "de",
+    "pt",
+    "es"
+  ],
   "notesTranscription": [
     "en",
     "fr",

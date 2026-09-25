@@ -96,6 +96,10 @@ export const SOURCES = {
   // --- Additional sources gathered for the website (2026-09-25) ---
   H1:  { pub: 'Apple Newsroom', title: 'Apple Intelligence is available today on iPhone, iPad, and Mac', url: 'https://www.apple.com/newsroom/2024/10/apple-intelligence-is-available-today-on-iphone-ipad-and-mac/', date: '2024-10-28' },
   H2:  { pub: 'Apple Newsroom', title: 'Apple announces changes to iOS, Safari, and the App Store in the European Union', url: 'https://www.apple.com/newsroom/2024/01/apple-announces-changes-to-ios-safari-and-the-app-store-in-the-european-union/', date: '2024-01-25' },
+  R1:  { pub: 'Apple Support', title: 'Self Service Repair', url: 'https://support.apple.com/self-service-repair', date: null },
+  R2:  { pub: 'Apple', title: 'Apple Store list (per-country retail pages)', url: 'https://www.apple.com/retail/storelist/', date: null },
+  R3:  { pub: 'Apple Newsroom', title: 'Apple Vision Pro with M5 (country list footnote)', url: 'https://www.apple.com/newsroom/2025/10/apple-unveils-new-apple-vision-pro-with-m5-chip/', date: '2025-10-15' },
+  R4:  { pub: 'European Commission', title: 'VAT rates applied in the member states of the European Union', url: 'https://taxation-customs.ec.europa.eu/taxation/vat/vat-rates_en', date: null },
   X1:  { pub: 'Trading Economics', title: 'Euro US Dollar exchange rate (EUR/USD), 25 September 2026', url: 'https://tradingeconomics.com/euro-area/currency', date: '2026-09-25' },
 };
 

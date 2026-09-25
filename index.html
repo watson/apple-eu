@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Apple in the EU vs the US — what you get, what you don't, and what you get instead</title>
+  <meta name="description" content="An interactive comparison of what an Apple customer gets in the European Union versus the United States: Apple Intelligence and Siri, subscriptions, app-store freedoms, satellite services, Wallet, health features, hardware and consumer rights. Snapshot as of 25 September 2026.">
+  <meta property="og:title" content="Apple in the EU vs the US">
+  <meta property="og:description" content="Same Apple, different offer. An interactive infographic for anyone in the EU. Snapshot: 25 September 2026.">
+  <meta name="theme-color" content="#f5f5f7" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='%232a78d6'/%3E%3Cpath d='M16 2a14 14 0 0 1 0 28z' fill='%23eb6834'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="./src/styles/main.css">
+  <script>
+    // Apply a saved theme before first paint to avoid a flash.
+    try { const t = localStorage.getItem('theme'); if (t === 'dark' || t === 'light') document.documentElement.dataset.theme = t; } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="visually-hidden" href="#overview">Skip to content</a>
+
+  <header class="topbar">
+    <div class="container">
+      <a class="brand" href="#top"><span class="dot" aria-hidden="true"></span><span class="text">Apple: EU vs US</span></a>
+      <nav class="nav" aria-label="Sections">
+        <a href="#overview">Overview</a>
+        <a href="#scorecard">Scorecard</a>
+        <a href="#map">Map</a>
+        <a href="#intelligence">Intelligence</a>
+        <a href="#subscriptions">Subscriptions</a>
+        <a href="#platform">Platform</a>
+        <a href="#hardware">Hardware</a>
+        <a href="#rights">Rights</a>
+        <a href="#method">Sources</a>
+      </nav>
+      <div class="topbar-actions">
+        <div id="topbar-country"></div>
+        <button class="btn icon" id="theme-toggle" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">◐</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- ============================== HERO ============================== -->
+    <section class="hero">
+      <div class="container">
+        <div>
+          <p class="eyebrow">An interactive infographic · snapshot 25 September 2026</p>
+          <h1>Same Apple.<br>Different offer in the <span class="eu">EU</span> and the <span class="us">US</span>.</h1>
+        </div>
+        <p class="lede">Apple sells the same iPhone on both sides of the Atlantic, but not the same experience. Some features never cross the ocean, some arrive late, some depend on which EU country you live in, and a few exist only in Europe. Pick your country to see what applies to you.</p>
+        <div class="hero-picker" id="hero-picker"></div>
+        <div class="kpis" id="kpis" aria-live="polite"></div>
+        <div class="hero-meta">
+          <span><b>Sources:</b> Apple's own support, product, developer and legal pages, plus the European Commission.</span>
+          <span><b>Scope:</b> the 27 EU member states versus the 50 US states. Not the UK, Norway, Iceland or Switzerland.</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== OVERVIEW ============================== -->
+    <section class="section" id="overview">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">The big picture</p>
+          <h2>It is not one-directional.</h2>
+          <p class="lede">The US gets the newest AI, the richest subscription bundle and every satellite service. The EU gets app-store freedom, stronger consumer rights, a SIM tray, and blood-oxygen readings on the wrist. And a surprising amount depends on which member state, and which language, you use.</p>
+        </div>
+        <div id="country-banner"></div>
+        <div id="versus" style="margin-top: 24px"></div>
+      </div>
+    </section>
+
+    <!-- ============================== SCORECARD ============================== -->
+    <section class="section" id="scorecard">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Feature by feature</p>
+          <h2>The scorecard.</h2>
+          <p class="lede">Every difference we could document, side by side. Filter by who comes out ahead, search, and expand a row for the details and Apple's own source.</p>
+        </div>
+        <div id="scorecard-filters"></div>
+        <div id="scorecard-list"></div>
+      </div>
+    </section>
+
+    <!-- ============================== MAP ============================== -->
+    <section class="section" id="map">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Inside the EU</p>
+          <h2>Which EU? It depends on the country.</h2>
+          <p class="lede">There is no single "European version" of Apple. Fitness+ is sold in 12 member states, satellite SOS works in 10, the top Apple One tier exists in 7, Vision Pro in 2. Pick a feature to light up the map, or click a country to make it yours.</p>
+        </div>
+        <div class="map-layout">
+          <div class="map-sticky">
+            <div class="tilemap" id="tilemap" role="group" aria-label="Schematic map of EU member states"></div>
+            <p class="note" style="margin-top:12px">Schematic tile map, not to scale. The orange tile is the United States for reference.</p>
+          </div>
+          <div class="map-side" id="map-side"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== INTELLIGENCE ============================== -->
+    <section class="section" id="intelligence">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Apple Intelligence &amp; Siri</p>
+          <h2>Late, then partial, then late again.</h2>
+          <p class="lede">Apple Intelligence reached EU iPhones five months after the US. The new Siri AI, rolling out in the US since 14 September 2026, is explicitly withheld from EU iPhones, iPads and Watches. And whether any of it works in your language is a separate question.</p>
+        </div>
+
+        <div class="grid-3">
+          <div class="card">
+            <h4>What EU iPhones have</h4>
+            <p>Writing Tools, Genmoji, Image Playground, Clean Up, notification and mail summaries, Visual Intelligence, ChatGPT integration, Live Translation in Messages, calls and AirPods. All since iOS 18.4 (31 March 2025) or later.</p>
+          </div>
+          <div class="card">
+            <h4>What EU iPhones lack</h4>
+            <p>Siri AI (personal context, onscreen awareness, app actions, Write with Siri, Siri mode in Camera), iPhone Mirroring on Mac, and built-in call recording. Apple cites the Digital Markets Act; the Commission says the law does not prohibit launching them.</p>
+          </div>
+          <div class="card">
+            <h4>The language rule</h4>
+            <p>Device language and Siri language must be the same supported language. Apple Intelligence supports 9 of the EU's 24 official languages. Speakers of the other 15 must run their iPhone in another language to use any of it.</p>
+          </div>
+        </div>
+
+        <h3>How the gap evolved</h3>
+        <div class="timeline" id="timeline"></div>
+
+        <h3>Does it work in your language?</h3>
+        <p class="secondary" style="max-width:720px">Apple gates many features by language rather than by country. Choose a language to see which features support it. Countries pre-select their official languages.</p>
+        <div class="filter-row" id="lang-picker"></div>
+        <div id="lang-check"></div>
+        <h4 style="margin-top:28px;font-size:16px">Apple Intelligence support across the 24 official EU languages</h4>
+        <div class="lang-grid" id="lang-grid"></div>
+      </div>
+    </section>
+
+    <!-- ============================== SUBSCRIPTIONS ============================== -->
+    <section class="section" id="subscriptions">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Subscriptions &amp; media</p>
+          <h2>The bundle is bigger in America.</h2>
+          <p class="lede">Apple One Individual and Family are the same four services everywhere. The difference is at the top: the US Premier tier adds Fitness+, News+ and 2 TB. Seven EU countries get a five-service Premium without News+. The rest get no top tier at all.</p>
+        </div>
+
+        <div id="plan-compare"></div>
+
+        <h3>What is in the top Apple One tier, country by country</h3>
+        <p class="secondary" style="max-width:720px">Highest tier advertised on each country's Apple One page. Prices are monthly, in local currency, tax included in the EU and before sales tax in the US. Eleven member states have no Apple One page on apple.com at all, although Apple's services register lists Apple One as available in all but Croatia and Romania.</p>
+        <div id="apple-one-matrix"></div>
+
+        <h3>Three things Europeans cannot buy at all</h3>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Apple News+</h4>
+            <p>Sold only in the US, UK, Canada and Australia. No EU member state is on the list, and using English does not change that. In the US it is $12.99 a month for 500+ publications, narrated articles and puzzles.</p>
+          </div>
+          <div class="card">
+            <h4>Formula 1 on Apple TV</h4>
+            <p>Every 2026 race, practice, qualifying and Sprint session is included for US Apple TV subscribers, together with F1 TV Premium. Those are US rights only. MLS, by contrast, is included everywhere since 2026.</p>
+          </div>
+          <div class="card">
+            <h4>Fitness+ in 15 member states</h4>
+            <p>Fitness+ is sold in 12 EU countries and absent from 15, including Denmark, Czechia, Greece and Hungary. Workouts are in English with subtitles in six languages and dubbing in German and Spanish for selected sessions.</p>
+          </div>
+        </div>
+
+        <div class="callout eu" style="margin-top:24px"><b>One EU-only advantage.</b> Under EU portability rules, your subscriptions travel with you: Apple's terms let you use your home-country services during a temporary stay in any other member state. This does not unlock services your home country lacks.</div>
+      </div>
+    </section>
+
+    <!-- ============================== PLATFORM ============================== -->
+    <section class="section" id="platform">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Apps &amp; platform freedoms</p>
+          <h2>The DMA dividend.</h2>
+          <p class="lede">Since iOS 17.4 in March 2024, the Digital Markets Act has made the EU the one place where an iPhone can install apps from outside the App Store, run a browser that is not WebKit underneath, and delete Safari. It is also the reason Apple gives for withholding some features.</p>
+        </div>
+        <div id="platform-versus"></div>
+        <div class="grid-2" style="margin-top:24px">
+          <div class="callout"><b>Fine print.</b> Alternative distribution requires an EU Apple Account and physical presence in the EU. Apps you already installed keep working when you travel, with updates for up to 90 days outside the EU. Purchases made outside Apple's system are not covered by Ask to Buy or purchase sharing, though Screen Time still works.</div>
+          <div class="callout"><b>Coming 1 October 2026.</b> Apple's developer page describes new EU business terms taking effect on that date and broader installation access while travelling in autumn 2026. Those are not yet in force in this snapshot.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== HARDWARE ============================== -->
+    <section class="section" id="hardware">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Hardware, buying &amp; support</p>
+          <h2>Same iPhone, different radios, different price tag.</h2>
+          <p class="lede">The EU iPhone 18 Pro keeps a physical SIM tray; the US model is eSIM-only but adds mmWave 5G. Apple's EU prices include VAT, the US price does not include sales tax, and the exchange rate decides who really pays more.</p>
+        </div>
+        <div id="price-chart"></div>
+        <div class="grid-3" style="margin-top:24px">
+          <div class="card">
+            <h4>Satellite: four services, four lists</h4>
+            <p>Emergency SOS via satellite covers 10 EU countries and follows where you physically are. Messages via satellite, Roadside Assistance via satellite and Find My via satellite are US-side extras; no EU country has Messages or Roadside.</p>
+          </div>
+          <div class="card">
+            <h4>Wallet is where the US pulls ahead</h4>
+            <p>Apple Pay and Tap to Pay work across all 27 member states. Apple Cash, Apple Card, the Savings account, driver's licences in Wallet and the passport-based Digital ID all require US residency or a US device region.</p>
+          </div>
+          <div class="card">
+            <h4>Vision Pro, AppleCare One, Apple Upgrade</h4>
+            <p>Vision Pro is sold in France and Germany only. AppleCare One's multi-device plan exists in France and Germany; the Family plan and the Klarna-backed Apple Upgrade lease are US-only.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== RIGHTS ============================== -->
+    <section class="section" id="rights">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Consumer rights</p>
+          <h2>Where the EU customer is better protected.</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <h4>Two years, by law</h4>
+            <p>EU purchases from professional sellers carry a minimum two-year legal guarantee against faulty goods; some countries go further. Apple's own limited warranty is one year in both regions. The legal guarantee is a claim against the seller, separate from AppleCare.</p>
+          </div>
+          <div class="card">
+            <h4>A SIM tray and a choice of engine</h4>
+            <p>EU iPhones keep a nano-SIM slot alongside eSIM. EU browsers may use engines other than WebKit. EU users can delete Safari, Messages, Camera and the App Store, and pick more default apps.</p>
+          </div>
+          <div class="card">
+            <h4>Blood Oxygen on the wrist</h4>
+            <p>A rare hardware feature that is better in Europe: Apple Watches bought in the US since 18 January 2024 route blood-oxygen analysis through the iPhone. EU-bought Watches measure and show it on the Watch itself.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================== METHOD & SOURCES ============================== -->
+    <section class="section" id="method">
+      <div class="container">
+        <div class="section-head">
+          <p class="eyebrow">Method &amp; sources</p>
+          <h2>How to read this.</h2>
+          <p class="lede">Everything here is taken from Apple's own published pages, accessed on 25 September 2026, plus the European Commission for the legal position. It records what Apple publishes, not device tests.</p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <h4>"Unavailable" versus "not listed"</h4>
+            <p>"Explicitly unavailable" means Apple states a restriction. "Not listed" means a country or language is missing from Apple's availability page. A localised marketing page alone does not establish eligibility, and a capability existing for developers does not mean every bank, browser or accessory has implemented it.</p>
+          </div>
+          <div class="card">
+            <h4>Eight variables that change the answer</h4>
+            <p>Device language, Siri language, device region, Apple Account country, physical location, content language, hardware and OS version, and the provider (bank, carrier, transit operator). Two people in the same city can get different results.</p>
+          </div>
+          <div class="card">
+            <h4>Prices</h4>
+            <p>Advertised standard prices in local currency. EU prices include VAT; US prices exclude sales tax, which varies by state. No currency conversion is asserted except in the adjustable price explorer, which uses the EUR/USD rate of 25 September 2026 as a default.</p>
+          </div>
+          <div class="card">
+            <h4>Known uncertainties</h4>
+            <p>Apple's documents disagree on AirPods Live Translation in the EU. Vision Pro's country list comes from a 2025 newsroom footnote. Eleven EU countries have no Apple One page on apple.com, so their tiers are unknown. Apple's October 2026 EU app terms and extra Siri AI languages should be rechecked once in force.</p>
+          </div>
+        </div>
+        <h3>Source register</h3>
+        <div class="sources-list" id="sources"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Independent comparison, not affiliated with or endorsed by Apple Inc. Apple, iPhone, Siri and related marks belong to Apple. Data snapshot: 25 September 2026. The underlying research document and raw data are in the <a href="./research/RESEARCH-2026-09-25.md">research folder</a> of this repository.</p>
+    </div>
+  </footer>
+
+  <div class="tooltip" id="tooltip" role="tooltip"></div>
+  <script type="module" src="./src/main.js"></script>
+</body>
+</html>

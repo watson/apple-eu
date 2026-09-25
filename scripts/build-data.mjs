@@ -88,7 +88,8 @@ const nameToCode = Object.fromEntries(Object.entries(euLangNames).map(([k, v]) =
 const codesFromNames = (names) => names.map((n) => nameToCode[n]).filter(Boolean);
 const langScoped = (headline) => codesFromNames(ios.otherRegional.languageScoped.find((f) => f.pageHeadline === headline)?.euLanguagesIncluded || []);
 const aiFeature = (headline) => {
-  const f = (ios.appleIntelligenceFeatures.features || ios.appleIntelligenceFeatures).find((x) => x.pageHeadline === headline);
+  const norm = (s) => String(s || '').replace(/[\u00a0\u2010-\u2015]/g, ' ').replace(/\s+/g, ' ').trim().toLowerCase();
+  const f = (ios.appleIntelligenceFeatures.features || ios.appleIntelligenceFeatures).find((x) => norm(x.pageHeadline) === norm(headline));
   const langs = f?.languages || f?.rawList || [];
   return Object.keys(euLangNames).filter((code) => langs.some((l) => l.startsWith(euLangNames[code])));
 };
