@@ -4,6 +4,8 @@
 
 # Apple in the EU vs the US
 
+**Live at [theotherapple.eu](https://theotherapple.eu/).**
+
 Apple sells the same iPhone on both sides of the Atlantic, but not the same experience.
 Some features never cross the ocean, some arrive late, some depend on which EU country
 you live in, and a few exist only in Europe.
