@@ -147,7 +147,7 @@ function renderMatrix(state) {
   );
   const panels = {
     notes: () => el('div', { class: 'chart-panel prose' },
-      el('p', {}, 'Monthly prices in local currency, VAT included in the EU. US prices include the sales tax of the state chosen above; digital subscriptions are taxed only in some states, so the US figure is an upper bound. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier".'),
+      el('p', {}, 'Monthly prices in local currency, VAT included in the EU. US prices add the sales tax of the state chosen above as an estimate; whether digital subscriptions are taxed at all varies by state, and the exact rate by address. Every tier everywhere includes Apple Music, Apple TV, Apple Arcade and iCloud+ (50 GB Individual, 200 GB Family, 2 TB Premium); the top tier adds Fitness+, and in the US also News+. Ireland calls its five-service tier "Premier".'),
       el('p', {}, 'Eleven member states have no Apple One page on apple.com, so their tiers and prices could not be verified; Apple\u2019s services register lists Apple One as available in all of them except Croatia and Romania.'),
       conversionNote(state),
     ),

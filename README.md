@@ -25,7 +25,7 @@ developer or legal pages, with the European Commission for the legal position.
   subscriptions, app-store freedoms under the Digital Markets Act, satellite services,
   Wallet, health features, hardware and consumer rights. Each row shows both sides,
   who comes out ahead, the fine print, and its sources.
-- **Country map**: a tile map of the EU you can paint with more than forty availability
+- **Country map**: a tile map of the EU you can paint with three dozen availability
   lists, from Fitness+ and satellite SOS to hearing-aid features and Apple Stores.
 - **Language checker**: which of the 24 official EU languages Apple Intelligence, Siri,
   Live Translation and a dozen other language-gated features actually support.

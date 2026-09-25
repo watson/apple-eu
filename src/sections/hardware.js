@@ -108,7 +108,7 @@ function priceTable(rows, usRow, tax, state) {
     el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'With tax'), el('th', {}, 'Tax'), el('th', {}, 'Before tax'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
     el('tbody', {},
       el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(Math.round(usRow.price * (1 + tax.rate / 100)), 'USD', { maxFrac: 0 })} (${tax.label})`), el('td', {}, `${tax.rate.toFixed(2)}% sales tax`), el('td', {}, fmtMoney(usRow.price, 'USD', { maxFrac: 0 })), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
-      rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
+      rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency)), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
     ),
   );
 }

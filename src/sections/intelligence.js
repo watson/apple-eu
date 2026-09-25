@@ -77,7 +77,7 @@ function renderLangCheck() {
     else {
       const ok = (LANGUAGE_SUPPORT[c.key] || []).includes(lang);
       status = ok ? 'yes' : 'no';
-      note = ok ? `Supported in ${name}.` : `Not listed for ${name}${lang !== 'en' ? '; works if you switch the device to a supported language such as English' : ''}.`;
+      note = ok ? `Supported in ${name}.` : `Not listed for ${name}${lang !== 'en' ? '; works if you run the device and Siri in a supported language such as English' : ''}.`;
     }
     return el('div', { class: `lang-item ${status}` },
       el('div', { class: 'icon', 'aria-hidden': 'true' }, glyph(status)),

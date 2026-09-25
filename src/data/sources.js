@@ -570,6 +570,27 @@ export const SOURCES = {
     "title": "State and Local Sales Tax Rates, Midyear 2026",
     "url": "https://taxfoundation.org/data/all/state/2026-sales-tax-rates-midyear/",
     "date": "2026-07-06"
+  },
+  "S32": {
+    "pub": "Apple",
+    "title": "iPhone 18 Pro (A3714) product information sheet (EU energy label)",
+    "url": "https://regulatoryinfo.apple.com/cwt/api/ext/file?fileId=energyLabels/A3714_V1/A3714/A3714_PIS_LotX_DE_German.pdf",
+    "date": null,
+    "note": "Rated battery capacity 4056 mAh"
+  },
+  "S33": {
+    "pub": "Apple",
+    "title": "iPhone 18 Pro Max (A3717) product information sheet (EU energy label)",
+    "url": "https://regulatoryinfo.apple.com/cwt/api/ext/file?fileId=energyLabels/A3717_V1/A3717/A3717_PIS_LotX_DE_German.pdf",
+    "date": null,
+    "note": "Rated battery capacity 5391 mAh"
+  },
+  "S34": {
+    "pub": "Föli (Turku region transport)",
+    "title": "Contactless payment",
+    "url": "https://www.foli.fi/en/tickets/contactless-payment",
+    "date": null,
+    "note": "Bank-card payment through Apple Pay; not an agency card in Wallet"
   }
 };
 

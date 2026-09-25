@@ -8,7 +8,8 @@ const GROUPS = [
   ['P', 'Platform, DMA and warranty'],
   ['H', 'Historical announcements'],
   ['R', 'Additional Apple pages gathered for this site'],
-  ['X', 'Other'],
+  ['T', 'Independent reporting'],
+  ['X', 'Exchange rates and taxes'],
 ];
 
 export function initSources() {
