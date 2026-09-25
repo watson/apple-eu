@@ -1,0 +1,777 @@
+{
+  "accessed": "2026-09-25",
+  "source": "apple.com localized sites, fetched via WebFetch (summarized) and cross-checked against raw HTML via curl",
+  "countries": {
+    "AT": {
+      "name": "Austria",
+      "sitePath": "at",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/at/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Einzelperson",
+            "monthly": 19.95,
+            "priceString": "19,95 €/Monat",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Spare 10,01 €/Monat"
+          },
+          {
+            "tier": "family",
+            "localName": "Familie",
+            "monthly": 25.95,
+            "priceString": "25,95 €/Monat",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 14.01,
+            "savingsString": "Spare 14,01 €/Monat"
+          },
+          {
+            "tier": "premier",
+            "localName": "Premium",
+            "monthly": 34.95,
+            "priceString": "34,95 €/Monat",
+            "storageGB": 2048,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud",
+              "fitness"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 22.0,
+            "savingsString": "Spare 22 €/Monat"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Top tier is called 'Premium' and has 5 services (no Apple News+). Savings text: 'Die Einsparungen basieren auf den normalen Monatspreisen für einzeln gekaufte Abonnements'. No VAT statement on page."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/at/apple-fitness-plus/",
+        "available": true,
+        "monthly": 9.99,
+        "yearly": 79.99,
+        "notes": "'9,99 € pro Monat' / '79,99 € im Jahr'; '1 Monat kostenlos' for new subscribers."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/at/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/at/iphone-18-pro/",
+        "from": 1449,
+        "fromString": "Ab 1.449 €",
+        "proMaxFrom": 1599,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "Die Preise beinhalten die Mehrwertsteuer (20 %) und Versicherungssteuer (wo erforderlich).",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL."
+      }
+    },
+    "BE": {
+      "name": "Belgium",
+      "sitePath": "befr",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/befr/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Individuel",
+            "monthly": 19.95,
+            "priceString": "19,95 €/mois",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Économisez 10,01 €/mois"
+          },
+          {
+            "tier": "family",
+            "localName": "Famille",
+            "monthly": 25.95,
+            "priceString": "25,95 €/mois",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 14.01,
+            "savingsString": "Économisez 14,01 €/mois"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Only Individual and Family offered; NO Premium/Premier tier (confirmed on both befr and benl pages, and raw HTML contains no 'Premium'/'2 To' plan card). benl names: 'Individueel' € 19,95/mnd., 'Gezin' € 25,95/mnd. Notable: a standalone Apple Fitness+ page exists for Belgium, yet no Apple One tier bundles it."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/befr/apple-fitness-plus/",
+        "available": true,
+        "monthly": 9.99,
+        "yearly": 79.99,
+        "notes": "'9,99 € par mois' / '79,99 € par an'; 1 month free for new subscribers."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/be-fr/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/befr/iphone-18-pro/",
+        "from": 1479,
+        "fromString": "À partir de 1 479 €",
+        "proMaxFrom": 1629,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "Les prix indiqués incluent la TVA (21 %) et les frais de recyclage applicables, mais s'entendent hors frais de livraison (sauf mention contraire).",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL. NOTE: the suggested fallback /befr/shop/buy-iphone/iphone-18-pro returns 404 (as does /benl/shop/...); Belgium's store uses the hyphenated path /be-fr/shop/... (linked from the marketing page's Acheter button)."
+      }
+    },
+    "BG": {
+      "name": "Bulgaria",
+      "sitePath": "bg",
+      "currency": null,
+      "appleOne": {
+        "url": "https://www.apple.com/bg/apple-one/",
+        "plans": [],
+        "savingsShown": null,
+        "notes": "HTTP 404 (retried, also without trailing slash). apple.com/bg/ root and /bg/iphone/ exist (200) but there is no Apple One page."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/bg/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/bg/iphone-18-pro/",
+        "marketingUrl": null,
+        "from": null,
+        "fromString": null,
+        "proMaxFrom": null,
+        "currency": null,
+        "vatIncluded": null,
+        "vatString": null,
+        "notes": "HTTP 404 on /bg/iphone-18-pro/ and on fallback /bg/shop/buy-iphone/iphone-18-pro (retried). No Apple online store for this site; only a generic /bg/iphone/ page exists."
+      }
+    },
+    "HR": {
+      "name": "Croatia",
+      "sitePath": "hr",
+      "currency": null,
+      "appleOne": {
+        "url": "https://www.apple.com/hr/apple-one/",
+        "plans": [],
+        "savingsShown": null,
+        "notes": "HTTP 404 (retried). apple.com/hr/ root and /hr/iphone/ exist (200) but there is no Apple One page."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/hr/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/hr/iphone-18-pro/",
+        "marketingUrl": null,
+        "from": null,
+        "fromString": null,
+        "proMaxFrom": null,
+        "currency": null,
+        "vatIncluded": null,
+        "vatString": null,
+        "notes": "HTTP 404 on /hr/iphone-18-pro/ and on fallback /hr/shop/buy-iphone/iphone-18-pro (retried). No Apple online store for this site."
+      }
+    },
+    "CY": {
+      "name": "Cyprus",
+      "sitePath": null,
+      "currency": null,
+      "appleOne": {
+        "url": "https://www.apple.com/cy/apple-one/",
+        "plans": [],
+        "savingsShown": null,
+        "notes": "no local site: https://www.apple.com/cy/ returns HTTP 404 (retried), as do /cy/apple-one/, /cy/apple-fitness-plus/, /cy/iphone-18-pro/, /cy/iphone/."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/cy/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "no local site (404)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/cy/iphone-18-pro/",
+        "marketingUrl": null,
+        "from": null,
+        "fromString": null,
+        "proMaxFrom": null,
+        "currency": null,
+        "vatIncluded": null,
+        "vatString": null,
+        "notes": "no local site (404)."
+      }
+    },
+    "CZ": {
+      "name": "Czechia",
+      "sitePath": "cz",
+      "currency": "CZK",
+      "appleOne": {
+        "url": "https://www.apple.com/cz/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Individuální tarif",
+            "monthly": 339,
+            "priceString": "339 Kč/měs.",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 269,
+            "savingsString": "Ušetříš 269 Kč/měs."
+          },
+          {
+            "tier": "family",
+            "localName": "Rodinný tarif",
+            "monthly": 449,
+            "priceString": "449 Kč/měs.",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 327,
+            "savingsString": "Ušetříš 327 Kč/měs."
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Only Individual and Family offered; no Premium tier (raw HTML has no 'Premium' or 'Fitness' plan card). Page also shows '29 %' / '28 %' savings. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/cz/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/cz/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/cz/iphone-18-pro/",
+        "from": 34990,
+        "fromString": "Od 34 990 Kč",
+        "proMaxFrom": 37990,
+        "currency": "CZK",
+        "vatIncluded": true,
+        "vatString": "Ceny jsou uváděny včetně DPH (21 %) a příslušných autorských poplatků, ale neobsahují poplatky za doručení (není-li uvedeno jinak).",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL."
+      }
+    },
+    "DK": {
+      "name": "Denmark",
+      "sitePath": "dk",
+      "currency": "DKK",
+      "appleOne": {
+        "url": "https://www.apple.com/dk/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Enkeltperson",
+            "monthly": 179,
+            "priceString": "179 kr./måned",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 87,
+            "savingsString": "Spar 87 kr./måned"
+          },
+          {
+            "tier": "family",
+            "localName": "Familie",
+            "monthly": 239,
+            "priceString": "239 kr./måned",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 123,
+            "savingsString": "Spar 123 kr./måned"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Only Individual and Family offered; no Premium tier (raw HTML has no 'Premium' or 'Fitness' mention at all). Separate-purchase totals shown: 266 kr./måned and 362 kr./måned. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/dk/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/dk/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/dk/iphone-18-pro/",
+        "from": 10999,
+        "fromString": "Fra 10.999 kr.",
+        "proMaxFrom": 12299,
+        "currency": "DKK",
+        "vatIncluded": true,
+        "vatString": "Priser er inklusive moms (25 %), men eksklusive leveringsomkostninger (medmindre andet er anført).",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL."
+      }
+    },
+    "EE": {
+      "name": "Estonia",
+      "sitePath": "ee",
+      "currency": null,
+      "appleOne": {
+        "url": "https://www.apple.com/ee/apple-one/",
+        "plans": [],
+        "savingsShown": null,
+        "notes": "HTTP 404 (retried). apple.com/ee/ root and /ee/iphone/ exist (200) but there is no Apple One page."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/ee/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/ee/iphone-18-pro/",
+        "marketingUrl": null,
+        "from": null,
+        "fromString": null,
+        "proMaxFrom": null,
+        "currency": null,
+        "vatIncluded": null,
+        "vatString": null,
+        "notes": "HTTP 404 on /ee/iphone-18-pro/ and on fallback /ee/shop/buy-iphone/iphone-18-pro (retried). No Apple online store for this site."
+      }
+    },
+    "FI": {
+      "name": "Finland",
+      "sitePath": "fi",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/fi/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Oma",
+            "monthly": 20.95,
+            "priceString": "20,95 €/kk",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Säästä 10,01 €/kk"
+          },
+          {
+            "tier": "family",
+            "localName": "Perhe",
+            "monthly": 27.95,
+            "priceString": "27,95 €/kk",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 13.01,
+            "savingsString": "Säästä 13,01 €/kk"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Only Individual and Family offered; NO Premium tier (re-checked; raw HTML has no 'Premium'/'2 Tt' plan card). Prices are 1-2 EUR higher than DE/FR/AT. Notable: a standalone Apple Fitness+ page exists for Finland, yet no Apple One tier bundles it. Savings text: 'Säästölaskelma perustuu erikseen hankittujen tilausten normaaliin kuukausihintaan'."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/fi/apple-fitness-plus/",
+        "available": true,
+        "monthly": 10.99,
+        "yearly": 79.99,
+        "notes": "'10,99 € kuukaudessa' / '79,99 € vuosittain' (monthly is 10,99 not 9,99); 1 month free for new subscribers."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/fi/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/fi/iphone-18-pro/",
+        "from": 1509,
+        "fromString": "Alkaen 1 509 €",
+        "proMaxFrom": 1659,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "Hinnat sisältävät ALV:n (25.5 %), mutta eivät toimituskustannuksia",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL."
+      }
+    },
+    "FR": {
+      "name": "France",
+      "sitePath": "fr",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/fr/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Individuel",
+            "monthly": 19.95,
+            "priceString": "19,95 €/mois",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Économisez 10,01 €/mois"
+          },
+          {
+            "tier": "family",
+            "localName": "Famille",
+            "monthly": 25.95,
+            "priceString": "25,95 €/mois",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 14.01,
+            "savingsString": "Économisez 14,01 €/mois"
+          },
+          {
+            "tier": "premier",
+            "localName": "Premium",
+            "monthly": 34.95,
+            "priceString": "34,95 €/mois",
+            "storageGB": 2048,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud",
+              "fitness"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 22.0,
+            "savingsString": "Économisez 22 €/mois"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Top tier is called 'Premium' and has 5 services (no Apple News+). Savings 'basées sur les tarifs mensuels standard des abonnements souscrits séparément'. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/fr/apple-fitness-plus/",
+        "available": true,
+        "monthly": 9.99,
+        "yearly": 79.99,
+        "notes": "'9,99 € par mois' / '79,99 € par an'; 1 month free."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/fr/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/fr/iphone-18-pro/",
+        "from": 1479,
+        "fromString": "À partir de 1 479 €",
+        "proMaxFrom": 1629,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "TVA et frais inclus : env. …",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL. AMBIGUOUS: unlike other countries, the FR store page has no footer sentence 'Les prix incluent la TVA (20 %)'. The only VAT statement is the per-price disclaimer 'TVA et frais inclus : env. ...' attached to each configuration price; vatIncluded=true is based on that."
+      }
+    },
+    "DE": {
+      "name": "Germany",
+      "sitePath": "de",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/de/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Einzelperson",
+            "monthly": 19.95,
+            "priceString": "19,95 €/Monat",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Spare 10,01 €/Monat"
+          },
+          {
+            "tier": "family",
+            "localName": "Familie",
+            "monthly": 25.95,
+            "priceString": "25,95 €/Monat",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 14.01,
+            "savingsString": "Spare 14,01 €/Monat"
+          },
+          {
+            "tier": "premier",
+            "localName": "Premium",
+            "monthly": 34.95,
+            "priceString": "34,95 €/Monat",
+            "storageGB": 2048,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud",
+              "fitness"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 22.0,
+            "savingsString": "Spare 22 €/Monat"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Top tier is called 'Premium' and has 5 services (no Apple News+). Identical to AT. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/de/apple-fitness-plus/",
+        "available": true,
+        "monthly": 9.99,
+        "yearly": 79.99,
+        "notes": "'9,99 € pro Monat' / '79,99 € im Jahr'; 1 month free."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/de/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/de/iphone-18-pro/",
+        "from": 1449,
+        "fromString": "Ab 1.449 €",
+        "proMaxFrom": 1599,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "Die Preise beinhalten die Mehrwertsteuer (19 %), anwendbare Copyright-Gebühren und Versicherungssteuer (wo erforderlich).",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL. First WebFetch summary returned 1.599,00 € (that is the 6.9-inch Pro Max 256 GB); re-fetch and raw HTML confirm 6.3-inch Pro is 'Ab 1.449 €'."
+      }
+    },
+    "GR": {
+      "name": "Greece",
+      "sitePath": "gr",
+      "currency": null,
+      "appleOne": {
+        "url": "https://www.apple.com/gr/apple-one/",
+        "plans": [],
+        "savingsShown": null,
+        "notes": "HTTP 404 (retried). apple.com/gr/ root and /gr/iphone/ exist (200) but there is no Apple One page."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/gr/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/gr/iphone-18-pro/",
+        "marketingUrl": null,
+        "from": null,
+        "fromString": null,
+        "proMaxFrom": null,
+        "currency": null,
+        "vatIncluded": null,
+        "vatString": null,
+        "notes": "HTTP 404 on /gr/iphone-18-pro/ and on fallback /gr/shop/buy-iphone/iphone-18-pro (retried). No Apple online store for this site."
+      }
+    },
+    "HU": {
+      "name": "Hungary",
+      "sitePath": "hu",
+      "currency": "HUF",
+      "appleOne": {
+        "url": "https://www.apple.com/hu/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Egyéni",
+            "monthly": 4590,
+            "priceString": "4590 Ft/hó",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 3579,
+            "savingsString": "Havi 3579 Ft megtakarítás"
+          },
+          {
+            "tier": "family",
+            "localName": "Családi",
+            "monthly": 5990,
+            "priceString": "5990 Ft/hó",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 4570,
+            "savingsString": "Havi 4570 Ft megtakarítás"
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Only Individual and Family offered; no Premium tier (raw HTML has no 'Premium'/'Fitness' plan card). Also shows 'Havi 29% / 28% megtakarítás'. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/hu/apple-fitness-plus/",
+        "available": false,
+        "monthly": null,
+        "yearly": null,
+        "notes": "HTTP 404 (retried)."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/hu/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/hu/iphone-18-pro/",
+        "from": 549990,
+        "fromString": "549 990 Ft (256 GB, lowest listed)",
+        "proMaxFrom": 599990,
+        "currency": "HUF",
+        "vatIncluded": true,
+        "vatString": "Az árak tartalmazzák az áfát (27%) és az alkalmazandó szerzői jogdíjakat, a kézbesítési költséget azonban nem",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL. The HU store page shows no 'from'-style string; 549 990 Ft is the lowest listed configuration (6.3-inch iPhone 18 Pro, 256 GB). First WebFetch summary returned 599 990 Ft, which is the 6.9-inch Pro Max 256 GB."
+      }
+    },
+    "IE": {
+      "name": "Ireland",
+      "sitePath": "ie",
+      "currency": "EUR",
+      "appleOne": {
+        "url": "https://www.apple.com/ie/apple-one/",
+        "plans": [
+          {
+            "tier": "individual",
+            "localName": "Individual",
+            "monthly": 19.95,
+            "priceString": "€19.95/mo.",
+            "storageGB": 50,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 10.01,
+            "savingsString": "Save €10.01/mo."
+          },
+          {
+            "tier": "family",
+            "localName": "Family",
+            "monthly": 27.95,
+            "priceString": "€27.95/mo.",
+            "storageGB": 200,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 12.01,
+            "savingsString": "Save €12.01/mo."
+          },
+          {
+            "tier": "premier",
+            "localName": "Premier",
+            "monthly": 36.95,
+            "priceString": "€36.95/mo.",
+            "storageGB": 2048,
+            "services": [
+              "music",
+              "tv",
+              "arcade",
+              "icloud",
+              "fitness"
+            ],
+            "savingsShown": true,
+            "savingsMonthly": 20.0,
+            "savingsString": "Save €20/mo."
+          }
+        ],
+        "savingsShown": true,
+        "notes": "Top tier is called 'Premier' (not 'Premium') but still has 5 services (no Apple News+). Family (27.95) and Premier (36.95) are €2 higher than DE/FR/AT; separate-purchase totals shown: €29.96 / €39.96 / €56.95 per month. No VAT statement."
+      },
+      "fitnessPlus": {
+        "url": "https://www.apple.com/ie/apple-fitness-plus/",
+        "available": true,
+        "monthly": 9.99,
+        "yearly": 79.99,
+        "notes": "'€9.99 per month' / '€79.99 annually'; 1 month free."
+      },
+      "iphone18Pro": {
+        "url": "https://www.apple.com/ie/shop/buy-iphone/iphone-18-pro",
+        "marketingUrl": "https://www.apple.com/ie/iphone-18-pro/",
+        "from": 1489,
+        "fromString": "From €1,489",
+        "proMaxFrom": 1639,
+        "currency": "EUR",
+        "vatIncluded": true,
+        "vatString": "Total Payments for your device include VAT of approx. €… (financing disclaimer only)",
+        "notes": "Marketing page /iphone-18-pro/ loads (HTTP 200) but displays no price at all (verified via WebFetch and raw HTML grep); price taken from the shop fallback URL. AMBIGUOUS: the IE store page has no footer sentence such as 'Prices include VAT (23%)'. The only VAT text (32 occurrences, all in the financing block) is 'Total Payments for your device include VAT of approx. €307.00' etc., which implies displayed prices are VAT-inclusive; vatIncluded=true is based on that."
+      }
+    }
+  }
+}
