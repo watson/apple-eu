@@ -12,5 +12,14 @@
   "engines": {
     "node": ">=22"
   },
-  "license": "MIT"
+  "license": "MIT",
+  "author": {
+    "name": "Thomas Watson",
+    "url": "https://wa.tson.dk"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/watson/apple-eu.git"
+  },
+  "homepage": "https://github.com/watson/apple-eu"
 }

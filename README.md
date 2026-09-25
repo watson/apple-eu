@@ -86,4 +86,16 @@ research/raw/*.json         structured extracts of Apple's availability and pric
   that conversion (the USD rate is adjustable there).
 - The site records what Apple publishes, not device tests.
 
+## License
+
+Two licenses, because the repository holds two kinds of material:
+
+- **Code** (JavaScript, CSS, HTML, scripts): [MIT](LICENSE).
+- **Text and data** (editorial copy, `research/`, `src/data/`): [CC BY 4.0](LICENSE-CONTENT).
+  Reuse it however you like, with credit to Thomas Watson and a link back to this repository.
+
+The underlying facts come from Apple's published pages, the European Central Bank and the
+Tax Foundation and remain theirs; the licenses cover this project's selection, arrangement
+and writing, not the third-party material itself.
+
 Made by [Thomas Watson](https://wa.tson.dk). Not affiliated with or endorsed by Apple Inc.
