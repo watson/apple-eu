@@ -473,10 +473,6 @@ details.table-view td, details.table-view th { padding: 4px 8px; text-align: lef
 .country-banner .flag { font-size: 36px; line-height: 1; }
 .country-banner h4 { font-size: 18px; }
 .country-banner p { font-size: 14px; color: var(--ink-2); }
-.country-banner .stats { display: flex; gap: 18px; margin-left: auto; }
-.country-banner .stats div { text-align: center; }
-.country-banner .stats b { display: block; font-size: 22px; letter-spacing: -0.02em; }
-.country-banner .stats span { font-size: 12px; color: var(--ink-3); }
 
 /* Print */
 @media print {

@@ -25,12 +25,6 @@ function render() {
           el('h4', {}, `Your view: ${c.name}`),
           el('p', {}, `Resolved for ${c.name} (${cur}) and ${langs || 'no language selected'}. Change the language in the Intelligence section if you use your iPhone in another language.`),
         ),
-        el('div', { class: 'stats' },
-          stat(by('us').length, 'US ahead'),
-          stat(by('eu').length, 'EU ahead'),
-          stat(by('same').length, 'same'),
-          stat(by('depends').length + by('mixed').length, 'depends'),
-        ),
       ),
     );
   } else {
@@ -61,4 +55,3 @@ function render() {
   );
 }
 
-function stat(n, label) { return el('div', {}, el('b', {}, String(n)), el('span', {}, label)); }
