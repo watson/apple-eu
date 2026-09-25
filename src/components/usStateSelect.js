@@ -11,5 +11,5 @@ export function usStateSelect() {
   );
   sel.value = getState().usState;
   sel.addEventListener('change', () => setState({ usState: sel.value }));
-  return el('label', { class: 'toggle' }, 'US sales tax:', sel);
+  return el('label', { class: 'toggle' }, el('span', { class: 'muted', style: { fontWeight: '500' } }, 'US sales tax'), sel);
 }

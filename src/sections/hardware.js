@@ -111,7 +111,7 @@ function render() {
       el('div', { class: 'chart-controls' },
         fxToggle(),
         usStateSelect(),
-        el('label', {}, exVat, ' Remove VAT and sales tax'),
+        el('label', { class: 'toggle' }, exVat, 'Remove VAT and sales tax'),
       ),
       tabs,
       panel ? panels[panel]() : null,
