@@ -24,8 +24,7 @@ jobs:
         run: find src scripts -type f \( -name '*.js' -o -name '*.mjs' \) -print0 | xargs -0 -n1 node --check
       - name: Validate datasets
         run: npm test
-      - name: Regenerated data matches committed data
+      - name: Generated modules match the data files
         run: |
-          node scripts/build-data.mjs > /dev/null
-          node scripts/build-fx.mjs > /dev/null
+          node scripts/build.mjs > /dev/null
           git diff --exit-code -- src/data

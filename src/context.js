@@ -1,12 +1,12 @@
 // Shared resolution context and helpers used by several sections.
 import { FEATURES, verdictFor, resolveEu } from './data/features.js';
-import { AVAILABILITY } from './data/availability.js';
+import { AVAILABILITY, UNKNOWN } from './data/availability.js';
 import { LANGUAGE_SUPPORT } from './data/language-support.js';
 import { COUNTRY_BY_CODE } from './data/countries.js';
 
 export function ctxFor(state) {
   const c = state.country ? COUNTRY_BY_CODE[state.country] : null;
-  return { availability: AVAILABILITY, languageSupport: LANGUAGE_SUPPORT, countryName: c?.name || null };
+  return { availability: AVAILABILITY, unknown: UNKNOWN, languageSupport: LANGUAGE_SUPPORT, countryName: c?.name || null, total: 27 };
 }
 
 export function selection(state) {

@@ -1,0 +1,36 @@
+key,country,value,sources
+retailStores,AT,1,R2
+retailStores,BE,1,R2
+retailStores,FR,20,R2
+retailStores,DE,16,R2
+retailStores,IT,17,R2
+retailStores,NL,3,R2
+retailStores,ES,12,R2
+retailStores,SE,3,R2
+tapToPay,AT,Adyen; Global Payments; Hobex; Mollie; MyPos; Nexi; Rapyd; Revolut; Stripe; SumUp; UniCredit; Viva.com; Worldline/Payone,S12
+tapToPay,BE,Adyen; Axepta; Europabank; Mollie; MyPos; Pay.Nl; Rapyd; Revolut; Stripe; SumUp; Viva.com; Worldline,S12
+tapToPay,BG,Adyen; myPos; Rapyd; Revolut; Stripe; SumUp; Viva.com,S12
+tapToPay,HR,Adyen; Stripe; SumUp; Teya; Viva.com; Worldline,S12
+tapToPay,CY,Adyen; Revolut; Stripe; SumUp; Viva.com; Worldline,S12
+tapToPay,CZ,Adyen; Global Payments; Mollie; Revolut; Stripe; SumUp; Teya; Viva.com; Worldline,S12
+tapToPay,DK,Adyen; Mollie; Nexi; PayPal; Rapyd; Revolut; Stripe; SumUp; Surfboard Payments; Viva.com,S12
+tapToPay,EE,Revolut; Stripe; SumUp; Surfboard Payments; Viva,S12
+tapToPay,FI,Adyen; Mollie; Nexi; PayPal; Rapyd; Revolut; Stripe; SumUp; Surfboard Payments; Viva.com,S12
+tapToPay,FR,Adyen; Banque BCP; Banque Populaire; BNP Paribas; Caisse d'Épargne; Contodeo; Credit Mutuel; Crédit Coopératif; Lyra; Market Pay; Mollie; myPOS; PayPal; Payplug; Rapyd; Revolut; Smile and Pay; Square; Stancer; Stripe; SumUp; Surfboard Payments; Viva.com; Worldline; Yavin,S12
+tapToPay,DE,Adyen; Commerz Globalpay; Hobex; Mollie; myPOS; Nexi; PAYONE; Rapyd; Revolut; Sparkassen-Finanzgruppe; Stripe; SumUp; Viva.com,S12
+tapToPay,GR,Global Payments; MyPos; Viva.com; Worldline,S12
+tapToPay,HU,Adyen; Global Payments; myPos; Revolut; Stripe; SumUp; Surfboard Payments; Teya; Viva.com; Worldline,S12
+tapToPay,IE,Adyen; Global Payments; Mollie; Rapyd; Revolut; Square; Stripe; SumUp; Surfboard Payments; Viva.com,S12
+tapToPay,IT,Adyen; Fabrick; Hobex; Mollie; myPOS; Nexi; Numia; PayPal; Revolut; Sella; Stancer; Stripe; SumUp; Teya; UniCredit; Viva.com; Worldline,S12
+tapToPay,LV,Stripe; SumUp; Surfboard Payments; Viva,S12
+tapToPay,LT,Revolut; Stripe; SumUp; Surfboard Payments; Viva,S12
+tapToPay,LU,Adyen; Axepta; Mollie; Rapyd; Revolut; Stripe; SumUp; Viva.com; Worldline,S12
+tapToPay,MT,Adyen; Global Payments; Revolut; Stripe; SumUp; Trust Payments; Viva.com,S12
+tapToPay,NL,Adyen; Klearly; Mollie; myPOS; Pay.nl; PayPal; Rabobank; Rapyd; Revolut; Stripe; SumUp; Viva.com; Worldline,S12
+tapToPay,PL,Adyen; Global Payments/eService; Mollie; Nexi Poland (PEP); PlanetPay; Rapyd; Stripe; SumUp; Surfboard Payments; Viva.com; Worldline,S12
+tapToPay,PT,Adyen; Mollie; myPos; Revolut; Stripe; SumUp; Teya; Viva.com,S12
+tapToPay,RO,Adyen; Banca Transilvania; Global Payments; myPos; Revolut; Stripe; SumUp; Viva.com,S12
+tapToPay,SK,Adyen; Global Payments; myPos; Revolut; Stripe; SumUp; Tatra Bank; Teya; Viva; Wordline,S12
+tapToPay,SI,Adyen; Hobex; Revolut; Stripe; SumUp; Viva; Worldline,S12
+tapToPay,ES,Adyen; Comercia Global Payments; Mollie; MyPos; PayPal; Rapyd; Revolut; Square; Stripe; SumUp; Teya; Viva,S12
+tapToPay,SE,Adyen; Mollie; Nexi; PayPal; Rapyd; Revolut; Stripe; SumUp; Surfboard Payments; Viva.com,S12

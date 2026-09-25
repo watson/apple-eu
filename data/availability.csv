@@ -1,0 +1,47 @@
+key,label,page,section,basis,sources,note,AT,BE,BG,HR,CY,CZ,DK,EE,FI,FR,DE,GR,HU,IE,IT,LV,LT,LU,MT,NL,PL,PT,RO,SK,SI,ES,SE
+fitnessPlus,Apple Fitness+,ios,fitness-fitness-plus,country,B10;B11,,Y,Y,N,N,N,N,N,N,Y,Y,Y,N,N,Y,Y,N,N,N,N,Y,Y,Y,N,N,N,Y,Y
+appleOneAny,Apple One (any tier),manual,,country,B16,Apple media-services register,Y,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,Y,Y
+appleOnePremier,Apple One top tier (Premier/Premium),manual,,country,B1;B3;B4;R5,From each apple.com/<cc>/apple-one page; ? = no plan page published,Y,N,?,?,?,N,N,?,N,Y,Y,?,N,Y,Y,?,?,N,?,N,N,Y,?,?,?,Y,N
+appleOnePagePublished,Apple One plan page published on apple.com,manual,,country,B1;R5,,Y,Y,N,N,N,Y,Y,N,Y,Y,Y,N,Y,Y,Y,N,N,Y,N,Y,Y,Y,N,N,N,Y,Y
+newsPlus,Apple News+,ios,apple-news-plus,country,B8,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+appleTvSubscription,Apple TV subscription,manual,,country,B16,Media register lists all 27; the iOS table (apple-tv) omits HR and RO,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+buyTvShows,Buy TV shows in the Apple TV app,ios,itunes-store-tv-shows,country,B16,,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+audiobooks,Buy audiobooks in Apple Books,watchos,apple-media-services-audiobooks,country,B16;S13,,Y,Y,N,N,N,N,Y,N,Y,Y,Y,Y,N,Y,Y,N,N,Y,N,Y,N,Y,N,N,N,Y,Y
+emergencySOS,Emergency SOS via satellite,watchos,communications-emergency-sos,country,S1,Matches the iPhone support list,Y,Y,N,N,N,N,N,N,N,Y,Y,N,N,Y,Y,N,N,Y,N,Y,N,Y,N,N,N,Y,N
+findMySatellite,Find My via satellite (iPhone),manual,,country,S4;S1,iPhone guide points to the SOS list; the Watch page has its own shorter list,Y,Y,N,N,N,N,N,N,N,Y,Y,N,N,Y,Y,N,N,Y,N,Y,N,Y,N,N,N,Y,N
+messagesSatellite,Messages via satellite,watchos,communications-messages,country,S2,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+roadsideSatellite,Roadside Assistance via satellite,manual,,country,S3,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+applePay,Apple Pay,ios,apple-wallet-apple-pay,country,S5,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+tapToPay,Tap to Pay on iPhone,manual,,country,S12,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+transitWallet,Transit cards in Wallet,watchos,apple-wallet-transit,city,S13;S16,,N,N,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,Y
+watchEcg,ECG app,watchos,health-ecg,country,S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+watchIrregularRhythm,Irregular rhythm notifications,watchos,health-atrial-fib,country,S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+watchAfibHistory,AFib History,watchos,health-afib-history,country,S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+watchSleepApnea,Sleep apnoea notifications,watchos,health-sleep-apnea-notifications,country,S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+watchHypertension,Hypertension notifications,watchos,health-hypertension-notifications,country,S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+bloodOxygen,Blood Oxygen app,watchos,health-blood-oxygen,country,S15;S13,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+watchForKids,Apple Watch For Your Kids,watchos,apple-watch-for-your-kids,country,S13,,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,Y,Y
+watchHikes,Hikes and topographic maps on Apple Watch,watchos,apple-maps-hikes-and-topographic-maps,country,S13,,Y,N,N,N,N,N,N,N,N,Y,Y,N,N,Y,Y,N,N,N,N,N,N,Y,N,N,Y,Y,N
+trackDetection,Workout track detection,watchos,workout-track-detection,country,S13,,Y,Y,N,Y,N,Y,Y,N,Y,Y,Y,Y,Y,N,Y,N,N,Y,N,Y,Y,Y,N,Y,Y,Y,Y
+hearingTest,AirPods Hearing Test,airpods,hearing-test,country,S14,,Y,N,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+hearingAid,AirPods Hearing Aid,airpods,hearing-aid,country,S14,,Y,N,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y
+hearingProtectionPro2,Hearing Protection on AirPods Pro 2,airpods,hearing-protection-airpods-pro-2,country,S14,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+hearingProtectionPro3,Hearing Protection on AirPods Pro 3,airpods,hearing-protection-airpods-pro-3,country,S14,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+communicationSafety,Communication Safety in Messages,watchos,communications-communication-safety,country,A4;S13,,N,Y,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,N,N,Y,Y
+weatherAQI,Weather: air quality index,watchos,weather-air-quality-index,country,S13,,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,N,N,Y,N
+weatherNextHour,Weather: next-hour precipitation,watchos,weather-next-hour-precipitation,country,S13,,N,N,N,N,N,N,N,N,N,N,N,N,N,Y,N,N,N,N,N,N,N,N,N,N,N,N,N
+healthRecords,Health Records in the Health app,ios,health-health-records,country,A4,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+mapsLookAround,Maps: Look Around,ios,maps-look-around,country,A4,,Y,Y,N,Y,N,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,Y,Y,N,N,Y,Y,Y
+mapsCycling,Maps: cycling directions,ios,maps-cycling,country,A4,,Y,Y,N,Y,N,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,Y,Y,N,N,Y,Y,Y
+mapsTransit,Maps: transit directions,ios,maps-transit,country,A4,HU and PT appear as cities only,Y,Y,N,Y,N,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,Y,N,Y,Y,Y,Y
+mapsDetailedCity,Maps: Detailed City Experience,ios,maps-3d-city-experience,city,A4,,N,N,N,N,N,N,Y,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,Y,N,N,N,Y,Y
+mapsIndoorAirports,Maps: indoor airport maps,manual,maps-indoor-maps-airports,airport,A4,Page lists airports without countries; derived from airport locations,Y,N,N,N,N,Y,Y,N,Y,Y,Y,Y,N,Y,Y,N,N,N,N,Y,N,N,N,N,N,Y,N
+mapsSpeedLimits,Maps: speed limits,ios,maps-speed-limits,country,A4,,Y,Y,N,Y,N,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,Y,Y,N,Y,Y,Y,Y
+mapsLaneGuidance,Maps: lane guidance,ios,maps-lane-guidance,country,A4,,Y,Y,N,Y,N,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,Y,N,Y,Y,Y,Y
+mapsCustomRoute,Maps: custom route creation,ios,maps-custom-route-creation,country,A4,,Y,Y,N,Y,N,Y,Y,N,Y,Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,Y,Y,N,Y,Y,Y,Y
+mapsFlyover,Maps: Flyover,ios,maps-flyover,city,A4,,Y,Y,N,N,N,Y,Y,N,Y,Y,Y,N,Y,Y,Y,N,N,Y,N,Y,N,Y,N,N,N,Y,Y
+mapsVisitedPlaces,Maps: Visited Places,ios,maps-visited-places,country,A4,,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+visionPro,Apple Vision Pro sold by Apple,manual,,country,S20;S21;R3,,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+appleCareOne,AppleCare One (Individual),manual,,country,S22,,N,N,N,N,N,N,N,N,N,Y,Y,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N,N
+selfServiceRepair,Self Service Repair,manual,,country,R1;R10,,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y,Y
+retailStores,Physical Apple Stores,manual,,country,R2,,Y,Y,N,N,N,N,N,N,N,Y,Y,N,N,N,Y,N,N,N,N,Y,N,N,N,N,N,Y,Y

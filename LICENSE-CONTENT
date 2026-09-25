@@ -2,8 +2,8 @@ Creative Commons Attribution 4.0 International (CC BY 4.0)
 
 Copyright (c) 2026 Thomas Watson
 
-The editorial text, the research document (research/), the structured data
-extracts (research/raw/) and the datasets in src/data/ are licensed under the
+The editorial text, the research reports and raw extracts (research/), the
+datasets in data/ and the generated modules in src/data/ are licensed under the
 Creative Commons Attribution 4.0 International License.
 
 You are free to share and adapt this material for any purpose, including
@@ -25,6 +25,6 @@ project, not the underlying third-party material. Apple, iPhone, Siri and
 related marks are trademarks of Apple Inc. This project is not affiliated
 with or endorsed by Apple.
 
-The code (everything outside research/ and src/data/, in particular the
+The code (everything outside research/, data/ and src/data/, in particular the
 JavaScript, CSS, HTML and scripts) is licensed separately under the MIT
 License; see the LICENSE file.

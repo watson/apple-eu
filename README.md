@@ -57,7 +57,7 @@ snapshot is described in [CONTRIBUTING.md](CONTRIBUTING.md).
 Two licenses, because the repository holds two kinds of material:
 
 - **Code** (JavaScript, CSS, HTML, scripts): [MIT](LICENSE).
-- **Text and data** (editorial copy, `research/`, `src/data/`): [CC BY 4.0](LICENSE-CONTENT).
+- **Text and data** (editorial copy, `research/`, `data/`, `src/data/`): [CC BY 4.0](LICENSE-CONTENT).
   Reuse it however you like, with credit to Thomas Watson and a link back to this repository.
 
 The underlying facts come from Apple's published pages, the European Central Bank and the
