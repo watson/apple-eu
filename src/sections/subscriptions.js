@@ -70,9 +70,9 @@ function planCard(code, region, state) {
   );
 }
 
+/** Always shown, so toggling the euro switch never adds or removes a paragraph. */
 function conversionNote(state) {
-  if (!state.convert) return null;
-  return el('p', { class: 'tax-note' }, `Euro figures are approximate, converted at the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (USD ${state.fx.toFixed(2)}, DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro).`);
+  return el('p', { class: 'tax-note' }, `Euro figures, when shown, are approximate: converted at the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (USD ${state.fx.toFixed(2)}, DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro).`);
 }
 
 function render() {
