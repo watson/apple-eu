@@ -352,7 +352,8 @@ strong { font-weight: 600; }
 
 /* ---------- Timeline ---------- */
 .timeline { position: relative; display: grid; gap: 0; margin-top: 8px; }
-.timeline::before { content: ""; position: absolute; left: 92px; top: 8px; bottom: 8px; width: 2px; background: var(--hair); }
+/* Line centred under the 40px dot column: 72px date column + 8px gap + 20px, minus half the 2px line. */
+.timeline::before { content: ""; position: absolute; left: 99px; top: 8px; bottom: 8px; width: 2px; background: var(--hair); }
 .tl-item { display: grid; grid-template-columns: 72px 40px minmax(0, 1fr); gap: 0 8px; padding: 10px 0; align-items: start; }
 .tl-date { font-size: 13px; color: var(--ink-3); font-variant-numeric: tabular-nums; padding-top: 3px; text-align: right; }
 .tl-dot { width: 14px; height: 14px; border-radius: 50%; background: var(--surface); border: 3px solid var(--ink-3); margin: 6px auto 0; position: relative; z-index: 1; }
@@ -364,7 +365,7 @@ strong { font-weight: 600; }
 .tl-body h4 { font-size: 15px; margin-bottom: 4px; display: flex; gap: 8px; align-items: center; flex-wrap: wrap; }
 .tl-body p { font-size: 14px; color: var(--ink-2); }
 @media (max-width: 600px) {
-  .timeline::before { left: 20px; }
+  .timeline::before { left: 19px; }
   .tl-item { grid-template-columns: 40px minmax(0, 1fr); }
   .tl-date { grid-column: 2; text-align: left; order: -1; padding: 0; }
   .tl-dot { grid-row: 1 / span 2; }
