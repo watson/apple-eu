@@ -1,90 +1,55 @@
+<p align="center">
+  <img src="docs/screenshot-hero.png" alt="Same Apple. Different offer in the EU and the US. Screenshot of the site's opening screen with the country picker and four tallies." width="100%">
+</p>
+
 # Apple in the EU vs the US
 
-A single-page, interactive infographic comparing what an Apple customer gets in the
-European Union versus the United States: Apple Intelligence and Siri, subscriptions,
-app-store freedoms under the Digital Markets Act, satellite services, Wallet, health
-features, hardware, pricing and consumer rights.
+Apple sells the same iPhone on both sides of the Atlantic, but not the same experience.
+Some features never cross the ocean, some arrive late, some depend on which EU country
+you live in, and a few exist only in Europe.
 
-The audience is anyone living in one of the 27 EU member states. Pick your country and
-the page resolves every "depends on the member state" item for you, pre-selects your
-official language for the language checker, and shows your local Apple One tier and
-iPhone price against the US.
+This is an interactive, sourced comparison of what an Apple customer gets in the
+European Union versus the United States, written for anyone living in one of the 27
+member states. Pick your country and the page resolves every "depends where you are"
+item for you, checks Apple Intelligence against your language, and puts your local Apple
+One tiers and iPhone price next to the US ones.
 
-**Data snapshot: 25 September 2026.** Everything comes from Apple's own support, product,
-developer and legal pages, plus the European Commission for the legal position.
+**Data as of 25 September 2026.** Every claim links to Apple's own support, product,
+developer or legal pages, with the European Commission for the legal position.
 
-## Run it locally
+## What's inside
 
-No build step and no dependencies. Node.js 22 or newer (an `.nvmrc` selects Node 26 for nvm users). Any static file server works; the repo ships a tiny one:
+- **Scorecard**: 66 documented differences across Apple Intelligence and Siri,
+  subscriptions, app-store freedoms under the Digital Markets Act, satellite services,
+  Wallet, health features, hardware and consumer rights. Each row shows both sides,
+  who comes out ahead, the fine print, and its sources.
+- **Country map**: a tile map of the EU you can paint with more than forty availability
+  lists, from Fitness+ and satellite SOS to hearing-aid features and Apple Stores.
+- **Language checker**: which of the 24 official EU languages Apple Intelligence, Siri,
+  Live Translation and a dozen other language-gated features actually support.
+- **Apple One and iPhone prices**: which tiers each country can buy and for how much,
+  and an iPhone 18 Pro price explorer with VAT, US state sales tax and euro conversion
+  under your control.
+- **Timeline** of how the gap evolved, and a full source register.
 
-```sh
-npm run dev          # serves the site at http://localhost:5173
-```
-
-or, without Node:
-
-```sh
-python3 -m http.server 5173
-```
-
-Then open <http://localhost:5173>. A country can be preselected with `?country=DK`
-(any EU ISO code).
-
-The site uses ES modules, so it must be served over HTTP rather than opened as a `file://` URL.
-
-## Check the data
-
-```sh
-npm test             # validates the datasets (ids, statuses, sources, country codes)
-```
-
-## Project layout
-
-```
-index.html                  page skeleton and static copy
-src/main.js                 entry point, wires up all sections
-src/state.js                selected country / language / filters (URL + localStorage)
-src/sections/*.js           one renderer per section (hero, scorecard, map, …)
-src/components/*.js         tooltip, status chips, country select
-src/styles/main.css         design tokens, light and dark themes, components
-src/data/features.js        the feature-by-feature comparison (hand-written, cited)
-src/data/sources.js         source register (IDs match the research document)
-src/data/countries.js       the 27 member states, currencies, languages, map tiles
-src/data/languages.js       the 24 official EU languages
-src/data/timeline.js        key dates
-src/data/map-features.js    which availability lists can be painted on the map
-src/data/availability.js    GENERATED per-country lists
-src/data/language-support.js GENERATED per-language lists
-src/data/pricing.js         GENERATED Apple One / Fitness+ / iPhone / iCloud+ prices
-src/data/fx.js              GENERATED ECB 12-month average exchange rates (conversion toggle)
-scripts/build-data.mjs      regenerates the three GENERATED data modules from research/raw
-scripts/build-fx.mjs        regenerates fx.js from the ECB rates CSV in research/raw
-scripts/validate-data.mjs   the test
-scripts/serve.mjs           zero-dependency static server
-research/RESEARCH-2026-09-25.md   the underlying research report
-research/raw/*.json         structured extracts of Apple's availability and price pages
-```
-
-## Updating the snapshot
-
-1. Re-fetch Apple's availability pages and refresh the JSON in `research/raw/`
-   (each file keeps the raw list text next to every derived value so it can be audited).
-2. Run `node scripts/build-data.mjs` to regenerate the data modules.
-3. Update `src/data/features.js` and `src/data/timeline.js` by hand where Apple's
-   published position has changed, and add new sources to `src/data/sources.js`.
-4. Change the snapshot date in `index.html` and `src/data/sources.js`.
-5. Run `npm test`.
-
-## How to read the comparison
+## How to read it
 
 - **Explicitly unavailable** means Apple states a restriction. **Not listed** means a
   country or language is missing from Apple's availability page.
 - Prices are advertised standard prices in local currency. EU prices include VAT; US
-  prices exclude sales tax and are marked with an asterisk. Prices are shown in local currency by
-  default; a "Show prices in €" switch adds euro figures converted at the ECB's average
-  daily reference rates over the last twelve months. The iPhone chart's bars always use
-  that conversion (the USD rate is adjustable there).
-- The site records what Apple publishes, not device tests.
+  prices exclude sales tax, so the page lets you add the rate of any US state (default:
+  the population-weighted US average), remove taxes on both sides, and convert to euros
+  at the European Central Bank's twelve-month average rates.
+- The site records what Apple publishes, not device tests. Eight things can change the
+  answer for two people in the same city: device language, Siri language, device region,
+  Apple Account country, physical location, content language, hardware and OS version,
+  and the provider.
+
+## Contributing
+
+Corrections are welcome, especially with a link to the Apple page that shows the current
+position. Running the site locally, checking the data and refreshing the snapshot are
+described in [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## License
 
