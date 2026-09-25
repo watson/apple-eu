@@ -1,6 +1,7 @@
-// iPhone 18 Pro price explorer. Prices are shown in euros: euro storefronts as
-// advertised, and, when the reader turns on conversion, the US and non-euro EU
-// storefronts converted at ECB average rates (the USD rate is adjustable).
+// iPhone 18 Pro price explorer. Bars are always in euros, converted at the ECB
+// twelve-month average rates (USD adjustable), so every storefront can sit on
+// one axis. The "Show prices in €" toggle only changes the labels: local
+// currency as advertised, or the converted euro figure.
 import { el, svg, mount, fmtMoney, fmtDate } from '../dom.js';
 import { getState, setState, subscribe } from '../state.js';
 import { COUNTRIES } from '../data/countries.js';
@@ -26,61 +27,45 @@ export function initHardware() {
 
 function render() {
   const state = getState();
-  const all = published();
-  // Every published storefront stays in the chart. Rows in a non-euro currency get a bar
-  // only when conversion is on; otherwise they show their local price as text.
-  const rows = all.map((r) => {
+  const rows = published().map((r) => {
     const localAdj = state.exVat ? r.price / (1 + r.vat / 100) : r.price;
-    const comparable = r.currency === 'EUR' || state.convert;
-    const eur = comparable ? toEUR(localAdj, r.currency, state.fx) : null;
     const eurExVat = toEUR(r.price / (1 + r.vat / 100), r.currency, state.fx);
-    return { ...r, localAdj, eur, eurExVat, breakEven: US_PRICE / eurExVat, converted: r.currency !== 'EUR' };
-  }).sort((a, b) => {
-    if (a.eur != null && b.eur != null) return b.eur - a.eur;
-    if (a.eur != null) return -1;
-    if (b.eur != null) return 1;
-    return a.name.localeCompare(b.name);
-  });
-  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, eur: state.convert ? US_PRICE / state.fx : null, price: US_PRICE, currency: 'USD' };
+    return { ...r, localAdj, eur: toEUR(localAdj, r.currency, state.fx), eurExVat, breakEven: US_PRICE / eurExVat, converted: r.currency !== 'EUR' };
+  }).sort((a, b) => b.eur - a.eur);
+  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, converted: true, price: US_PRICE, localAdj: US_PRICE, currency: 'USD', eur: US_PRICE / state.fx };
   const bars = [usRow, ...rows];
-  const withBars = bars.filter((r) => r.eur != null);
-  const max = Math.max(...withBars.map((r) => r.eur));
+  const max = Math.max(...bars.map((r) => r.eur));
+
+  const valueLabel = (r) => state.convert
+    ? `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}${r.isUs ? '*' : ''}`
+    : `${fmtMoney(r.localAdj, r.currency, { maxFrac: 0 })}${r.isUs ? '*' : ''}`;
 
   // --- chart geometry ---
-  const W = 720, rowH = 30, left = 150, right = 100, top = 8;
+  const W = 720, rowH = 30, left = 150, right = 110, top = 8;
   const H = top + bars.length * rowH + 30;
   const scale = (v) => (v / (max * 1.06)) * (W - left - right);
   const ticks = niceTicks(max * 1.06, 5);
-  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'iPhone 18 Pro starting price by country in euros' });
+  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'iPhone 18 Pro starting price by country, bars in euros' });
   for (const t of ticks) {
     const x = left + scale(t);
     g.append(svg('line', { class: 'grid', x1: x, x2: x, y1: top, y2: top + bars.length * rowH }));
     g.append(svg('text', { class: 'axis-label', x, y: H - 8, 'text-anchor': 'middle' }, `€${t.toLocaleString('en-IE')}`));
   }
   g.append(svg('line', { class: 'baseline', x1: left, x2: left, y1: top, y2: top + bars.length * rowH }));
-  const euroRows = withBars.filter((r) => !r.isUs);
-  const labelled = new Set(['US', state.country, euroRows[0]?.code, euroRows[euroRows.length - 1]?.code]);
+  const labelled = new Set(['US', state.country, rows[0]?.code, rows[rows.length - 1]?.code]);
   bars.forEach((r, i) => {
     const y = top + i * rowH + 4;
     const isMe = r.code === state.country;
-    g.append(svg('text', { x: left - 10, y: y + 15, 'text-anchor': 'end', style: isMe || r.isUs ? 'font-weight:600;fill:var(--ink)' : '' }, `${r.flag} ${r.name}`));
-    const hit = svg('rect', { class: 'bar-hit', x: 0, y: y - 4, width: W, height: rowH, fill: 'transparent', tabindex: '0' });
-    attachTooltip(hit, () => tooltipLines(r, state));
-    if (r.eur == null) {
-      // No bar: the price is in another currency and conversion is off.
-      g.append(hit, svg('text', { x: left + 8, y: y + 15, class: 'axis-label' }, `${fmtMoney(r.isUs ? r.price : r.localAdj, r.currency, { maxFrac: 0 })}${r.isUs ? '*' : ''} · not converted`));
-      return;
-    }
     const w = Math.max(2, scale(r.eur));
     const fill = r.isUs ? 'var(--us)' : isMe ? 'var(--eu)' : 'var(--eu-mid, #86b6ef)';
+    g.append(svg('text', { x: left - 10, y: y + 15, 'text-anchor': 'end', style: isMe || r.isUs ? 'font-weight:600;fill:var(--ink)' : '' }, `${r.flag} ${r.name}`));
     const bar = svg('path', { class: 'bar', d: roundedRight(left, y, w, 22, 4), fill });
+    const hit = svg('rect', { class: 'bar-hit', x: 0, y: y - 4, width: W, height: rowH, fill: 'transparent', tabindex: '0' });
+    attachTooltip(hit, () => tooltipLines(r, state));
     hit.addEventListener('pointerenter', () => bar.classList.add('hover'));
     hit.addEventListener('pointerleave', () => bar.classList.remove('hover'));
     g.append(hit, bar);
-    if (labelled.has(r.code)) {
-      const label = (r.isUs || r.converted ? '≈ ' : '') + fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 }) + (r.isUs ? '*' : '');
-      g.append(svg('text', { x: left + w + 8, y: y + 15, style: 'font-weight:600;fill:var(--ink)' }, label));
-    }
+    if (labelled.has(r.code)) g.append(svg('text', { x: left + w + 8, y: y + 15, style: 'font-weight:600;fill:var(--ink)' }, valueLabel(r)));
   });
 
   // --- controls ---
@@ -92,56 +77,41 @@ function render() {
   const exVat = el('input', { type: 'checkbox', checked: state.exVat || null });
   exVat.addEventListener('change', () => setState({ exVat: exVat.checked }));
 
-  const meSrc = all.find((r) => r.code === state.country);
+  const me = rows.find((r) => r.code === state.country);
   let meText;
-  if (meSrc) {
-    const exVatLocal = meSrc.price / (1 + meSrc.vat / 100);
-    const eurExVat = toEUR(exVatLocal, meSrc.currency, state.fx);
-    const breakEven = US_PRICE / eurExVat;
-    const onChart = rows.some((r) => r.code === meSrc.code && r.eur != null);
-    meText = `${meSrc.name}: ${fmtMoney(meSrc.price, meSrc.currency, { maxFrac: 0 })} including ${meSrc.vat}% VAT, ${fmtMoney(exVatLocal, meSrc.currency, { maxFrac: 0 })} before VAT.`
-      + (state.convert
-        ? ` At ${state.fx.toFixed(2)} USD per euro the before-VAT price is about $${Math.round(eurExVat * state.fx).toLocaleString('en-US')} against $${US_PRICE.toLocaleString('en-US')} in the US before sales tax; the two would match at ${breakEven.toFixed(2)} USD per euro.`
-        : ` Turn on conversion to place ${onChart ? 'the US price' : `${meSrc.name} and the US`} on the chart; the two would match at ${breakEven.toFixed(2)} USD per euro.`);
+  if (me) {
+    meText = `${me.name}: ${fmtMoney(me.price, me.currency, { maxFrac: 0 })} including ${me.vat}% VAT, ${fmtMoney(me.price / (1 + me.vat / 100), me.currency, { maxFrac: 0 })} before VAT. At ${state.fx.toFixed(2)} USD per euro the before-VAT price is about $${Math.round(me.eurExVat * state.fx).toLocaleString('en-US')} against $${US_PRICE.toLocaleString('en-US')} in the US before sales tax; the two would match at ${me.breakEven.toFixed(2)} USD per euro.`;
   } else if (state.country) {
     meText = 'Apple publishes no online-store price for your country.';
   } else {
     meText = 'Pick a country to see its before-VAT price and the exchange rate at which it would equal the US price.';
   }
 
-  const hidden = all.filter((r) => r.currency !== 'EUR');
   mount('price-chart',
     el('div', { class: 'chart' },
       el('div', { class: 'chart-head' },
-        el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', VAT removed' : ', as advertised'}, in euros`),
+        el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', VAT removed' : ', as advertised'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
         el('div', { class: 'legend' },
           el('span', {}, el('i', { style: { background: 'var(--eu)' } }), 'EU storefront', state.exVat ? ' (ex-VAT)' : ' (VAT incl.)'),
-          state.convert ? el('span', {}, el('i', { style: { background: 'var(--us)' } }), 'US, before sales tax, converted') : el('span', { class: 'muted' }, 'Other currencies: text only until converted')),
+          el('span', {}, el('i', { style: { background: 'var(--us)' } }), 'US, before sales tax')),
       ),
       g,
       el('div', { class: 'chart-controls' },
         fxToggle(),
         el('label', {}, exVat, ' Remove VAT from EU prices'),
-        state.convert ? el('label', {}, 'USD per € ', rate) : null,
-        state.convert ? slider : null,
-        state.convert ? el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, `Reset to ${FX.rates.USD.toFixed(2)}`) : null,
+        el('label', {}, 'USD per € ', rate), slider,
+        el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, `Reset to ${FX.rates.USD.toFixed(2)}`),
       ),
       el('p', { class: 'chart-foot' }, meText),
-      !state.convert ? el('p', { class: 'chart-foot' }, `The US and ${hidden.length} EU storefronts (${hidden.map((r) => r.name).join(', ')}) price in other currencies, so they are listed without a bar. Turn on conversion to place them on the euro axis at ECB average rates.`) : null,
       el('p', { class: 'tax-note' }, TAX_NOTE, ' Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.'),
-      state.convert ? el('p', { class: 'tax-note' }, `Conversions use the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be adjusted above.`) : null,
+      el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be adjusted above.`),
       el('details', { class: 'table-view' },
         el('summary', {}, 'Table view'),
         el('table', {},
-          el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'Advertised'), el('th', {}, 'VAT'), el('th', {}, 'Before VAT'), state.convert ? el('th', {}, '≈ € (as charted)') : null, el('th', {}, 'Break-even USD per €'))),
+          el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'Advertised'), el('th', {}, 'VAT'), el('th', {}, 'Before VAT'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
           el('tbody', {},
-            el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(US_PRICE, 'USD')}*`), el('td', {}, 'sales tax extra'), el('td', {}, '—'), state.convert ? el('td', {}, `≈ ${fmtMoney(Math.round(US_PRICE / state.fx), 'EUR', { maxFrac: 0 })}`) : null, el('td', {}, '—')),
-            all.map((r) => {
-              const exv = r.price / (1 + r.vat / 100);
-              const eurExVat = toEUR(exv, r.currency, state.fx);
-              const charted = state.convert || r.currency === 'EUR' ? toEUR(state.exVat ? exv : r.price, r.currency, state.fx) : null;
-              return el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(exv, r.currency, { maxFrac: 0 })), state.convert ? el('td', {}, charted == null ? '—' : `${r.currency === 'EUR' ? '' : '≈ '}${fmtMoney(Math.round(charted), 'EUR', { maxFrac: 0 })}`) : null, el('td', {}, (US_PRICE / eurExVat).toFixed(2)));
-            }),
+            el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(US_PRICE, 'USD')}*`), el('td', {}, 'sales tax extra'), el('td', {}, '—'), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
+            rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
           ),
         ),
       ),
@@ -151,13 +121,13 @@ function render() {
 }
 
 function tooltipLines(r, state) {
-  if (r.isUs) return [{ b: 'United States' }, `$${US_PRICE.toLocaleString('en-US')} before sales tax`, r.eur == null ? 'Turn on conversion to place it on the euro axis' : `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
+  if (r.isUs) return [{ b: 'United States' }, `$${US_PRICE.toLocaleString('en-US')} before sales tax`, `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
   const lines = [
     { b: r.name },
     `Advertised: ${fmtMoney(r.price, r.currency, { maxFrac: 0 })} incl. ${r.vat}% VAT`,
     `Before VAT: ${fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })}`,
   ];
-  if (r.converted) lines.push(r.eur == null ? 'Turn on conversion to place it on the euro axis' : `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${FX.rates[r.currency]} ${r.currency} per euro`);
+  if (r.converted) lines.push(`≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${FX.rates[r.currency]} ${r.currency} per euro`);
   lines.push(`Would equal the US price at ${r.breakEven.toFixed(2)} USD per euro`);
   return lines;
 }

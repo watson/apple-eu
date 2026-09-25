@@ -80,9 +80,10 @@ research/raw/*.json         structured extracts of Apple's availability and pric
 - **Explicitly unavailable** means Apple states a restriction. **Not listed** means a
   country or language is missing from Apple's availability page.
 - Prices are advertised standard prices in local currency. EU prices include VAT; US
-  prices exclude sales tax and are marked with an asterisk. Currency conversion is off by
-  default; when on, it uses the ECB's average daily reference rates over the last twelve
-  months (the USD rate is adjustable in the price explorer).
+  prices exclude sales tax and are marked with an asterisk. Prices are shown in local currency by
+  default; a "Show prices in €" switch adds euro figures converted at the ECB's average
+  daily reference rates over the last twelve months. The iPhone chart's bars always use
+  that conversion (the USD rate is adjustable there).
 - The site records what Apple publishes, not device tests.
 
 Not affiliated with or endorsed by Apple Inc.
