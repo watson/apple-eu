@@ -135,15 +135,18 @@ strong { font-weight: 600; }
   background: color-mix(in srgb, var(--surface) 78%, transparent);
   border-bottom: 1px solid var(--hair-2);
 }
-.topbar .container { display: flex; align-items: center; gap: 16px; height: 56px; }
+.topbar .container { display: flex; align-items: center; gap: 12px; height: 56px; }
 .brand { font-weight: 600; letter-spacing: -0.01em; white-space: nowrap; }
 .brand .dot { display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: linear-gradient(135deg, var(--eu) 50%, var(--us) 50%); margin-right: 8px; vertical-align: 0; }
 .nav { display: flex; gap: 4px; margin-left: 8px; overflow-x: auto; scrollbar-width: none; flex: 1; }
 .nav::-webkit-scrollbar { display: none; }
-.nav a { color: var(--ink-2); font-size: 13px; padding: 6px 9px; border-radius: 999px; white-space: nowrap; }
+.nav a { color: var(--ink-2); font-size: 13px; padding: 6px 8px; border-radius: 999px; white-space: nowrap; }
 .nav a:hover { background: var(--hair-2); text-decoration: none; color: var(--ink); }
 .nav a[aria-current="true"] { background: var(--ink); color: var(--page); }
-.topbar-actions { display: flex; align-items: center; gap: 8px; margin-left: auto; flex: none; }
+.topbar-actions { display: flex; align-items: center; gap: 6px; margin-left: auto; flex: none; }
+.topbar-actions .select { font-size: 13px; padding: 7px 30px 7px 12px; background-position: right 11px center; }
+.topbar-actions .btn.theme { padding: 6px 10px 6px 9px; }
+.topbar-actions .btn.icon { width: 32px; height: 32px; }
 @media (max-width: 1000px) { #topbar-country { display: none; } }
 @media (max-width: 640px) { .brand span.text { display: none; } }
 
