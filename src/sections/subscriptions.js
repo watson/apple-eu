@@ -117,7 +117,9 @@ function renderMatrix(state) {
       );
     })),
   );
-  mount('apple-one-matrix', el('div', { class: 'table-wrap' }, table),
+  mount('apple-one-matrix',
+    el('div', { class: 'filter-row', style: { marginTop: '0' } }, fxToggle()),
+    el('div', { class: 'table-wrap' }, table),
     el('p', { class: 'tax-note' }, TAX_NOTE),
     conversionNote(state),
     el('p', { class: 'note', style: { marginTop: '10px' } }, 'Ireland calls its five-service tier "Premier" but it still omits News+. Finland and Portugal have their own price points. Sources: each country’s apple.com/apple-one page and Apple’s media services register, accessed 25 September 2026.'));
