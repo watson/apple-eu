@@ -3,8 +3,6 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    # The published site is index.html plus src/. Nothing else (research, scripts,
-    # docs, workflows) affects it, so only changes to those two paths trigger a deploy.
     paths:
       - 'index.html'
       - 'src/**'
