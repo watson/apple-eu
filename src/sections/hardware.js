@@ -90,16 +90,6 @@ function render() {
   const exVat = el('input', { type: 'checkbox', checked: state.exVat || null });
   exVat.addEventListener('change', () => setState({ exVat: exVat.checked }));
 
-  const me = rows.find((r) => r.code === state.country);
-  let meText;
-  if (me) {
-    meText = `${me.name}: ${fmtMoney(me.price, me.currency, { maxFrac: 0 })} including ${me.vat}% VAT, ${fmtMoney(me.price / (1 + me.vat / 100), me.currency, { maxFrac: 0 })} before VAT. US: $${US_LIST.toLocaleString('en-US')} list, $${Math.round(US_PRICE).toLocaleString('en-US')} with ${tax.label}. Tax-free on both sides and at ${state.fx.toFixed(2)} USD per euro, ${me.name} is about $${Math.round(me.eurExVat * state.fx).toLocaleString('en-US')} against $${US_LIST.toLocaleString('en-US')}; the two would match at ${me.breakEven.toFixed(2)} USD per euro.`;
-  } else if (state.country) {
-    meText = 'Apple publishes no online-store price for your country.';
-  } else {
-    meText = 'Pick a country to see its before-VAT price and the exchange rate at which it would equal the US price.';
-  }
-
   mount('price-chart',
     el('div', { class: 'chart' },
       el('div', { class: 'chart-head' },
@@ -115,9 +105,11 @@ function render() {
         el('label', {}, exVat, ' Remove VAT and sales tax'),
       ),
       advanced,
-      el('p', { class: 'chart-foot' }, meText),
-      el('p', { class: 'tax-note' }, `Apple’s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
-      el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed under Advanced.`),
+      el('details', { class: 'table-view' },
+        el('summary', {}, 'Notes on prices'),
+        el('p', { class: 'tax-note' }, `Apple’s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
+        el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed under Advanced. Hover a bar for that country’s before-tax price and the exchange rate at which it would equal the US list price.`),
+      ),
       el('details', { class: 'table-view' },
         el('summary', {}, 'Table view'),
         el('table', {},

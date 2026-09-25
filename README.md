@@ -86,4 +86,4 @@ research/raw/*.json         structured extracts of Apple's availability and pric
   that conversion (the USD rate is adjustable there).
 - The site records what Apple publishes, not device tests.
 
-Not affiliated with or endorsed by Apple Inc.
+Made by [Thomas Watson](https://wa.tson.dk). Not affiliated with or endorsed by Apple Inc.
