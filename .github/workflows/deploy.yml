@@ -3,16 +3,11 @@ name: Deploy to GitHub Pages
 on:
   push:
     branches: [main]
-    # Changes that do not affect the published site do not trigger a deploy.
-    paths-ignore:
-      - 'README.md'
-      - 'CONTRIBUTING.md'
-      - 'LICENSE'
-      - 'LICENSE-CONTENT'
-      - 'docs/**'
-      - '.github/**'
-      - '.nvmrc'
-      - '.gitignore'
+    # The published site is index.html plus src/. Nothing else (research, scripts,
+    # docs, workflows) affects it, so only changes to those two paths trigger a deploy.
+    paths:
+      - 'index.html'
+      - 'src/**'
   workflow_dispatch:
 
 permissions:
@@ -39,10 +34,15 @@ jobs:
       - name: Validate datasets before publishing
         run: npm test
       - uses: actions/configure-pages@v5
+      - name: Assemble the site (only what the page needs)
+        run: |
+          mkdir -p _site
+          cp index.html _site/
+          cp -R src _site/src
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: _site
       - name: Deploy
         id: deployment
         uses: actions/deploy-pages@v4
