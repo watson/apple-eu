@@ -60,7 +60,8 @@ function planCard(code, region, state) {
     el('div', { class: 'region' }, `${c.flag} ${c.name}`),
     el('h4', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, `Apple One ${tierName(plan, code)}`),
     el('div', { class: 'price' }, local, el('small', {}, ` / month${code === 'US' ? ', before sales tax' : ', VAT included'}`)),
-    approx ? el('div', { class: 'approx', style: { marginTop: '-8px', marginBottom: '12px' } }, `${approx} / month`) : null,
+    // Always rendered so switching the euro toggle does not change the card height.
+    el('div', { class: 'approx plan-approx' }, approx ? `${approx} / month` : '\u00a0'),
     el('ul', {}, SERVICES.map((s) => {
       const has = plan.services.includes(s.key);
       return el('li', { class: has ? 'in' : 'out' }, el('i', { 'aria-hidden': 'true' }, has ? '✓' : '✕'), s.key === 'icloud' ? `${s.label} ${storage}` : s.label);
@@ -84,7 +85,6 @@ function render() {
     el('div', { class: 'plan-compare' }, cards),
     el('p', { class: 'note', style: { marginTop: '12px' } }, state.country ? 'Top tier advertised in the US versus the top tier advertised in your country.' : 'Top tier advertised in the US, Germany (five-service Premium) and the Netherlands (no top tier). Pick a country to compare your own.'),
     el('p', { class: 'tax-note' }, TAX_NOTE),
-    conversionNote(state),
   );
   renderMatrix(state);
 }
