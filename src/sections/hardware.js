@@ -98,6 +98,7 @@ function render() {
   }, label)));
 
   mount('price-chart',
+    el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect(), exVatToggle()),
     el('div', { class: 'chart' },
       el('div', { class: 'chart-head' },
         el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', all taxes removed' : ', taxes included'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
@@ -106,11 +107,6 @@ function render() {
           el('span', {}, el('i', { style: { background: 'var(--us)' } }), state.exVat ? 'US list price, no sales tax' : `US incl. sales tax (${tax.label})`)),
       ),
       g,
-      el('div', { class: 'chart-controls' },
-        fxToggle(),
-        usStateSelect(),
-        exVatToggle(),
-      ),
       tabs,
       panel ? panels[panel]() : null,
     ),
