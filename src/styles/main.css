@@ -442,6 +442,13 @@ strong { font-weight: 600; }
 .matrix .dot.on { background: var(--same); }
 .matrix .dot.off { background: var(--na-soft); border: 1px solid var(--hair); }
 .matrix .num, .matrix th.num, .matrix td.unsold { text-align: right; padding-right: 28px; font-variant-numeric: tabular-nums; }
+/* "Top tier includes" group: the last three columns are tinted and carry a spanning caption. */
+.matrix .grp { background: color-mix(in srgb, var(--eu) 7%, transparent); }
+.matrix tr.us td.grp { background: color-mix(in srgb, var(--eu) 12%, var(--us-soft)); }
+.matrix tr.me td.grp { background: color-mix(in srgb, var(--eu) 16%, transparent); }
+.matrix thead tr.group th { border-bottom: 0; padding-bottom: 2px; font-size: 11px; letter-spacing: .08em; color: var(--eu-ink); }
+.matrix thead tr.group th:first-child { background: transparent; }
+.matrix thead tr.group th.grp { border-radius: 10px 10px 0 0; }
 .matrix .country { display: flex; align-items: center; gap: 8px; font-weight: 500; }
 .table-wrap { overflow-x: auto; border: 1px solid var(--hair-2); border-radius: var(--radius); background: var(--surface); padding: 8px 12px; box-shadow: var(--shadow); }
 

@@ -119,7 +119,10 @@ function renderMatrix(state) {
     return el('td', { class: 'num', title: title || null }, shown);
   };
   const table = el('table', { class: 'matrix' },
-    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', { class: 'num' }, label === 'Premium' ? 'Premium / Premier' : label)), el('th', {}, 'Top-tier storage'), el('th', {}, 'Fitness+'), el('th', {}, 'News+'))),
+    el('thead', {},
+      el('tr', { class: 'group' }, el('th', { colspan: '4' }), el('th', { colspan: '3', class: 'grp' }, 'Top tier includes')),
+      el('tr', {}, el('th', {}, 'Country'), TIERS.map(([, label]) => el('th', { class: 'num' }, label === 'Premium' ? 'Premium / Premier' : label)), el('th', { class: 'grp' }, 'Storage'), el('th', { class: 'grp' }, 'Fitness+'), el('th', { class: 'grp' }, 'News+')),
+    ),
     el('tbody', {}, rows.map((row) => {
       const { code, plan, c } = row;
       const cls = code === 'US' ? 'us' : state.country === code ? 'me' : '';
@@ -132,9 +135,9 @@ function renderMatrix(state) {
       return el('tr', { class: cls },
         el('td', {}, el('span', { class: 'country' }, c.flag, ' ', c.name)),
         TIERS.map(([tier]) => tierCell(row, tier)),
-        el('td', {}, plan.storageGB >= 1024 ? `${plan.storageGB / 1024} TB` : `${plan.storageGB} GB`),
-        el('td', {}, dot(has('fitness'), 'Fitness+')),
-        el('td', {}, dot(has('news'), 'News+')),
+        el('td', { class: 'grp' }, plan.storageGB >= 1024 ? `${plan.storageGB / 1024} TB` : `${plan.storageGB} GB`),
+        el('td', { class: 'grp' }, dot(has('fitness'), 'Fitness+')),
+        el('td', { class: 'grp' }, dot(has('news'), 'News+')),
       );
     })),
   );
