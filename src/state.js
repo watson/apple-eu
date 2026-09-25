@@ -2,6 +2,7 @@
 // (?country=DK) and localStorage so a shared link opens the same view.
 import { COUNTRY_BY_CODE } from './data/countries.js';
 import { FX } from './data/fx.js';
+import { track } from './analytics.js';
 
 const listeners = new Set();
 
@@ -36,6 +37,7 @@ export function getState() { return state; }
 export function setState(patch) {
   const prev = { ...state };
   Object.assign(state, patch);
+  recordEvents(patch, prev);
   if ('country' in patch) {
     const c = COUNTRY_BY_CODE[state.country];
     if (!state.langsManual) state.langs = c ? [...c.languages] : [];
@@ -45,6 +47,17 @@ export function setState(patch) {
     history.replaceState(null, '', url);
   }
   for (const fn of listeners) fn(state, prev);
+}
+
+// User-initiated changes only: the initial country from the URL or storage does not go through here.
+function recordEvents(patch, prev) {
+  if ('country' in patch && patch.country !== prev.country) track('Country', { country: patch.country || 'none' });
+  if ('langs' in patch && patch.langsManual && patch.langs?.[0] && patch.langs[0] !== prev.langs?.[0]) track('Language', { language: patch.langs[0] });
+  if ('mapFeature' in patch && patch.mapFeature !== prev.mapFeature) track('Map feature', { feature: patch.mapFeature });
+  if ('convert' in patch && patch.convert !== prev.convert) track('Prices', { control: 'euro', value: patch.convert ? 'on' : 'off' });
+  if ('exVat' in patch && patch.exVat !== prev.exVat) track('Prices', { control: 'taxes', value: patch.exVat ? 'removed' : 'included' });
+  if ('usState' in patch && patch.usState !== prev.usState) track('Prices', { control: 'us-state', value: patch.usState });
+  if ('filter' in patch && patch.filter !== prev.filter) track('Filter', { filter: patch.filter });
 }
 
 export function subscribe(fn) { listeners.add(fn); return () => listeners.delete(fn); }
