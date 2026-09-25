@@ -101,6 +101,7 @@ export const SOURCES = {
   R3:  { pub: 'Apple Newsroom', title: 'Apple Vision Pro with M5 (country list footnote)', url: 'https://www.apple.com/newsroom/2025/10/apple-unveils-new-apple-vision-pro-with-m5-chip/', date: '2025-10-15' },
   R4:  { pub: 'European Commission', title: 'VAT rates applied in the member states of the European Union', url: 'https://taxation-customs.ec.europa.eu/taxation/vat/vat-rates_en', date: null },
   X2:  { pub: 'European Central Bank', title: 'Euro foreign exchange reference rates (daily), 25 Sep 2025 to 24 Sep 2026', url: 'https://data.ecb.europa.eu/data/datasets/EXR', date: '2026-09-24' },
+  X3:  { pub: 'Tax Foundation', title: 'State and Local Sales Tax Rates, Midyear 2026', url: 'https://taxfoundation.org/data/all/state/2026-sales-tax-rates-midyear/', date: '2026-07-06' },
   X1:  { pub: 'Trading Economics', title: 'Euro US Dollar exchange rate (EUR/USD), 25 September 2026', url: 'https://tradingeconomics.com/euro-area/currency', date: '2026-09-25' },
 };
 

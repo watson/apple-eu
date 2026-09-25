@@ -14,6 +14,7 @@ const state = {
   category: 'all',
   query: '',
   convert: false,     // show approximate euro conversions next to non-euro prices
+  usState: 'AVG',     // 'AVG' | 'NONE' | US state code: sales tax added to US hardware prices
   fx: FX.rates.USD,   // USD per EUR used for conversions; defaults to the ECB 12-month average
   exVat: false,
 };

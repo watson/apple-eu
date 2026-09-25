@@ -9,9 +9,11 @@ import { PRICING } from '../data/pricing.js';
 import { FX, toEUR } from '../data/fx.js';
 import { attachTooltip } from '../components/tooltip.js';
 import { sourceLinks } from '../components/chips.js';
-import { fxToggle, TAX_NOTE } from '../components/fxToggle.js';
+import { fxToggle } from '../components/fxToggle.js';
+import { usStateSelect } from '../components/usStateSelect.js';
+import { salesTaxFor } from '../data/us-sales-tax.js';
 
-const US_PRICE = PRICING.US.iphone18Pro.from; // USD, before sales tax
+const US_LIST = PRICING.US.iphone18Pro.from; // USD, before sales tax
 
 function published() {
   return COUNTRIES
@@ -22,23 +24,27 @@ function published() {
 
 export function initHardware() {
   render();
-  subscribe((state, prev) => { if (['country', 'fx', 'exVat', 'convert'].some((k) => state[k] !== prev[k])) render(); });
+  subscribe((state, prev) => { if (['country', 'fx', 'exVat', 'convert', 'usState'].some((k) => state[k] !== prev[k])) render(); });
 }
 
 function render() {
   const state = getState();
+  const tax = salesTaxFor(state.usState);
+  const US_PRICE = Math.round(US_LIST * (1 + tax.rate / 100) * 100) / 100; // USD incl. the selected sales tax
   const rows = published().map((r) => {
     const localAdj = state.exVat ? r.price / (1 + r.vat / 100) : r.price;
     const eurExVat = toEUR(r.price / (1 + r.vat / 100), r.currency, state.fx);
-    return { ...r, localAdj, eur: toEUR(localAdj, r.currency, state.fx), eurExVat, breakEven: US_PRICE / eurExVat, converted: r.currency !== 'EUR' };
+    return { ...r, localAdj, eur: toEUR(localAdj, r.currency, state.fx), eurExVat, breakEven: US_LIST / eurExVat, converted: r.currency !== 'EUR' };
   }).sort((a, b) => b.eur - a.eur);
-  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, converted: true, price: US_PRICE, localAdj: US_PRICE, currency: 'USD', eur: US_PRICE / state.fx };
+  // The US row follows the tax switch: list price when all taxes are removed, otherwise list price plus the selected sales tax.
+  const usShown = state.exVat ? US_LIST : US_PRICE;
+  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, converted: true, price: US_LIST, localAdj: usShown, currency: 'USD', eur: usShown / state.fx, taxRate: state.exVat ? 0 : tax.rate };
   const bars = [usRow, ...rows];
   const max = Math.max(...bars.map((r) => r.eur));
 
   const valueLabel = (r) => state.convert
-    ? `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}${r.isUs ? '*' : ''}`
-    : `${fmtMoney(r.localAdj, r.currency, { maxFrac: 0 })}${r.isUs ? '*' : ''}`;
+    ? `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`
+    : fmtMoney(r.localAdj, r.currency, { maxFrac: 0 });
 
   // --- chart geometry ---
   const W = 720, rowH = 30, left = 150, right = 110, top = 8;
@@ -80,7 +86,7 @@ function render() {
   const me = rows.find((r) => r.code === state.country);
   let meText;
   if (me) {
-    meText = `${me.name}: ${fmtMoney(me.price, me.currency, { maxFrac: 0 })} including ${me.vat}% VAT, ${fmtMoney(me.price / (1 + me.vat / 100), me.currency, { maxFrac: 0 })} before VAT. At ${state.fx.toFixed(2)} USD per euro the before-VAT price is about $${Math.round(me.eurExVat * state.fx).toLocaleString('en-US')} against $${US_PRICE.toLocaleString('en-US')} in the US before sales tax; the two would match at ${me.breakEven.toFixed(2)} USD per euro.`;
+    meText = `${me.name}: ${fmtMoney(me.price, me.currency, { maxFrac: 0 })} including ${me.vat}% VAT, ${fmtMoney(me.price / (1 + me.vat / 100), me.currency, { maxFrac: 0 })} before VAT. US: $${US_LIST.toLocaleString('en-US')} list, $${Math.round(US_PRICE).toLocaleString('en-US')} with ${tax.label}. Tax-free on both sides and at ${state.fx.toFixed(2)} USD per euro, ${me.name} is about $${Math.round(me.eurExVat * state.fx).toLocaleString('en-US')} against $${US_LIST.toLocaleString('en-US')}; the two would match at ${me.breakEven.toFixed(2)} USD per euro.`;
   } else if (state.country) {
     meText = 'Apple publishes no online-store price for your country.';
   } else {
@@ -90,45 +96,46 @@ function render() {
   mount('price-chart',
     el('div', { class: 'chart' },
       el('div', { class: 'chart-head' },
-        el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', VAT removed' : ', as advertised'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
+        el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', all taxes removed' : ', taxes included'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
         el('div', { class: 'legend' },
           el('span', {}, el('i', { style: { background: 'var(--eu)' } }), 'EU storefront', state.exVat ? ' (ex-VAT)' : ' (VAT incl.)'),
-          el('span', {}, el('i', { style: { background: 'var(--us)' } }), 'US, before sales tax')),
+          el('span', {}, el('i', { style: { background: 'var(--us)' } }), state.exVat ? 'US list price, no sales tax' : `US incl. sales tax (${tax.label})`)),
       ),
       g,
       el('div', { class: 'chart-controls' },
         fxToggle(),
-        el('label', {}, exVat, ' Remove VAT from EU prices'),
+        usStateSelect(),
+        el('label', {}, exVat, ' Remove VAT and sales tax'),
         el('label', {}, 'USD per € ', rate), slider,
         el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, `Reset to ${FX.rates.USD.toFixed(2)}`),
       ),
       el('p', { class: 'chart-foot' }, meText),
-      el('p', { class: 'tax-note' }, TAX_NOTE, ' Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.'),
+      el('p', { class: 'tax-note' }, `Apple’s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
       el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be adjusted above.`),
       el('details', { class: 'table-view' },
         el('summary', {}, 'Table view'),
         el('table', {},
-          el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'Advertised'), el('th', {}, 'VAT'), el('th', {}, 'Before VAT'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
+          el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'With tax'), el('th', {}, 'Tax'), el('th', {}, 'Before tax'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
           el('tbody', {},
-            el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(US_PRICE, 'USD')}*`), el('td', {}, 'sales tax extra'), el('td', {}, '—'), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
+            el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(US_PRICE, 'USD')} (${tax.label})`), el('td', {}, `${tax.rate.toFixed(2)}% sales tax`), el('td', {}, fmtMoney(US_LIST, 'USD')), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
             rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
           ),
         ),
       ),
-      el('div', { style: { marginTop: '8px' } }, sourceLinks(['S18', 'S19', 'X2'])),
+      el('div', { style: { marginTop: '8px' } }, sourceLinks(['S18', 'S19', 'X2', 'X3'])),
     ),
   );
 }
 
 function tooltipLines(r, state) {
-  if (r.isUs) return [{ b: 'United States' }, `$${US_PRICE.toLocaleString('en-US')} before sales tax`, `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
+  if (r.isUs) return [{ b: 'United States' }, `$${US_LIST.toLocaleString('en-US')} list price`, r.taxRate ? `$${Math.round(r.localAdj).toLocaleString('en-US')} with ${r.taxRate.toFixed(2)}% sales tax` : 'No sales tax added', `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
   const lines = [
     { b: r.name },
     `Advertised: ${fmtMoney(r.price, r.currency, { maxFrac: 0 })} incl. ${r.vat}% VAT`,
     `Before VAT: ${fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })}`,
   ];
   if (r.converted) lines.push(`≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${FX.rates[r.currency]} ${r.currency} per euro`);
-  lines.push(`Would equal the US price at ${r.breakEven.toFixed(2)} USD per euro`);
+  lines.push(`Tax-free, would equal the US list price at ${r.breakEven.toFixed(2)} USD per euro`);
   return lines;
 }
 
