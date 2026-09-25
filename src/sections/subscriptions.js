@@ -20,9 +20,10 @@ export function initSubscriptions() {
   subscribe((state, prev) => { if (state.country !== prev.country || state.convert !== prev.convert) render(); });
 }
 
-/** English tier name: Apple's own "Premier"/"Premium" for the top tier, otherwise Family / Individual. */
-function tierName(plan) {
-  if (plan.tier === 'premier') return plan.localName === 'Premier' ? 'Premier' : 'Premium';
+/** English tier name. The top tier is "Premier" in the US (the only bundle with News+) and shown as
+ *  "Premium" for every EU country, which is Apple's name in all but Ireland; the local name stays on hover. */
+function tierName(plan, code) {
+  if (plan.tier === 'premier') return code === 'US' ? 'Premier' : 'Premium';
   if (plan.tier === 'family') return 'Family';
   return 'Individual';
 }
@@ -57,7 +58,7 @@ function planCard(code, region, state) {
   const { local, approx } = priceParts(plan.monthly, p.currency, state);
   return el('div', { class: `plan ${region}` },
     el('div', { class: 'region' }, `${c.flag} ${c.name}`),
-    el('h4', { title: plan.localName !== tierName(plan) ? `Local name: ${plan.localName}` : null }, `Apple One ${tierName(plan)}`),
+    el('h4', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, `Apple One ${tierName(plan, code)}`),
     el('div', { class: 'price' }, local, el('small', {}, ` / month${code === 'US' ? ', before sales tax' : ', VAT included'}`)),
     approx ? el('div', { class: 'approx', style: { marginTop: '-8px', marginBottom: '12px' } }, `${approx} / month`) : null,
     el('ul', {}, SERVICES.map((s) => {
@@ -108,7 +109,7 @@ function renderMatrix(state) {
       const { local, approx } = priceParts(plan.monthly, p.currency, state);
       return el('tr', { class: cls },
         el('td', {}, el('span', { class: 'country' }, c.flag, ' ', c.name)),
-        el('td', { title: plan.localName !== tierName(plan) ? `Local name: ${plan.localName}` : null }, tierName(plan), plan.tier === 'premier' ? '' : el('span', { class: 'muted' }, ' (no top tier)')),
+        el('td', { title: plan.localName !== tierName(plan, code) ? `Local name: ${plan.localName}` : null }, tierName(plan, code), plan.tier === 'premier' ? '' : el('span', { class: 'muted' }, ' (no top tier)')),
         el('td', { class: 'num' }, local),
         state.convert ? el('td', { class: 'num approx' }, approx || fmtMoney(plan.monthly, 'EUR')) : null,
         el('td', {}, plan.storageGB >= 1024 ? `${plan.storageGB / 1024} TB` : `${plan.storageGB} GB`),
