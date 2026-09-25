@@ -9,7 +9,7 @@ import { PRICING } from '../data/pricing.js';
 import { FX, toEUR } from '../data/fx.js';
 import { attachTooltip } from '../components/tooltip.js';
 import { sourceLinks } from '../components/chips.js';
-import { fxToggle } from '../components/fxToggle.js';
+import { fxToggle, exVatToggle } from '../components/fxToggle.js';
 import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
@@ -96,8 +96,6 @@ function render() {
     type: 'button', role: 'tab', 'aria-selected': String(panel === id), 'aria-expanded': String(panel === id),
     onclick: () => { panel = panel === id ? null : id; render(); },
   }, label)));
-  const exVat = el('input', { type: 'checkbox', checked: state.exVat || null });
-  exVat.addEventListener('change', () => setState({ exVat: exVat.checked }));
 
   mount('price-chart',
     el('div', { class: 'chart' },
@@ -111,7 +109,7 @@ function render() {
       el('div', { class: 'chart-controls' },
         fxToggle(),
         usStateSelect(),
-        el('label', { class: 'toggle' }, exVat, 'Remove VAT and sales tax'),
+        exVatToggle(),
       ),
       tabs,
       panel ? panels[panel]() : null,

@@ -10,4 +10,11 @@ export function fxToggle() {
     input, el('span', {}, 'Show prices in €'));
 }
 
-export const TAX_NOTE = '* US prices are before sales tax. Whether a US state taxes digital subscriptions at all varies, so none is added here; hardware prices in the iPhone chart do include the sales tax of a chosen state. EU prices include VAT.';
+/** Switch bound to state.exVat: show EU prices before VAT and US prices before sales tax. */
+export function exVatToggle() {
+  const input = el('input', { type: 'checkbox', checked: getState().exVat || null });
+  input.addEventListener('change', () => setState({ exVat: input.checked }));
+  return el('label', { class: 'toggle', title: 'EU prices before VAT at the standard national rate; US prices at list, without sales tax.' },
+    input, el('span', {}, 'Remove VAT and sales tax'));
+}
+
