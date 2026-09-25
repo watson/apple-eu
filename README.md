@@ -56,7 +56,9 @@ src/data/map-features.js    which availability lists can be painted on the map
 src/data/availability.js    GENERATED per-country lists
 src/data/language-support.js GENERATED per-language lists
 src/data/pricing.js         GENERATED Apple One / Fitness+ / iPhone / iCloud+ prices
-scripts/build-data.mjs      regenerates the three GENERATED modules from research/raw
+src/data/fx.js              GENERATED ECB 12-month average exchange rates (conversion toggle)
+scripts/build-data.mjs      regenerates the three GENERATED data modules from research/raw
+scripts/build-fx.mjs        regenerates fx.js from the ECB rates CSV in research/raw
 scripts/validate-data.mjs   the test
 scripts/serve.mjs           zero-dependency static server
 research/RESEARCH-2026-09-25.md   the underlying research report
@@ -78,8 +80,9 @@ research/raw/*.json         structured extracts of Apple's availability and pric
 - **Explicitly unavailable** means Apple states a restriction. **Not listed** means a
   country or language is missing from Apple's availability page.
 - Prices are advertised standard prices in local currency. EU prices include VAT; US
-  prices exclude sales tax. The price explorer's currency conversion is adjustable and
-  defaults to the EUR/USD rate of 25 September 2026.
+  prices exclude sales tax and are marked with an asterisk. Currency conversion is off by
+  default; when on, it uses the ECB's average daily reference rates over the last twelve
+  months (the USD rate is adjustable in the price explorer).
 - The site records what Apple publishes, not device tests.
 
 Not affiliated with or endorsed by Apple Inc.

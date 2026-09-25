@@ -1,6 +1,7 @@
 // Page state: chosen country, chosen languages, filters. Persisted in the URL
 // (?country=DK) and localStorage so a shared link opens the same view.
 import { COUNTRY_BY_CODE } from './data/countries.js';
+import { FX } from './data/fx.js';
 
 const listeners = new Set();
 
@@ -12,7 +13,8 @@ const state = {
   filter: 'all',      // all | us | eu | same | depends
   category: 'all',
   query: '',
-  fx: 1.14,           // USD per EUR (the EUR/USD quote), default from 25 Sep 2026
+  convert: false,     // show approximate euro conversions next to non-euro prices
+  fx: FX.rates.USD,   // USD per EUR used for conversions; defaults to the ECB 12-month average
   exVat: false,
 };
 
