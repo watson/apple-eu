@@ -12,7 +12,7 @@ const state = {
   filter: 'all',      // all | us | eu | same | depends
   category: 'all',
   query: '',
-  fx: 1.14,           // EUR per USD? No: USD per EUR (EUR/USD quote), default 25 Sep 2026
+  fx: 1.14,           // USD per EUR (the EUR/USD quote), default from 25 Sep 2026
   exVat: false,
 };
 
