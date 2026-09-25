@@ -9,6 +9,7 @@
     "start": "node scripts/serve.mjs",
     "build": "node scripts/build.mjs",
     "fetch": "node scripts/fetch-availability.mjs",
+    "social-card": "node scripts/social-card.mjs",
     "test": "node scripts/build.mjs > /dev/null && node scripts/validate-data.mjs"
   },
   "engines": {

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<!-- Template for the link-preview image (assets/social-card.png). Rendered by
+     scripts/social-card.mjs; the tallies and the date come from the data modules,
+     so the picture stays in step with the page. -->
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <title>Social card</title>
+  <link rel="stylesheet" href="../src/styles/main.css">
+  <style>
+    html, body { margin: 0; background: var(--page); }
+    .social { position: relative; width: 1200px; height: 630px; padding: 56px 64px 72px; display: flex; flex-direction: column; overflow: hidden; }
+    .social .eyebrow { font-size: 15px; margin-bottom: 14px; }
+    .social h1 { font-size: 66px; line-height: 1.02; letter-spacing: -0.035em; max-width: 740px; }
+    .social h1 .eu { color: var(--eu); }
+    .social h1 .us { color: var(--us); }
+    .social .lede { margin: 18px 0 0; font-size: 21px; line-height: 1.4; color: var(--ink-2); max-width: 780px; }
+    .social .kpis { grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: auto; }
+    .social .stat { padding: 20px 22px 18px; }
+    .social .stat .label { font-size: 15px; }
+    .social .stat .value { font-size: 56px; margin: 6px 0 0; }
+    .social .stat .hint { display: none; }
+    .brand { position: absolute; top: 52px; right: 64px; display: flex; align-items: center; gap: 12px; font-size: 17px; font-weight: 600; color: var(--ink-2); }
+    .brand svg { width: 30px; height: 30px; display: block; }
+    .foot { position: absolute; right: 64px; bottom: 44px; font-size: 14px; color: var(--ink-3); }
+  </style>
+</head>
+<body>
+  <div class="social">
+    <div class="brand">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="#2a78d6"/><path d="M16 2a14 14 0 0 1 0 28z" fill="#eb6834"/></svg>
+      theotherapple.eu
+    </div>
+    <p class="eyebrow" id="eyebrow"></p>
+    <h1>Same Apple.<br>Different offer in the <span class="eu">EU</span> and the <span class="us">US</span>.</h1>
+    <p class="lede">Apple Intelligence, subscriptions, app stores, satellite services, Wallet, health features, hardware and consumer rights, compared for all 27 EU countries.</p>
+    <div class="kpis" id="kpis"></div>
+    <div class="foot" id="foot"></div>
+  </div>
+  <script type="module">
+    import { tally } from '../src/context.js';
+    import { FEATURES } from '../src/data/features.js';
+    import { fill } from '../src/text.js';
+
+    const counts = tally({ country: null, langs: [] });
+    counts.depends += counts.mixed || 0;
+    const tiles = [
+      ['us', 'US-only advantages'],
+      ['eu', 'EU-only advantages'],
+      ['same', 'Same on both sides'],
+      ['depends', 'Depends on where in the EU'],
+    ];
+    document.getElementById('eyebrow').textContent = `${FEATURES.length} documented differences`;
+    document.getElementById('kpis').innerHTML = tiles.map(([key, label]) =>
+      `<div class="stat ${key}"><div class="label">${label}</div><div class="value">${counts[key]}</div></div>`).join('');
+    document.getElementById('foot').textContent = fill('Data as of {asOf}');
+    await document.fonts.ready;
+    window.__ready = true;
+  </script>
+</body>
+</html>

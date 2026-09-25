@@ -134,6 +134,9 @@ missing from an availability page.
    update themselves, the sentences around them do not.
 5. Put the raw pages or extracts you worked from under `research/raw/<date>/` and, if
    the refresh was a substantial re-check, a dated report under `research/reports/`.
+6. `npm run social-card` re-renders the link-preview image in `assets/` (needs Google
+   Chrome) so the tallies and the date on it match the page. X, Facebook and the
+   others cache the image by URL for days, so a refreshed picture shows up late.
 
 ## Style
 
