@@ -14,7 +14,7 @@ import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
 const US_LIST = PRICING.US.iphone18Pro.from; // USD, before sales tax
-let advancedOpen = false; // disclosure state survives re-renders
+let panel = null; // which auxiliary panel is open: 'advanced' | 'notes' | 'table' | 'sources' | null
 
 function published() {
   return COUNTRIES
@@ -78,15 +78,24 @@ function render() {
   // --- controls ---
   const rate = el('input', { type: 'number', step: '0.01', min: '0.5', max: '2', value: state.fx.toFixed(2), 'aria-label': 'US dollars per euro' });
   rate.addEventListener('change', () => { const n = Number(rate.value); if (n > 0.3 && n < 3) setState({ fx: n }); });
-  const advanced = el('details', { class: 'advanced', open: advancedOpen || null },
-    el('summary', {}, el('span', { class: 'gear', 'aria-hidden': 'true' }, '⚙'), ' Advanced'),
-    el('div', { class: 'advanced-body' },
+  const panels = {
+    advanced: () => el('div', { class: 'chart-panel' },
       el('label', {}, 'US dollars per euro ', rate),
       el('button', { class: 'btn', type: 'button', onclick: () => setState({ fx: FX.rates.USD }) }, 'Reset'),
       el('span', { class: 'note' }, `Default ${FX.rates.USD.toFixed(2)}: ECB average, ${fmtDate(FX.from)} to ${fmtDate(FX.to)}.`),
     ),
-  );
-  advanced.addEventListener('toggle', () => { advancedOpen = advanced.open; });
+    notes: () => el('div', { class: 'chart-panel prose' },
+      el('p', {}, `Apple\u2019s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
+      el('p', {}, `Bar lengths convert every price to euros using the European Central Bank\u2019s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed under Advanced. Hover a bar for that country\u2019s before-tax price and the exchange rate at which it would equal the US list price.`),
+    ),
+    table: () => el('div', { class: 'chart-panel' }, priceTable(rows, usRow, tax, state)),
+    sources: () => el('div', { class: 'chart-panel' }, sourceLinks(['S18', 'S19', 'X2', 'X3'])),
+  };
+  const TABS = [['advanced', '⚙ Advanced'], ['notes', 'Notes'], ['table', 'Table'], ['sources', 'Sources']];
+  const tabs = el('div', { class: 'chart-tabs', role: 'tablist' }, TABS.map(([id, label]) => el('button', {
+    type: 'button', role: 'tab', 'aria-selected': String(panel === id), 'aria-expanded': String(panel === id),
+    onclick: () => { panel = panel === id ? null : id; render(); },
+  }, label)));
   const exVat = el('input', { type: 'checkbox', checked: state.exVat || null });
   exVat.addEventListener('change', () => setState({ exVat: exVat.checked }));
 
@@ -104,23 +113,18 @@ function render() {
         usStateSelect(),
         el('label', {}, exVat, ' Remove VAT and sales tax'),
       ),
-      advanced,
-      el('details', { class: 'table-view' },
-        el('summary', {}, 'Notes on prices'),
-        el('p', { class: 'tax-note' }, `Apple’s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
-        el('p', { class: 'tax-note' }, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed under Advanced. Hover a bar for that country’s before-tax price and the exchange rate at which it would equal the US list price.`),
-      ),
-      el('details', { class: 'table-view' },
-        el('summary', {}, 'Table view'),
-        el('table', {},
-          el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'With tax'), el('th', {}, 'Tax'), el('th', {}, 'Before tax'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
-          el('tbody', {},
-            el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(US_PRICE, 'USD')} (${tax.label})`), el('td', {}, `${tax.rate.toFixed(2)}% sales tax`), el('td', {}, fmtMoney(US_LIST, 'USD')), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
-            rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
-          ),
-        ),
-      ),
-      el('div', { style: { marginTop: '8px' } }, sourceLinks(['S18', 'S19', 'X2', 'X3'])),
+      tabs,
+      panel ? panels[panel]() : null,
+    ),
+  );
+}
+
+function priceTable(rows, usRow, tax, state) {
+  return el('table', {},
+    el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'With tax'), el('th', {}, 'Tax'), el('th', {}, 'Before tax'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
+    el('tbody', {},
+      el('tr', {}, el('td', {}, '🇺🇸 United States'), el('td', {}, `${fmtMoney(Math.round(usRow.price * (1 + tax.rate / 100)), 'USD', { maxFrac: 0 })} (${tax.label})`), el('td', {}, `${tax.rate.toFixed(2)}% sales tax`), el('td', {}, fmtMoney(usRow.price, 'USD', { maxFrac: 0 })), el('td', {}, `≈ ${fmtMoney(Math.round(usRow.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, '—')),
+      rows.map((r) => el('tr', {}, el('td', {}, `${r.flag} ${r.name}`), el('td', {}, fmtMoney(r.price, r.currency, { maxFrac: 0 })), el('td', {}, `${r.vat}%`), el('td', {}, fmtMoney(r.price / (1 + r.vat / 100), r.currency, { maxFrac: 0 })), el('td', {}, `${r.converted ? '≈ ' : ''}${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })}`), el('td', {}, r.breakEven.toFixed(2)))),
     ),
   );
 }
