@@ -2,6 +2,7 @@
 // (?country=DK) and localStorage so a shared link opens the same view.
 import { COUNTRY_BY_CODE } from './data/countries.js';
 import { FX } from './data/fx.js';
+import { DEFAULT_HARDWARE } from './data/hardware.js';
 import { track } from './analytics.js';
 
 const listeners = new Set();
@@ -18,6 +19,7 @@ const state = {
   usState: 'AVG',     // 'AVG' | 'NONE' | US state code: sales tax added to US hardware prices
   fx: FX.rates.USD,   // USD per EUR used for conversions; defaults to the ECB 12-month average
   exVat: false,
+  product: DEFAULT_HARDWARE, // hardware product shown in the price explorer
 };
 
 function readInitial() {
@@ -57,6 +59,7 @@ function recordEvents(patch, prev) {
   if ('convert' in patch && patch.convert !== prev.convert) track('Prices', { control: 'euro', value: patch.convert ? 'on' : 'off' });
   if ('exVat' in patch && patch.exVat !== prev.exVat) track('Prices', { control: 'taxes', value: patch.exVat ? 'removed' : 'included' });
   if ('usState' in patch && patch.usState !== prev.usState) track('Prices', { control: 'us-state', value: patch.usState });
+  if ('product' in patch && patch.product !== prev.product) track('Prices', { control: 'product', value: patch.product });
   if ('filter' in patch && patch.filter !== prev.filter) track('Filter', { filter: patch.filter });
 }
 

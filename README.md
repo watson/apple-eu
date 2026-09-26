@@ -29,9 +29,9 @@ developer or legal pages, with the European Commission for the legal position.
   lists, from Fitness+ and satellite SOS to hearing-aid features and Apple Stores.
 - **Language checker**: which of the 24 official EU languages Apple Intelligence, Siri,
   Live Translation and a dozen other language-gated features actually support.
-- **Apple One and iPhone prices**: which tiers each country can buy and for how much,
-  and an iPhone 18 Pro price explorer with VAT, US state sales tax and euro conversion
-  under your control.
+- **Apple One and hardware prices**: which tiers each country can buy and for how much,
+  and a price explorer for the iPhone 18 Pro, iPhone Duo, MacBook Neo and Apple Watch
+  Series 12 with VAT, US state sales tax and euro conversion under your control.
 - **Timeline** of how the gap evolved, and a full source register.
 
 ## How to read it

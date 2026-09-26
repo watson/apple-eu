@@ -51,7 +51,7 @@ data/snapshot.json          the "as of" date shown on the page, and the tax/ECB 
 data/availability.csv       one row per availability list, one column per EU country (Y, N, or ? for not published)
 data/language-support.csv   one row per language-gated feature, one column per official EU language
 data/country-details.csv    per-country extras: store counts, transit cities, Tap to Pay providers, Detailed City cities
-data/prices.csv             Apple One tiers, Fitness+ and iPhone 18 Pro prices per storefront, with URL and access date
+data/prices.csv             Apple One tiers, Fitness+ and hardware prices per storefront, with URL and access date
 data/vat-rates.csv          standard VAT rate per member state
 data/us-sales-tax.csv       combined state + average local sales tax per US state, plus the AVG row
 data/ecb-rates.csv          the ECB's daily euro reference rates for the averaging window (their CSV, unmodified)
@@ -59,7 +59,8 @@ data/sources.csv            the source register; IDs are cited from features, ti
 ```
 
 Hand-written, in `src/data/`: `features.js` (the comparison itself, with prose),
-`timeline.js`, `map-features.js`, `countries.js`, `languages.js`.
+`timeline.js`, `map-features.js`, `countries.js`, `languages.js`, `hardware.js` (the
+products in the price explorer and the configuration each price is for).
 
 Generated, in `src/data/`: `availability.js`, `language-support.js`, `pricing.js`,
 `fx.js`, `sources.js`, `us-sales-tax.js`, `snapshot.js`.
@@ -76,6 +77,7 @@ src/components/*.js         tooltip, chips, selects, toggles, tabs, settings
 src/styles/main.css         design tokens, light and dark themes, components
 scripts/build.mjs           data/ → src/data/ generator
 scripts/fetch-availability.mjs  refreshes the two availability CSVs from Apple's pages
+scripts/fetch-prices.mjs    refreshes the hardware rows of data/prices.csv from Apple's store pages
 scripts/validate-data.mjs   the test
 scripts/serve.mjs           zero-dependency static server
 research/reports/           dated research and fact-check reports (immutable records)
@@ -125,9 +127,12 @@ missing from an availability page.
    `data/language-support.csv`. Read the differences, then `npm run fetch -- --write`
    to apply them. Rows marked `manual` (support articles, price pages, the media
    register) are not touched: check their sources by hand and edit the CSV.
-2. Update `data/prices.csv` from the local apple.com pages, `data/us-sales-tax.csv`
-   from the Tax Foundation's latest table, and `data/ecb-rates.csv` from the ECB API
-   (the URL is in the X2 source entry; change the dates).
+2. `npm run fetch-prices` reads each hardware product's entry price from Apple's online
+   store in every storefront and prints what differs from `data/prices.csv`; add
+   `-- --write` to apply. Update the Apple One and Fitness+ rows by hand from the local
+   apple.com pages, `data/us-sales-tax.csv` from the Tax Foundation's latest table, and
+   `data/ecb-rates.csv` from the ECB API (the URL is in the X2 source entry; change the
+   dates).
 3. Set the new dates in `data/snapshot.json`.
 4. `npm test` regenerates `src/data/` and validates. Then read through
    `features.js` and `index.html` for prose that the changes made wrong: the numbers

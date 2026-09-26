@@ -14,6 +14,7 @@ import { PRICING } from '../src/data/pricing.js';
 import { TIMELINE } from '../src/data/timeline.js';
 import { MAP_FEATURES } from '../src/data/map-features.js';
 import { SNAPSHOT } from '../src/data/snapshot.js';
+import { HARDWARE } from '../src/data/hardware.js';
 
 const root = resolve(import.meta.dirname, '..');
 const problems = [];
@@ -38,7 +39,7 @@ for (const r of langs) for (const l of LANG_CODES) check(['Y', 'N'].includes(r[l
 const prices = csv('prices.csv');
 for (const r of prices) {
   check([...EU_CODES, 'US'].includes(r.country), `prices.csv: unknown country ${r.country}`);
-  check(['appleOne', 'fitnessPlus', 'iphone18Pro'].includes(r.product), `prices.csv ${r.country}: unknown product ${r.product}`);
+  check(['appleOne', 'fitnessPlus'].includes(r.product) || HARDWARE.some((h) => h.id === r.product), `prices.csv ${r.country}: unknown product ${r.product}`);
   check(Number(r.monthly) > 0, `prices.csv ${r.country} ${r.product} ${r.tier}: monthly must be a positive number`);
   check(/^[A-Z]{3}$/.test(r.currency), `prices.csv ${r.country} ${r.product}: currency must be a 3-letter code`);
   check(/^\d{4}-\d{2}-\d{2}$/.test(r.accessed), `prices.csv ${r.country} ${r.product}: accessed must be YYYY-MM-DD`);
@@ -98,7 +99,13 @@ for (const m of MAP_FEATURES) {
 }
 for (const t of TIMELINE) for (const s of t.sources) check(SOURCES[s], `timeline ${t.date}: unknown source ${s}`);
 for (const [id, s] of Object.entries(SOURCES)) check(/^https?:\/\//.test(s.url) && s.title && s.pub, `source ${id} incomplete`);
-check(PRICING.US?.iphone18Pro?.from > 0, 'US iPhone price missing');
+check(new Set(HARDWARE.map((h) => h.id)).size === HARDWARE.length, 'duplicate hardware id');
+for (const h of HARDWARE) {
+  check(h.id && h.label && h.config && h.configNote && h.store, `hardware ${h.id}: needs id, label, config, configNote and store`);
+  check(PRICING.US?.hardware?.[h.id]?.from > 0, `hardware ${h.id}: US price missing`);
+  check(EU_CODES.some((c) => PRICING[c]?.hardware?.[h.id]?.from > 0), `hardware ${h.id}: no EU price`);
+  for (const s of h.sources || []) check(SOURCES[s], `hardware ${h.id}: unknown source ${s}`);
+}
 for (const code of EU_CODES) check(PRICING[code], `pricing missing for ${code}`);
 
 // Static markup placeholders

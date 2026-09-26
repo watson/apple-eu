@@ -1,11 +1,13 @@
-// iPhone 18 Pro price explorer. Bars are always in euros, converted at the ECB
-// twelve-month average rates (USD adjustable), so every storefront can sit on
-// one axis. The "Show prices in €" toggle only changes the labels: local
-// currency as advertised, or the converted euro figure.
+// Hardware price explorer: the starting price of one Apple product (the list in
+// data/hardware.js, chosen from a menu) in every EU storefront and the US. Bars are
+// always in euros, converted at the ECB twelve-month average rates (USD adjustable),
+// so every storefront can sit on one axis. The "Show prices in €" toggle only changes
+// the labels: local currency as advertised, or the converted euro figure.
 import { el, svg, mount, fmtMoney, fmtDate } from '../dom.js';
 import { getState, setState, subscribe } from '../state.js';
 import { COUNTRIES } from '../data/countries.js';
 import { PRICING } from '../data/pricing.js';
+import { HARDWARE, HARDWARE_BY_ID } from '../data/hardware.js';
 import { FX, toEUR } from '../data/fx.js';
 import { attachTooltip } from '../components/tooltip.js';
 import { sourceLinks } from '../components/chips.js';
@@ -14,33 +16,51 @@ import { fxToggle, exVatToggle } from '../components/fxToggle.js';
 import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
-const US_LIST = PRICING.US.iphone18Pro.from; // USD, before sales tax
 let panel = null; // which auxiliary panel is open: 'notes' | 'table' | 'sources' | null
 
-function published() {
+/** EU storefronts with a published price for the product. */
+function published(id) {
   return COUNTRIES
-    .map((c) => ({ c, p: PRICING[c.code] }))
-    .filter(({ p }) => p?.iphone18Pro?.from)
-    .map(({ c, p }) => ({ code: c.code, name: c.name, flag: c.flag, price: p.iphone18Pro.from, currency: p.iphone18Pro.currency, vat: p.vatRate }));
+    .map((c) => ({ c, h: PRICING[c.code]?.hardware?.[id] }))
+    .filter(({ h }) => h?.from)
+    .map(({ c, h }) => ({ code: c.code, name: c.name, flag: c.flag, price: h.from, currency: h.currency, vat: PRICING[c.code].vatRate }));
+}
+
+/** EU countries whose Apple online store prices other products but not this one. */
+function unpriced(id) {
+  return COUNTRIES.filter((c) => { const hw = PRICING[c.code]?.hardware || {}; return Object.keys(hw).length && !hw[id]?.from; });
+}
+
+const joinNames = (names) => names.length <= 1 ? names.join('') : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`;
+
+/** Dropdown bound to state.product. Product names only, so the control row stays on one line; the configuration is captioned under the chart title. */
+function productSelect() {
+  const sel = el('select', { class: 'select', 'aria-label': 'Product' },
+    HARDWARE.map((h) => el('option', { value: h.id }, h.label)));
+  sel.value = getState().product;
+  sel.addEventListener('change', () => setState({ product: sel.value }));
+  return el('label', { class: 'toggle' }, el('span', { class: 'muted', style: { fontWeight: '500' } }, 'Product'), sel);
 }
 
 export function initHardware() {
   render();
-  subscribe((state, prev) => { if (['country', 'fx', 'exVat', 'convert', 'usState'].some((k) => state[k] !== prev[k])) render(); });
+  subscribe((state, prev) => { if (['country', 'fx', 'exVat', 'convert', 'usState', 'product'].some((k) => state[k] !== prev[k])) render(); });
 }
 
 function render() {
   const state = getState();
+  const product = HARDWARE_BY_ID[state.product] || HARDWARE[0];
+  const usList = PRICING.US.hardware[product.id].from; // USD, before sales tax
   const tax = salesTaxFor(state.usState);
-  const US_PRICE = Math.round(US_LIST * (1 + tax.rate / 100) * 100) / 100; // USD incl. the selected sales tax
-  const rows = published().map((r) => {
+  const usPrice = Math.round(usList * (1 + tax.rate / 100) * 100) / 100; // USD incl. the selected sales tax
+  const rows = published(product.id).map((r) => {
     const localAdj = state.exVat ? r.price / (1 + r.vat / 100) : r.price;
     const eurExVat = toEUR(r.price / (1 + r.vat / 100), r.currency, state.fx);
-    return { ...r, localAdj, eur: toEUR(localAdj, r.currency, state.fx), eurExVat, breakEven: US_LIST / eurExVat, converted: r.currency !== 'EUR' };
+    return { ...r, localAdj, eur: toEUR(localAdj, r.currency, state.fx), eurExVat, breakEven: usList / eurExVat, converted: r.currency !== 'EUR' };
   }).sort((a, b) => b.eur - a.eur);
   // The US row follows the tax switch: list price when all taxes are removed, otherwise list price plus the selected sales tax.
-  const usShown = state.exVat ? US_LIST : US_PRICE;
-  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, converted: true, price: US_LIST, localAdj: usShown, currency: 'USD', eur: usShown / state.fx, taxRate: state.exVat ? 0 : tax.rate };
+  const usShown = state.exVat ? usList : usPrice;
+  const usRow = { code: 'US', name: 'United States', flag: '🇺🇸', isUs: true, converted: true, price: usList, localAdj: usShown, currency: 'USD', eur: usShown / state.fx, taxRate: state.exVat ? 0 : tax.rate };
   const bars = [usRow, ...rows];
   const max = Math.max(...bars.map((r) => r.eur));
 
@@ -53,7 +73,7 @@ function render() {
   const H = top + bars.length * rowH + 30;
   const scale = (v) => (v / (max * 1.06)) * (W - left - right);
   const ticks = niceTicks(max * 1.06, 5);
-  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': 'iPhone 18 Pro starting price by country, bars in euros' });
+  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `${product.label} (${product.config}) starting price by country, bars in euros` });
   for (const t of ticks) {
     const x = left + scale(t);
     g.append(svg('line', { class: 'grid', x1: x, x2: x, y1: top, y2: top + bars.length * rowH }));
@@ -77,21 +97,25 @@ function render() {
   });
 
   // --- controls ---
+  const missing = unpriced(product.id).map((c) => c.name);
   const panels = {
     notes: () => el('div', { class: 'chart-panel prose' },
-      el('p', {}, `Apple\u2019s US list price is $${US_LIST.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.`),
-      el('p', {}, `Bar lengths convert every price to euros using the European Central Bank\u2019s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed in the page settings (gear icon, top right). Hover a bar for that country\u2019s before-tax price and the exchange rate at which it would equal the US list price.`),
+      el('p', {}, `Prices are for ${product.configNote}. Apple’s US list price is $${usList.toLocaleString('en-US')} before sales tax, which depends on the delivery address. The chart adds the combined state and average local rate you choose (Tax Foundation, rates as of 1 July 2026); the default is the population-weighted US average. EU prices include VAT. Countries without an Apple online store (Bulgaria, Croatia, Cyprus, Estonia, Greece, Latvia, Lithuania, Malta, Romania, Slovakia, Slovenia) have no published Apple price.${missing.length ? ` Apple’s online store in ${joinNames(missing)} does not list this product.` : ''}`),
+      el('p', {}, `Bar lengths convert every price to euros using the European Central Bank’s average daily reference rates from ${fmtDate(FX.from)} to ${fmtDate(FX.to)} (DKK ${FX.rates.DKK.toFixed(2)}, SEK ${FX.rates.SEK.toFixed(2)}, PLN ${FX.rates.PLN.toFixed(2)}, CZK ${FX.rates.CZK.toFixed(2)}, HUF ${FX.rates.HUF.toFixed(0)} per euro). The USD rate defaults to the same average (${FX.rates.USD.toFixed(2)}) and can be changed in the page settings (gear icon, top right). Hover a bar for that country’s before-tax price and the exchange rate at which it would equal the US list price.`),
     ),
-    table: () => el('div', { class: 'chart-panel' }, priceTable(rows, usRow, tax, state)),
-    sources: () => el('div', { class: 'chart-panel' }, sourceLinks(['S18', 'S19', 'X2', 'X3'])),
+    table: () => el('div', { class: 'chart-panel' }, priceTable(rows, usRow, tax)),
+    sources: () => el('div', { class: 'chart-panel' }, sourceLinks([...product.sources, 'X2', 'X3'])),
   };
   const [tabs, panelNode] = tabPanels([['notes', 'Notes'], ['table', 'Table'], ['sources', 'Sources']], panels, panel, (id) => { panel = id; render(); });
 
   mount('price-chart',
-    el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, fxToggle(), usStateSelect(), exVatToggle()),
+    el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, productSelect(), fxToggle(), usStateSelect(), exVatToggle()),
     el('div', { class: 'chart' },
       el('div', { class: 'chart-head' },
-        el('h4', {}, `iPhone 18 Pro starting price${state.exVat ? ', all taxes removed' : ', taxes included'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
+        el('div', {},
+          el('h4', {}, `${product.label} starting price${state.exVat ? ', all taxes removed' : ', taxes included'}. Bars in euros; labels ${state.convert ? 'in euros' : 'in local currency'}.`),
+          el('p', { class: 'muted', style: { fontSize: '13px', margin: '2px 0 0' } }, `Entry configuration: ${product.config}.`),
+        ),
         el('div', { class: 'legend' },
           el('span', {}, el('i', { style: { background: 'var(--eu)' } }), 'EU storefront', state.exVat ? ' (ex-VAT)' : ' (VAT incl.)'),
           el('span', {}, el('i', { style: { background: 'var(--us)' } }), state.exVat ? 'US list price, no sales tax' : `US incl. sales tax (${tax.label})`)),
@@ -103,7 +127,7 @@ function render() {
   );
 }
 
-function priceTable(rows, usRow, tax, state) {
+function priceTable(rows, usRow, tax) {
   return el('table', {},
     el('thead', {}, el('tr', {}, el('th', {}, 'Country'), el('th', {}, 'With tax'), el('th', {}, 'Tax'), el('th', {}, 'Before tax'), el('th', {}, '≈ € as charted'), el('th', {}, 'Break-even USD per €'))),
     el('tbody', {},
@@ -114,7 +138,7 @@ function priceTable(rows, usRow, tax, state) {
 }
 
 function tooltipLines(r, state) {
-  if (r.isUs) return [{ b: 'United States' }, `$${US_LIST.toLocaleString('en-US')} list price`, r.taxRate ? `$${Math.round(r.localAdj).toLocaleString('en-US')} with ${r.taxRate.toFixed(2)}% sales tax` : 'No sales tax added', `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
+  if (r.isUs) return [{ b: 'United States' }, `$${r.price.toLocaleString('en-US')} list price`, r.taxRate ? `$${Math.round(r.localAdj).toLocaleString('en-US')} with ${r.taxRate.toFixed(2)}% sales tax` : 'No sales tax added', `≈ ${fmtMoney(Math.round(r.eur), 'EUR', { maxFrac: 0 })} at ${state.fx.toFixed(2)} USD per euro`];
   const lines = [
     { b: r.name },
     `Advertised: ${fmtMoney(r.price, r.currency, { maxFrac: 0 })} incl. ${r.vat}% VAT`,

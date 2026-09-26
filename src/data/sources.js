@@ -591,6 +591,42 @@ export const SOURCES = {
     "url": "https://www.foli.fi/en/tickets/contactless-payment",
     "date": null,
     "note": "Bank-card payment through Apple Pay; not an agency card in Wallet"
+  },
+  "S35": {
+    "pub": "Apple",
+    "title": "iPhone Duo technical specifications (US)",
+    "url": "https://www.apple.com/iphone-duo/specs/",
+    "date": null
+  },
+  "S36": {
+    "pub": "Apple",
+    "title": "iPhone Duo technical specifications (Denmark)",
+    "url": "https://www.apple.com/dk/iphone-duo/specs/",
+    "date": null
+  },
+  "S37": {
+    "pub": "Apple",
+    "title": "MacBook Neo technical specifications (US)",
+    "url": "https://www.apple.com/macbook-neo/specs/",
+    "date": null
+  },
+  "S38": {
+    "pub": "Apple",
+    "title": "MacBook Neo technical specifications (Denmark)",
+    "url": "https://www.apple.com/dk/macbook-neo/specs/",
+    "date": null
+  },
+  "S39": {
+    "pub": "Apple",
+    "title": "Apple Watch Series 12 technical specifications (US)",
+    "url": "https://www.apple.com/apple-watch-series-12/specs/",
+    "date": null
+  },
+  "S40": {
+    "pub": "Apple",
+    "title": "Apple Watch Series 12 technical specifications (Denmark)",
+    "url": "https://www.apple.com/dk/apple-watch-series-12/specs/",
+    "date": null
   }
 };
 

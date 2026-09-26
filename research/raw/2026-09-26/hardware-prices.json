@@ -1,0 +1,1008 @@
+{
+  "fetched": "2026-09-26",
+  "results": [
+    {
+      "product": "iphone18Pro",
+      "country": "US",
+      "url": "https://www.apple.com/shop/buy-iphone/iphone-18-pro",
+      "price": 1199,
+      "currency": "USD",
+      "names": [
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy",
+        "iPhone 18 Pro 256GB Black"
+      ],
+      "lowPrice": 1199,
+      "vatIncluded": "N",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "AT",
+      "url": "https://www.apple.com/at/shop/buy-iphone/iphone-18-pro",
+      "price": 1449,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1449,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "BE",
+      "url": "https://www.apple.com/be-fr/shop/buy-iphone/iphone-18-pro",
+      "price": 1479,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1479,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "CZ",
+      "url": "https://www.apple.com/cz/shop/buy-iphone/iphone-18-pro",
+      "price": 34990,
+      "currency": "CZK",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 34990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "DK",
+      "url": "https://www.apple.com/dk/shop/buy-iphone/iphone-18-pro",
+      "price": 10999,
+      "currency": "DKK",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 10999,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "FI",
+      "url": "https://www.apple.com/fi/shop/buy-iphone/iphone-18-pro",
+      "price": 1509,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1509,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "FR",
+      "url": "https://www.apple.com/fr/shop/buy-iphone/iphone-18-pro",
+      "price": 1479,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1479,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "DE",
+      "url": "https://www.apple.com/de/shop/buy-iphone/iphone-18-pro",
+      "price": 1449,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1449,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "HU",
+      "url": "https://www.apple.com/hu/shop/buy-iphone/iphone-18-pro",
+      "price": 549990,
+      "currency": "HUF",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 549990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "IE",
+      "url": "https://www.apple.com/ie/shop/buy-iphone/iphone-18-pro",
+      "price": 1489,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1489,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "IT",
+      "url": "https://www.apple.com/it/shop/buy-iphone/iphone-18-pro",
+      "price": 1489,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1489,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "LU",
+      "url": "https://www.apple.com/lu/shop/buy-iphone/iphone-18-pro",
+      "price": 1430.1,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1430.1,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "NL",
+      "url": "https://www.apple.com/nl/shop/buy-iphone/iphone-18-pro",
+      "price": 1479,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1479,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "PL",
+      "url": "https://www.apple.com/pl/shop/buy-iphone/iphone-18-pro",
+      "price": 6299,
+      "currency": "PLN",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 6299,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "PT",
+      "url": "https://www.apple.com/pt/shop/buy-iphone/iphone-18-pro",
+      "price": 1499,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1499,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "ES",
+      "url": "https://www.apple.com/es/shop/buy-iphone/iphone-18-pro",
+      "price": 1469,
+      "currency": "EUR",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 1469,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphone18Pro",
+      "country": "SE",
+      "url": "https://www.apple.com/se/shop/buy-iphone/iphone-18-pro",
+      "price": 16495,
+      "currency": "SEK",
+      "names": [
+        "iPhone 18 Pro 256GB Black",
+        "iPhone 18 Pro 256GB Glacier",
+        "iPhone 18 Pro 256GB Silver",
+        "iPhone 18 Pro 256GB Burgundy"
+      ],
+      "lowPrice": 16495,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "US",
+      "url": "https://www.apple.com/shop/buy-iphone/iphone-duo",
+      "price": 1999,
+      "currency": "USD",
+      "names": [
+        "iPhone Duo 256GB Night Sky",
+        "iPhone Duo 256GB Star White"
+      ],
+      "lowPrice": 1999,
+      "vatIncluded": "N",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "AT",
+      "url": "https://www.apple.com/at/shop/buy-iphone/iphone-duo",
+      "price": 2319,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2319,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "BE",
+      "url": "https://www.apple.com/be-fr/shop/buy-iphone/iphone-duo",
+      "price": 2339,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2339,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "CZ",
+      "url": "https://www.apple.com/cz/shop/buy-iphone/iphone-duo",
+      "price": 54990,
+      "currency": "CZK",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 54990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "DK",
+      "url": "https://www.apple.com/dk/shop/buy-iphone/iphone-duo",
+      "price": 17999,
+      "currency": "DKK",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 17999,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "FI",
+      "url": "https://www.apple.com/fi/shop/buy-iphone/iphone-duo",
+      "price": 2419,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2419,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "FR",
+      "url": "https://www.apple.com/fr/shop/buy-iphone/iphone-duo",
+      "price": 2339,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2339,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "DE",
+      "url": "https://www.apple.com/de/shop/buy-iphone/iphone-duo",
+      "price": 2299,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2299,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "HU",
+      "url": "https://www.apple.com/hu/shop/buy-iphone/iphone-duo",
+      "price": 899990,
+      "currency": "HUF",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 899990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "IE",
+      "url": "https://www.apple.com/ie/shop/buy-iphone/iphone-duo",
+      "price": 2369,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2369,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "IT",
+      "url": "https://www.apple.com/it/shop/buy-iphone/iphone-duo",
+      "price": 2369,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2369,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "LU",
+      "url": "https://www.apple.com/lu/shop/buy-iphone/iphone-duo",
+      "price": 2261.68,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2261.68,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "NL",
+      "url": "https://www.apple.com/nl/shop/buy-iphone/iphone-duo",
+      "price": 2339,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2339,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "PL",
+      "url": "https://www.apple.com/pl/shop/buy-iphone/iphone-duo",
+      "price": 9999,
+      "currency": "PLN",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 9999,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "PT",
+      "url": "https://www.apple.com/pt/shop/buy-iphone/iphone-duo",
+      "price": 2399,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2399,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "ES",
+      "url": "https://www.apple.com/es/shop/buy-iphone/iphone-duo",
+      "price": 2339,
+      "currency": "EUR",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 2339,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "iphoneDuo",
+      "country": "SE",
+      "url": "https://www.apple.com/se/shop/buy-iphone/iphone-duo",
+      "price": 26995,
+      "currency": "SEK",
+      "names": [
+        "iPhone Duo 256GB Star White",
+        "iPhone Duo 256GB Night Sky"
+      ],
+      "lowPrice": 26995,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "US",
+      "url": "https://www.apple.com/shop/buy-mac/macbook-neo",
+      "price": 699,
+      "currency": "USD",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 699,
+      "vatIncluded": "N",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "AT",
+      "url": "https://www.apple.com/at/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "BE",
+      "url": "https://www.apple.com/be-fr/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "CZ",
+      "url": "https://www.apple.com/cz/shop/buy-mac/macbook-neo",
+      "price": 19990,
+      "currency": "CZK",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 19990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "DK",
+      "url": "https://www.apple.com/dk/shop/buy-mac/macbook-neo",
+      "price": 6499,
+      "currency": "DKK",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 6499,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "FI",
+      "url": "https://www.apple.com/fi/shop/buy-mac/macbook-neo",
+      "price": 819,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 819,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "FR",
+      "url": "https://www.apple.com/fr/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "DE",
+      "url": "https://www.apple.com/de/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "HU",
+      "url": "https://www.apple.com/hu/shop/buy-mac/macbook-neo",
+      "price": 299990,
+      "currency": "HUF",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 299990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "IE",
+      "url": "https://www.apple.com/ie/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "IT",
+      "url": "https://www.apple.com/it/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "LU",
+      "url": "https://www.apple.com/lu/shop/buy-mac/macbook-neo",
+      "price": 772.59,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 772.59,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "NL",
+      "url": "https://www.apple.com/nl/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "PL",
+      "url": "https://www.apple.com/pl/shop/buy-mac/macbook-neo",
+      "price": 3499,
+      "currency": "PLN",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 3499,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "PT",
+      "url": "https://www.apple.com/pt/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "ES",
+      "url": "https://www.apple.com/es/shop/buy-mac/macbook-neo",
+      "price": 799,
+      "currency": "EUR",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 799,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "macbookNeo",
+      "country": "SE",
+      "url": "https://www.apple.com/se/shop/buy-mac/macbook-neo",
+      "price": 8995,
+      "currency": "SEK",
+      "names": [
+        "blush-6-5-256gb",
+        "citrus-6-5-256gb",
+        "silver-6-5-256gb",
+        "indigo-6-5-256gb"
+      ],
+      "lowPrice": 8995,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "US",
+      "url": "https://www.apple.com/shop/buy-watch/apple-watch",
+      "price": 399,
+      "currency": "USD",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 399,
+      "vatIncluded": "N",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "AT",
+      "url": "https://www.apple.com/at/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "BE",
+      "url": "https://www.apple.com/be-fr/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "CZ",
+      "url": "https://www.apple.com/cz/shop/buy-watch/apple-watch",
+      "price": 10990,
+      "currency": "CZK",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 10990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "DK",
+      "url": "https://www.apple.com/dk/shop/buy-watch/apple-watch",
+      "price": 3499,
+      "currency": "DKK",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 3499,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "FI",
+      "url": "https://www.apple.com/fi/shop/buy-watch/apple-watch",
+      "price": 469,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 469,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "FR",
+      "url": "https://www.apple.com/fr/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "DE",
+      "url": "https://www.apple.com/de/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "HU",
+      "url": "https://www.apple.com/hu/shop/buy-watch/apple-watch",
+      "price": 169990,
+      "currency": "HUF",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 169990,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "IE",
+      "url": "https://www.apple.com/ie/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "IT",
+      "url": "https://www.apple.com/it/shop/buy-watch/apple-watch",
+      "price": 459,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 459,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "LU",
+      "url": "https://www.apple.com/lu/shop/buy-watch/apple-watch",
+      "price": 434.15,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 434.15,
+      "vatIncluded": "Y",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "NL",
+      "url": "https://www.apple.com/nl/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "PL",
+      "url": "https://www.apple.com/pl/shop/buy-watch/apple-watch",
+      "price": 1899,
+      "currency": "PLN",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 1899,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "PT",
+      "url": "https://www.apple.com/pt/shop/buy-watch/apple-watch",
+      "price": 459,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 459,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "ES",
+      "url": "https://www.apple.com/es/shop/buy-watch/apple-watch",
+      "price": 449,
+      "currency": "EUR",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 449,
+      "vatIncluded": "",
+      "error": null
+    },
+    {
+      "product": "watchSeries12",
+      "country": "SE",
+      "url": "https://www.apple.com/se/shop/buy-watch/apple-watch",
+      "price": 4995,
+      "currency": "SEK",
+      "names": [
+        "watch_cases-aluminum-42mm-gps"
+      ],
+      "lowPrice": 4995,
+      "vatIncluded": "",
+      "error": null
+    }
+  ]
+}

@@ -6,6 +6,7 @@ import { resolve } from 'node:path';
 
 const root = resolve(import.meta.dirname, '..');
 const { COUNTRIES } = await import(resolve(root, 'src/data/countries.js'));
+const { HARDWARE } = await import(resolve(root, 'src/data/hardware.js'));
 const read = (name) => readFileSync(resolve(root, 'data', name), 'utf8');
 const write = (name, text) => writeFileSync(resolve(root, 'src/data', name), text);
 
@@ -78,17 +79,22 @@ for (const cc of [...EU, 'US']) {
   const rows = prices.filter((r) => r.country === cc);
   const plans = rows.filter((r) => r.product === 'appleOne').map((r) => ({ tier: r.tier, localName: r.localName, monthly: Number(r.monthly), storageGB: Number(r.storageGB), services: r.services.split(';').filter(Boolean) }));
   const fit = rows.find((r) => r.product === 'fitnessPlus');
-  const iph = rows.find((r) => r.product === 'iphone18Pro');
   const currency = rows[0]?.currency || (cc === 'US' ? 'USD' : COUNTRIES.find((c) => c.code === cc)?.currency || null);
+  // One entry per product in src/data/hardware.js that this storefront prices (tier "from", the entry configuration).
+  const hardware = {};
+  for (const h of HARDWARE) {
+    const row = rows.find((r) => r.product === h.id);
+    if (row) hardware[h.id] = { from: Number(row.monthly), currency: row.currency || currency, vatIncluded: row.vatIncluded === 'Y' ? true : row.vatIncluded === 'N' ? false : null, url: row.url || null };
+  }
   PRICING[cc] = {
     currency,
     appleOne: { url: rows.find((r) => r.product === 'appleOne')?.url || null, plans },
     fitnessPlus: { available: !!fit, monthly: fit ? Number(fit.monthly) : null, yearly: fit ? Number(fit.yearly) : null, url: fit?.url || null },
-    iphone18Pro: { from: iph ? Number(iph.monthly) : null, currency: iph?.currency || currency, vatIncluded: iph ? (iph.vatIncluded === 'Y' ? true : iph.vatIncluded === 'N' ? false : null) : null, url: iph?.url || null },
+    hardware,
     vatRate: cc === 'US' ? null : vat[cc],
   };
 }
-write('pricing.js', header('Apple One, Fitness+ and iPhone 18 Pro prices as advertised on apple.com storefronts; standard VAT rates for the hardware tax comparison.') + `export const PRICING = ${json(PRICING)};\n`);
+write('pricing.js', header('Apple One, Fitness+ and hardware prices (the products in src/data/hardware.js) as advertised on apple.com storefronts; standard VAT rates for the hardware tax comparison.') + `export const PRICING = ${json(PRICING)};\n`);
 
 // ---- fx ----
 const ecb = parseCsv(read('ecb-rates.csv'));
