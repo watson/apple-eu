@@ -537,8 +537,9 @@ details.table-view td, details.table-view th { padding: 4px 8px; text-align: lef
 .versus li span { color: var(--ink-2); font-size: 14px; }
 .versus li::before { content: "→"; color: var(--ink-3); }
 .versus .col.eu li::before { content: "＋"; color: var(--eu); font-weight: 700; }
-.versus .col.us li::before { content: "－"; color: var(--us); font-weight: 700; }
+.versus .col.us li::before { content: "＋"; color: var(--us); font-weight: 700; }
 .versus .col.same li::before { content: "＝"; color: var(--same); font-weight: 700; }
+.versus .col li.more::before { content: "→"; color: var(--ink-3); font-weight: 400; }
 
 /* ---------- Sources ---------- */
 .sources-list { columns: 2; column-gap: 32px; font-size: 13px; }

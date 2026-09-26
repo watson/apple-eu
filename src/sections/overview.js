@@ -42,7 +42,7 @@ function render() {
 
   const list = (items, limit = 7) => el('ul', {},
     items.slice(0, limit).map(({ f }) => el('li', {}, el('div', {}, el('b', {}, f.title), el('span', {}, fill(f.short))))),
-    items.length > limit ? el('li', {}, el('div', {}, el('a', { href: '#scorecard' }, `and ${items.length - limit} more in the scorecard`))) : null,
+    items.length > limit ? el('li', { class: 'more' }, el('div', {}, el('a', { href: '#scorecard' }, `and ${items.length - limit} more in the scorecard`))) : null,
   );
 
   const depends = [...by('depends'), ...by('mixed')];
