@@ -17,6 +17,11 @@ import { usStateSelect } from '../components/usStateSelect.js';
 import { salesTaxFor } from '../data/us-sales-tax.js';
 
 let panel = null; // which auxiliary panel is open: 'notes' | 'table' | 'sources' | null
+let plotW = 0; // measured pixel width of the plot area, so the chart can pick a layout for the screen it is on
+// Below this plot width (phones, small tablets) the chart is drawn 1:1 with name and value stacked above a
+// full-width bar, so text keeps its CSS size. At or above it, the fixed 720-unit drawing is scaled up by CSS
+// to fill the card, which is the roomier look desktops have always had.
+const NARROW = 640;
 
 /** EU storefronts with a published price for the product. */
 function published(id) {
@@ -43,8 +48,22 @@ function productSelect() {
 }
 
 export function initHardware() {
+  const host = document.getElementById('price-chart');
+  if (!host) return;
+  plotW = Math.max(0, host.clientWidth - 42); // the card's 1px border and 20px padding each side; render() measures the real plot area after the first draw
   render();
   subscribe((state, prev) => { if (['country', 'fx', 'exVat', 'convert', 'usState', 'product'].some((k) => state[k] !== prev[k])) render(); });
+  // Redraw at the new width when the window is resized or the phone rotated. Deferred a frame so the
+  // redraw (which changes the host's height) does not land inside the observer's own delivery.
+  if ('ResizeObserver' in window) new ResizeObserver(() => requestAnimationFrame(() => fit(host.querySelector('.chart-plot')?.clientWidth))).observe(host);
+}
+
+/** Note the plot area's measured width and redraw when the layout depends on it: any change while narrow, or crossing the threshold. */
+function fit(width) {
+  if (!width || width === plotW) return;
+  const wasNarrow = plotW < NARROW, isNarrow = width < NARROW;
+  plotW = width;
+  if (wasNarrow || isNarrow) render(); // the wide drawing is the same at every width; CSS scales it
 }
 
 function render() {
@@ -69,31 +88,43 @@ function render() {
     : fmtMoney(r.localAdj, r.currency, { maxFrac: 0 });
 
   // --- chart geometry ---
-  const W = 720, rowH = 30, left = 150, right = 110, top = 8;
-  const H = top + bars.length * rowH + 30;
+  // Wide: a 720-unit drawing, name | bar | value on one line, values only on the rows that matter; CSS
+  // scales it to the card. Narrow (see NARROW): drawn at the measured pixel width, name and value on one
+  // line with the bar beneath, so the bars get the full width and every row shows its price.
+  const narrow = plotW > 0 && plotW < NARROW;
+  const W = narrow ? plotW : 720;
+  const rowH = narrow ? 38 : 30, barH = narrow ? 14 : 22, left = narrow ? 0 : 150, right = narrow ? 0 : 110, top = narrow ? 4 : 8;
+  const H = top + bars.length * rowH + (narrow ? 26 : 30);
   const scale = (v) => (v / (max * 1.06)) * (W - left - right);
-  const ticks = niceTicks(max * 1.06, 5);
-  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, role: 'img', 'aria-label': `${product.label} (${product.config}) starting price by country, bars in euros` });
+  const ticks = niceTicks(max * 1.06, narrow ? 4 : 5);
+  const g = svg('svg', { viewBox: `0 0 ${W} ${H}`, class: narrow ? 'narrow' : null, role: 'img', 'aria-label': `${product.label} (${product.config}) starting price by country, bars in euros` });
   for (const t of ticks) {
     const x = left + scale(t);
     g.append(svg('line', { class: 'grid', x1: x, x2: x, y1: top, y2: top + bars.length * rowH }));
-    g.append(svg('text', { class: 'axis-label', x, y: H - 8, 'text-anchor': 'middle' }, `€${t.toLocaleString('en-IE')}`));
+    g.append(svg('text', { class: 'axis-label', x, y: H - 8, 'text-anchor': x < 16 ? 'start' : 'middle' }, `€${t.toLocaleString('en-IE')}`));
   }
   g.append(svg('line', { class: 'baseline', x1: left, x2: left, y1: top, y2: top + bars.length * rowH }));
   const labelled = new Set(['US', state.country, rows[0]?.code, rows[rows.length - 1]?.code]);
   bars.forEach((r, i) => {
-    const y = top + i * rowH + 4;
+    const y = top + i * rowH; // top of the row
+    const barY = narrow ? y + 19 : y + 4;
     const isMe = r.code === state.country;
     const w = Math.max(2, scale(r.eur));
     const fill = r.isUs ? 'var(--us)' : isMe ? 'var(--eu)' : 'var(--eu-mid, #86b6ef)';
-    g.append(svg('text', { x: left - 10, y: y + 15, 'text-anchor': 'end', style: isMe || r.isUs ? 'font-weight:600;fill:var(--ink)' : '' }, `${r.flag} ${r.name}`));
-    const bar = svg('path', { class: 'bar', d: roundedRight(left, y, w, 22, 4), fill });
-    const hit = svg('rect', { class: 'bar-hit', x: 0, y: y - 4, width: W, height: rowH, fill: 'transparent', tabindex: '0' });
+    const strong = isMe || r.isUs ? 'font-weight:600;fill:var(--ink)' : '';
+    if (narrow) {
+      g.append(svg('text', { class: 'row', x: 0, y: y + 12, style: strong }, `${r.flag} ${r.name}`));
+      g.append(svg('text', { class: 'row', x: W, y: y + 12, 'text-anchor': 'end', style: strong }, valueLabel(r)));
+    } else {
+      g.append(svg('text', { x: left - 10, y: barY + 15, 'text-anchor': 'end', style: strong }, `${r.flag} ${r.name}`));
+    }
+    const bar = svg('path', { class: 'bar', d: roundedRight(left, barY, w, barH, 4), fill });
+    const hit = svg('rect', { class: 'bar-hit', x: 0, y, width: W, height: rowH, fill: 'transparent', tabindex: '0' });
     attachTooltip(hit, () => tooltipLines(r, state));
     hit.addEventListener('pointerenter', () => bar.classList.add('hover'));
     hit.addEventListener('pointerleave', () => bar.classList.remove('hover'));
     g.append(bar, hit);
-    if (labelled.has(r.code)) g.append(svg('text', { x: left + w + 8, y: y + 15, style: 'font-weight:600;fill:var(--ink)' }, valueLabel(r)));
+    if (!narrow && labelled.has(r.code)) g.append(svg('text', { x: left + w + 8, y: barY + 15, style: 'font-weight:600;fill:var(--ink)' }, valueLabel(r)));
   });
 
   // --- controls ---
@@ -108,6 +139,7 @@ function render() {
   };
   const [tabs, panelNode] = tabPanels([['notes', 'Notes'], ['table', 'Table'], ['sources', 'Sources']], panels, panel, (id) => { panel = id; render(); });
 
+  const plot = el('div', { class: 'chart-plot' }, g);
   mount('price-chart',
     el('div', { class: 'chart-controls', style: { marginTop: '0', marginBottom: '16px' } }, productSelect(), fxToggle(), usStateSelect(), exVatToggle()),
     el('div', { class: 'chart' },
@@ -120,11 +152,12 @@ function render() {
           el('span', {}, el('i', { style: { background: 'var(--eu)' } }), 'EU storefront', state.exVat ? ' (ex-VAT)' : ' (VAT incl.)'),
           el('span', {}, el('i', { style: { background: 'var(--us)' } }), state.exVat ? 'US list price, no sales tax' : `US incl. sales tax (${tax.label})`)),
       ),
-      g,
+      plot,
       tabs,
       panelNode,
     ),
   );
+  fit(plot.clientWidth); // the first draw estimated the width from the host; redraw if the real plot area puts it in the other layout
 }
 
 function priceTable(rows, usRow, tax) {

@@ -498,6 +498,7 @@ strong { font-weight: 600; }
 .chart .bar { rx: 0; }
 .chart text { font-family: var(--font); fill: var(--ink-2); font-size: 12px; }
 .chart .axis-label { fill: var(--ink-3); font-size: 11px; }
+.chart svg.narrow text.row { font-size: 13px; paint-order: stroke; stroke: var(--surface); stroke-width: 4px; stroke-linejoin: round; } /* phones: a halo keeps the row labels legible where grid lines cross them */
 .chart .grid { stroke: var(--hair-2); stroke-width: 1; }
 .chart .baseline { stroke: var(--hair); stroke-width: 1; }
 .chart .bar-hit { fill: transparent; cursor: pointer; }
